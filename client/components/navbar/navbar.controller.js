@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('keepballin')
-  .controller('NavbarCtrl', function ($scope, $location, Auth) {
+  .controller('NavbarCtrl', function ($scope, $location, Auth, Scroll) {
+    Scroll.scrollInit();
     $scope.menu = [{
       'title': '首頁',
       'link': '/',
