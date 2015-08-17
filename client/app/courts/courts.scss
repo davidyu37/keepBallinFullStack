@@ -1,0 +1,46 @@
+/* css for google map */
+#map {
+    height: 100vh;
+    width: 100%;
+}
+
+
+.infoWindowContent {
+    font-size:  14px;
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+}
+/* Style for geolocate button */
+.geolocateBtn {
+    margin-right: 18px;
+    width: 50px;
+    height: 50px;
+    padding: 3px;
+    border: 0;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+}
+
+.glyphicon-screenshot {
+    font-size: 200%;
+    color: $brand-primary;       
+}
+/* Geolocate button ends here */
+/* Close button for panorama */
+.closeBtn {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+}
+
+.glyphicon-remove{
+    font-size: 200%;
+    color: $brand-primary;
+}
+/* close button ends here */
+
+/* District selection dropdown */
+#districtSelect {
+    margin-top: 80px;
+}

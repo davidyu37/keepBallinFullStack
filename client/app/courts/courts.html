@@ -1,0 +1,16 @@
+<div ng-controller="CourtsCtrl">
+    <div id="map"></div>
+    <button title="定位(解除瀏覽器的封鎖才可以使用喔)" type="button" id="geolocate" class="geolocateBtn"
+    ng-click="geolocate()">
+    	<span class="glyphicon glyphicon-screenshot"></span>
+    </button>
+    <div id="districtSelect" class="dropdown">
+	  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+	    選擇區域
+	    <span class="caret"></span>
+	  </button>
+	  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+	    <li ng-repeat="district in districts"><a href="" ng-click="displayDistrict($event, district)">{{district.name}}</a></li>
+	  </ul>
+	</div>
+</div>
