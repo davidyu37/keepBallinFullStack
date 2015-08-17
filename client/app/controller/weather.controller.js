@@ -75,7 +75,7 @@ angular.module('keepballin')
 		};//showFutureWeather ends here 
 
 		function getNowData(callback) {
-			$http.get('http://api.openweathermap.org/data/2.5/weather?q=taipei,tw&units=metric&lang=zh_tw').
+			$http.jsonp('http://api.openweathermap.org/data/2.5/weather?q=taipei,tw&units=metric&lang=zh_tw&callback=JSON_CALLBACK').
 			success(function(data, status, headers, config) {
 		    	$scope.now = data;
 		    	$scope.weatherID = data.weather[0].id;
@@ -88,7 +88,7 @@ angular.module('keepballin')
 		};
 
 		function getFutureData(callback) {
-			$http.get('http://api.openweathermap.org/data/2.5/forecast?q=taipei,tw&units=metric&lang=zh_tw').
+			$http.jsonp('http://api.openweathermap.org/data/2.5/forecast?q=taipei,tw&units=metric&lang=zh_tw&callback=JSON_CALLBACK').
 			success(function(data, status, headers, config) {
 		    	//Get timestamp of every list item
 		    	var dataList = data.list;
