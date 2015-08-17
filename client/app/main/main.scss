@@ -1,10 +1,12 @@
+@import 'temp/_weatherIcon.scss';
+
 .navbar-text {
   margin-left: 15px;
 }
 
 @font-face {
   font-family: digital;
-  src: url(../fonts/digital.ttf);
+  src: url(../assets/fonts/digital.ttf);
 }
 
 /* Main marketing message */
@@ -179,8 +181,14 @@
 /* Weather stuff ends here */
 
 .brand-mission {
-  width: 50%;
-  margin: 15% auto;
+  font-size: 40%;
+  width: 80%;
+  margin: 10% auto;
+  @media screen and (min-width: $screen-sm-min) {
+    font-size: 100%;
+    width: 50%;
+    margin: 15% auto;
+  }
 }
 
 /* Original css from generator */
