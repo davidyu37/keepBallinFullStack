@@ -1,5 +1,5 @@
-<div ng-controller="CourtsCtrl">
-    <div id="map"></div>
+<div ng-controller="MapCtrl">
+    <div id="map" ng-model="markers"></div>
     <button title="定位(解除瀏覽器的封鎖才可以使用喔)" type="button" id="geolocate" class="geolocateBtn"
     ng-click="geolocate()">
     	<span class="glyphicon glyphicon-screenshot"></span>
@@ -13,4 +13,5 @@
 	    <li ng-repeat="district in districts"><a href="" ng-click="displayDistrict($event, district)">{{district.name}}</a></li>
 	  </ul>
 	</div>
+	<div><button class="btn btn-primary" id="addMarker" ng-init="enable=false" ng-click="enable = !enable; enableAddMarker(enable)">{{mode}}</button></div>
 </div>

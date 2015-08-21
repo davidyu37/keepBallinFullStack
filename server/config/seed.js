@@ -7,6 +7,7 @@
 
 var Thing = require('../api/thing/thing.model');
 var User = require('../api/user/user.model');
+var Court = require('../api/court/court.model');
 
 Thing.find({}).remove(function() {
   Thing.create({
@@ -44,6 +45,22 @@ User.find({}).remove(function() {
     password: 'admin'
   }, function() {
       console.log('finished populating users');
+    }
+  );
+});
+
+Court.find({}).remove(function() {
+  Court.create({
+    court: '台北科技大學',
+    district: '大安',
+    lat: 25.043204,
+    long: 121.537544,
+    desc: '偶爾辦系隊比賽',
+    hours: [{begin: 7, end: 22}],
+    likes: 300,
+    hidden: true,
+  }, function() {
+      console.log('finished populating mapMarker');
     }
   );
 });
