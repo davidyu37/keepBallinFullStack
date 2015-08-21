@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('keepballin')
-	.controller('MapCtrl', ['$scope', '$compile', 'socket', 'Panorama', 'mapOptions', 'createMarker', 'Geolocate', 'Api', 'AddMarker', function ($scope, $compile, socket, Panorama, mapOptions, createMarker, Geolocate, Api, AddMarker) {
+	.controller('MapCtrl', ['$scope', '$compile', 'socket', 'Panorama', 'mapOptions', 'Geolocate', 'Api', 'AddMarker', 'EditMarker', 'DeleteMarker', 
+		function ($scope, $compile, socket, Panorama, mapOptions, Geolocate, Api, AddMarker, EditMarker, DeleteMarker) {
 		//Initialize map
 	    $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
 	    var map = $scope.map;
@@ -15,36 +16,36 @@ angular.module('keepballin')
 	 	Panorama.addEvent(panorama, streetViewControl, closeBtn);
 		//Panorama ends here
 	    $scope.markers = [];
-	    $scope.districts = districts;
+	    
 	    //Info window stuff
-	    var infoWindow = new google.maps.InfoWindow();
-
+	    // $scope.infowindow = [];
+	    $scope.infowindow = new google.maps.InfoWindow();
 	    //Store courts from api
 	    $scope.courts = [];
 	    Api.get().success(function(allCourts) {
+	    	console.log()
 	      $scope.courts = allCourts;
 	      socket.syncUpdates('court', $scope.courts);
-	      console.log($scope.courts);
-	      for (var i=0; i < allCourts.length; i++) {
-	      	createMarker(allCourts[i], $scope, map, infoWindow);
-	      };
 	    });
 	    //Add Marker begins here
 	    //Add the addMarker button to map
 	    var addMarkerBtn = document.getElementById('addMarker');
 	    map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(addMarkerBtn);
 	    //Message on the button
-	    $scope.mode = "加地點";
+	    $scope.addMode = "加地點";
 	    
 	    //Enable add marker mode
 	    $scope.enableAddMarker = function(state) {
-	    	AddMarker(state, $scope, map, infoWindow);
-	   		
-	 
+	    	AddMarker(state, $scope, map);
     	};
 
-    	$scope.editMode = function(state) {
-    		console.log('Editmode');
+    	$scope.deletemarker = function(id) {
+    		DeleteMarker(id, $scope);
+    	};
+
+    	$scope.editmode = function(state) {
+    		console.log('edit');
+    		// EditMarker(state);
     	};
 	    //Add Marker ends here
 	    //Geolocate begins here
@@ -61,16 +62,16 @@ angular.module('keepballin')
 		var districtSelection = document.getElementById('districtSelect');
 		map.controls[google.maps.ControlPosition.TOP_CENTER].push(districtSelection);
 		//Fire displayDistrict() after the user clicks on the desired district
-		$scope.displayDistrict = function(e, selectedDistrict, $scope){
-			//e is the event that a tag triggers
-			e.preventDefault();
-			//selectedDistrict is the object that all the information about that district
-			//Make markers for all the courts inside of the 
-			for (var i = 0; i < selectedDistrict.courts.length; i++){
-	        	createMarker(selectedDistrict.courts[i], map, markers, infoWindow);
-	    	}
-			// createMarker();
-		};
+		// $scope.displayDistrict = function(e, selectedDistrict, $scope){
+		// 	//e is the event that a tag triggers
+		// 	e.preventDefault();
+		// 	//selectedDistrict is the object that all the information about that district
+		// 	//Make markers for all the courts inside of the 
+		// 	for (var i = 0; i < selectedDistrict.courts.length; i++){
+	 //        	createMarker(selectedDistrict.courts[i], map, markers, infoWindow);
+	 //    	}
+		// 	// createMarker();
+		// };
 
 }]);//mapCtrl ends here
 

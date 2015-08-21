@@ -6,6 +6,6 @@ angular.module('keepballin')
       .state('courts', {
         url: '/courts',
         templateUrl: 'app/courts/courts.html',
-        controller: 'CourtsCtrl'
+        controller: 'MapCtrl'
       });
   });
