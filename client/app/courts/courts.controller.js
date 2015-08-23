@@ -50,8 +50,26 @@ angular.module('keepballin')
     	
     	$scope.editmode = function(state) {
     		console.log('edit');
-    		// EditMarker(state);
     	};
+
+    	$scope.finishedit = function(marker) {
+    		console.log(marker);
+    		
+    		//Grab the court data according to its id
+    		if(marker) {
+    			var updated = Court.get({ id: marker.id });
+    			updated.court = marker.title;
+    			updated.desc = marker.content;
+    			console.log(updated);
+    			Court.update({ id: marker.id }, updated);
+    		}
+    		
+    		
+    		// Court.update(function(data){
+    		// 	console.log(data);
+    		// });
+    	};
+
 	    //Add Marker ends here
 	    //Geolocate begins here
 	    // Place geolocate button on map

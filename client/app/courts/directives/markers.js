@@ -10,6 +10,7 @@ angular.module('keepballin')
 			markers: '=markers',
 			infowindow: '=infowindow',
 			editmode: '=editmode',
+			finishedit: '=finishedit',
 			deletemarker: '=deletemarker'
 
 		},
@@ -61,7 +62,7 @@ angular.module('keepballin')
 					for(var i=0; i < newVal.length; i ++) {
 						createMarker(newVal[i]);
 					}
-					console.log('make new markers');
+					console.log('made new markers');
 				}
 			}, true);
 		}

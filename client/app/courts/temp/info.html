@@ -1,5 +1,20 @@
-<h2>{{marker.title}}</h2>
-<div class="infoWindowContent">{{marker.content}}</div>
-<button class="btn-warning pull-right" ng-click="enableEdit = !enableEdit; editmode(enableEdit)">
-編輯</button>
+<h2 ng-hide="enableEdit">{{marker.title}}</h2>
+<div class="infoWindowContent" ng-hide="enableEdit">{{marker.content}}</div>
+
+<form ng-show="enableEdit">
+	<h2><label>
+		球場名稱:&nbsp<input type="text" name="球場名稱" ng-model="marker.title">
+	</label></h2>
+
+	<div class="infoWindowContent"><label>
+		<h4>球場簡介:</h4>
+		<textarea rows="3" cols="62" name="球場簡介" ng-model="marker.content"></textarea> 
+	</label></div>
+</form>
+<button class="btn-warning pull-right" 
+ng-click="enableEdit = !enableEdit; editmode(enableEdit)" 
+ng-show="!enableEdit">編輯</button>
+<button class="btn-success pull-right" 
+ng-click="enableEdit = !enableEdit; finishedit(marker)" 
+ng-show="enableEdit">好了</button>
 <button class="btn-danger pull-left" ng-click="deletemarker(marker.id)">刪除</button>

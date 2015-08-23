@@ -1,16 +1,11 @@
 'use strict';
 
 angular.module('keepballin')
-  .factory('Court', function ($resource) {
-    return $resource('/api/courts/:id/:controller', {
-      id: '@_id'
-    },
-    {
+  .factory('Court', ['$resource', function ($resource) {
+    return $resource('/api/courts/:id', 
+    { id: '@id' }, {
       update: {
-        method: 'PUT',
-        params: {
-
-        }
+        method: 'PUT'
       }
 	  });
-  });
+  }]);
