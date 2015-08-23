@@ -16,6 +16,10 @@ angular.module('keepballin')
 		link: function($scope, $element) {
 			
 			var infowindow = $scope.infowindow;
+
+			function cleanUpMarkers(oldVal) {
+				$scope.markers[oldVal._id].setMap(null);
+			};
 			
 			function createMarker(courts) {
 
@@ -29,16 +33,10 @@ angular.module('keepballin')
 		        marker.content = courts.desc;
 		        $scope.markers[marker.id] = marker;
                 
-		        google.maps.event.addListener(marker, 'click', (function(event) {
-		        	// var infoContent = '<div id=\"infoWin_'+ courts._id + '\"><h2>'; 
-			        // infoContent += marker.title; 
-			        // infoContent += '</h2>'; 
-			        // infoContent += marker.content; 
-			        // infoContent += '<button class="editBtn btn-primary pull-right" ng-click="editmode()">編輯</button>';
-			        // infoContent += '</div>';
+		        google.maps.event.addListener(marker, 'click', function() {
+		        	
 			        $scope.marker = marker;
 
-			       
 			        var infoContent = '<div id=\"infoWin_'+ marker.id + '\"';
 			        infoContent += 'ng-include="\'app/courts/temp/info.html\'">';
 	   				
@@ -48,19 +46,22 @@ angular.module('keepballin')
                   	$scope.$apply(function(){
                    		$compile(document.getElementById("infoWin_"+marker.id))($scope);
                 	});
-
-
-	              	
-	        	}));//Events listener ends here
+	        	});//Events listener ends here
 			}; //createMarker fn ends here
 
 
-			$scope.$watch('courts', function(newVal, oldVal) {
+			$scope.$watchCollection('courts', function(newVal, oldVal) {
 				if (newVal && newVal.length) {
+					//Clean up the old markers
+					for (var j=0; j < oldVal.length; j++) {
+						cleanUpMarkers(oldVal[j]);
+					}
+					$scope.markers = [];
 					//convert the new group of courts to marker here
 					for(var i=0; i < newVal.length; i ++) {
 						createMarker(newVal[i]);
 					}
+					console.log('make new markers');
 				}
 			}, true);
 		}
