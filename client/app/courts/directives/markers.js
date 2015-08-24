@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('keepballin') 
-.directive('marker', ['$window', '$compile', '$q', function($window, $compile, $q) {
+.directive('marker', ['$window', '$compile', '$q', 'Auth', function($window, $compile, $q, Auth) {
 	return {
 		restrict: 'A',
 		scope: {
@@ -15,7 +15,12 @@ angular.module('keepballin')
 
 		},
 		link: function($scope, $element) {
-			
+
+			//Authentication
+			$scope.isLoggedIn = Auth.isLoggedIn();
+		    $scope.isAdmin = Auth.isAdmin();
+		    $scope.getCurrentUser = Auth.getCurrentUser();
+				
 			var infowindow = $scope.infowindow;
 
 			function cleanUpMarkers(oldVal) {

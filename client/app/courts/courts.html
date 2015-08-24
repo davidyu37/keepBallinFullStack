@@ -1,6 +1,11 @@
 <div>
-    <div id="map" marker courts="courts" 
-    map="map" markers="markers" infowindow="infowindow" editmode="editmode" finishedit="finishedit"
+    <div id="map" marker 
+    courts="courts" 
+    map="map" 
+    markers="markers" 
+    infowindow="infowindow" 
+    editmode="editmode" 
+    finishedit="finishedit"
     deletemarker="deletemarker"></div>
     <button title="定位(解除瀏覽器的封鎖才可以使用喔)" type="button" id="geolocate" class="geolocateBtn"
     ng-click="geolocate()">
@@ -15,6 +20,6 @@
 	    <li ng-repeat="district in districts"><a href="" ng-click="displayDistrict($event, district)">{{district.name}}</a></li>
 	  </ul>
 	</div>
-	<div><button class="btn btn-primary" id="addMarker" ng-init="enable=false" ng-click="enable = !enable; enableAddMarker(enable)">{{addMode}}</button></div>
+	<div><button class="btn btn-primary" id="addMarker" ng-init="enable=false" ng-show="isAdmin" ng-click="enable = !enable; enableAddMarker(enable)">{{addMode}}</button></div>
 	
 </div>

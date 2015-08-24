@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('keepballin')
-	.controller('CourtsCtrl', ['$scope', '$compile', 'socket', 'Panorama', 'mapOptions', 'Geolocate', 'AddMarker', 'EditMarker', 'Court', 
-		function ($scope, $compile, socket, Panorama, mapOptions, Geolocate, AddMarker, EditMarker, Court) {
+	.controller('CourtsCtrl', ['$scope', '$compile', 'socket', 'Panorama', 'mapOptions', 'Geolocate', 'AddMarker', 'Court', 'Auth', 
+		function ($scope, $compile, socket, Panorama, mapOptions, Geolocate, AddMarker, Court, Auth) {
 		//Initialize map
 	    $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
 	    var map = $scope.map;
@@ -15,11 +15,15 @@ angular.module('keepballin')
 	    //If user switch into panorama, add customized button, vice versa
 	 	Panorama.addEvent(panorama, streetViewControl, closeBtn);
 		//Panorama ends here
+
+		//Authentication
+		$scope.isLoggedIn = Auth.isLoggedIn();
+	    $scope.isAdmin = Auth.isAdmin();
+	    $scope.getCurrentUser = Auth.getCurrentUser();
+
 	    $scope.markers = [];
-	    
 	    //Info window stuff	
 	    $scope.infowindow = new google.maps.InfoWindow();
-
 	    //Store courts from api
 	    $scope.courts = [];
 
