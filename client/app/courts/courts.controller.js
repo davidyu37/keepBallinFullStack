@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('keepballin')
-	.controller('CourtsCtrl', ['$scope', '$compile', 'socket', 'Panorama', 'mapOptions', 'Geolocate', 'AddMarker', 'Court', 'Auth', 
+	.controller('CourtsCtrl', ['$scope', '$compile', 'socket', 'Panorama', 'mapOptions', 'Geolocate', 'AddMarker', 'Court', 'Auth',  
 		function ($scope, $compile, socket, Panorama, mapOptions, Geolocate, AddMarker, Court, Auth) {
 		//Initialize map
 	    $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
@@ -21,18 +21,21 @@ angular.module('keepballin')
 	    $scope.isAdmin = Auth.isAdmin();
 	    $scope.getCurrentUser = Auth.getCurrentUser();
 
+	    //The current court user is looking at
+	    $scope.currentcourt
+	    $scope.markernow
+
+	    //Empty markers
 	    $scope.markers = [];
 	    //Info window stuff	
 	    $scope.infowindow = new google.maps.InfoWindow();
 	    //Store courts from api
 	    $scope.courts = [];
-
 	    $scope.courts = Court.query(function(){
 	    	console.log('Courts loaded');
 	    });
-
+	    //socket.io instant updates
 	    socket.syncUpdates('court', $scope.courts);
-	 
 		$scope.$on('$destroy', function () {
       		socket.unsyncUpdates('court');
     	});
@@ -68,11 +71,45 @@ angular.module('keepballin')
     			Court.update({ id: marker.id }, updated);
     		}
     		
-    		
-    		// Court.update(function(data){
-    		// 	console.log(data);
-    		// });
     	};
+
+    	$scope.editDetail = function(markernow, currentcourt) {
+    		console.log(markernow);
+    		console.log(currentcourt);
+    	};
+    	//Options for the hours
+		$scope.getHours = function() {
+			var hours = [];
+			for (var i = 0; i < 24; i++) {
+				var hour
+				if(i < 10) {
+					hour = '0'+ i + '00'; 
+				} else {
+					hour = i + '00';
+				}
+				hours.push(hour);
+			}
+			return hours
+		}
+
+		$scope.removeFromArray = function(index, myObjs) {
+			if(index && myObjs) {
+				delete myObjs[index];
+			} else {
+				console.log('do nothing');
+				angular.noop;
+			}
+		}
+
+		$scope.checkValue = function(value) {
+			if (value) {
+				console.log('add 1');
+				return 1;
+			} else {
+				console.log('do nothing');
+				angular.noop;
+			}
+		}
 
 	    //Add Marker ends here
 	    //Geolocate begins here

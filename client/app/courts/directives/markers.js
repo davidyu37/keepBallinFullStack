@@ -1,12 +1,14 @@
 'use strict';
 
 angular.module('keepballin') 
-.directive('marker', ['$window', '$compile', '$q', 'Auth', function($window, $compile, $q, Auth) {
+.directive('marker', ['$window', '$compile', '$q', 'Auth', 'Court', function($window, $compile, $q, Auth, Court) {
 	return {
 		restrict: 'A',
 		scope: {
 			courts: '=courts',
+			currentcourt: '=currentcourt',
 			map: '=map',
+			markernow: '=markernow',
 			markers: '=markers',
 			infowindow: '=infowindow',
 			editmode: '=editmode',
@@ -41,7 +43,10 @@ angular.module('keepballin')
                 
 		        google.maps.event.addListener(marker, 'click', function() {
 		        	
-			        $scope.marker = marker;
+			        $scope.markernow = marker;
+
+			        $scope.currentcourt = Court.get({id : marker.id});
+			        console.log($scope.currentcourt);
 
 			        var infoContent = '<div id=\"infoWin_'+ marker.id + '\"';
 			        infoContent += 'ng-include="\'app/courts/temp/info.html\'">';

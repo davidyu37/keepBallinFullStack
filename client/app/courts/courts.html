@@ -1,7 +1,9 @@
 <div>
     <div id="map" marker 
-    courts="courts" 
+    courts="courts"
+    currentcourt="currentcourt" 
     map="map" 
+    markernow="markernow"
     markers="markers" 
     infowindow="infowindow" 
     editmode="editmode" 
@@ -21,5 +23,56 @@
 	  </ul>
 	</div>
 	<div><button class="btn btn-primary" id="addMarker" ng-init="enable=false" ng-show="isAdmin" ng-click="enable = !enable; enableAddMarker(enable)">{{addMode}}</button></div>
-	
+</div>
+<div class="container court-detail">
+    <div class="row">
+        <div class="col-lg-9 picture-area">
+            <!-- Court name -->
+            <h1>{{markernow.title}}</h1>
+            <img src="../assets/images/court_pics/example.jpeg" alt="">
+        </div>
+        <div class="col-lg-3 words">
+            <!--Edit button-->
+            <button class="pull-right" ng-init="edit=false"
+            ng-click="edit = !edit; editDetail(markernow, currentcourt)"
+            ng-class="edit ? 'btn-success' : 'btn-warning'">{{edit ? '好了':'編輯'}}</button>
+            
+            <!-- City -->
+            <h2>{{currentcourt.city}}&nbsp
+            <span ng-show="currentcourt.district">{{currentcourt.district}}區</span>
+            </h2>
+            <!-- Hours -->
+            <p>開放時間:</p>
+            <div ng-repeat="courthour in currentcourt.hours track by $index">
+                <p ng-show="courthour">
+                    {{courthour.begin}}~{{courthour.end}}
+                    <span class="glyphicon glyphicon-minus"
+                    ng-click="removeFromArray($index)"></span>
+                </p>
+            </div>
+             <!-- Peaktime -->
+            <p>尖峰:</p>
+            <div ng-repeat="courthour in currentcourt.peaktime track by $index">
+                <p ng-show="courthour">
+                    {{courthour.begin}}~{{courthour.end}}
+                    <span class="glyphicon glyphicon-minus"
+                    ng-click="removeFromArray($index)"></span>
+                </p>
+            </div>
+            <!-- Net -->
+            <p>籃網:{{currentcourt.net | exist}}</p>
+            <!-- Basket number -->
+            <p>籃框數:{{currentcourt.basketnumber}}</p>
+            <!-- Floor -->
+            <p>地質:{{currentcourt.floor}}</p>
+            <!-- Water -->
+            <p>飲水機:{{currentcourt.water.exist | exist}}&nbsp{{currentcourt.water.desc}}</p>
+            <p>廁所:{{currentcourt.toilet.exist | exist}}&nbsp{{currentcourt.toilet.desc}}</p>
+            <p>屋簷:{{currentcourt.ceiling | exist}}</p>
+            <!-- Indoor -->
+            <p ng-show="currentcourt.indoor">室內</p>
+            <p ng-show="!currentcourt.indoor">室外</p>
+        </div>
+        <div id="courtEditPage" class="col-lg-12" ng-include="'app/courts/temp/edit.page.html'"></div>
+    </div>
 </div>

@@ -51,12 +51,21 @@ User.find({}).remove(function() {
 
 Court.find({}).remove(function() {
   Court.create({
+    country: 'Taiwan',
     court: '台北科技大學',
+    city: '台北市',
     district: '大安',
     lat: 25.043204,
     long: 121.537544,
     desc: '偶爾辦系隊比賽',
-    hours: [{begin: 7, end: 22}],
+    hours: [{begin: '0700', end: '2200'}],
+    peaktime: [{begin: '1800', end: '2000'}],
+    net: '有',
+    basketnumber: 11,
+    floor: '水泥地',
+    water: {exist: true, desc: '在宿舍旁'},
+    toilet: {exist: false},
+    ceiling: false,
     likes: 300,
     hidden: true,
   }, function() {
@@ -64,3 +73,4 @@ Court.find({}).remove(function() {
     }
   );
 });
+
