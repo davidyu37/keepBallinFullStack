@@ -13,7 +13,7 @@
     ng-click="geolocate()">
     	<span class="glyphicon glyphicon-screenshot"></span>
     </button>
-    <div id="districtSelect" class="dropdown">
+    <!-- <div id="districtSelect" class="dropdown">
 	  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 	    選擇區域
 	    <span class="caret"></span>
@@ -21,7 +21,7 @@
 	  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 	    <li ng-repeat="district in districts"><a href="" ng-click="displayDistrict($event, district)">{{district.name}}</a></li>
 	  </ul>
-	</div>
+	</div> -->
 	<div><button class="btn btn-primary" id="addMarker" ng-init="enable=false" ng-show="isAdmin" ng-click="enable = !enable; enableAddMarker(enable)">{{addMode}}</button></div>
 </div>
 <div class="container court-detail">
@@ -33,9 +33,10 @@
         </div>
         <div class="col-lg-3 words">
             <!--Edit button-->
-            <button class="pull-right" ng-init="edit=false"
-            ng-click="edit = !edit; editDetail(markernow, currentcourt)"
-            ng-class="edit ? 'btn-success' : 'btn-warning'">{{edit ? '好了':'編輯'}}</button>
+            <button class="btn-warning pull-right"
+            ng-click="editmode()" ng-model="edit">編輯</button>
+            <div id="courtEditPage" class="editPage col-lg-12" ng-include="'app/courts/temp/edit.page.html'" ng-show="edit" 
+            ng-click="editmode()"></div>
             
             <!-- City -->
             <h2>{{currentcourt.city}}&nbsp
@@ -46,8 +47,6 @@
             <div ng-repeat="courthour in currentcourt.hours track by $index">
                 <p ng-show="courthour">
                     {{courthour.begin}}~{{courthour.end}}
-                    <span class="glyphicon glyphicon-minus"
-                    ng-click="removeFromArray($index)"></span>
                 </p>
             </div>
              <!-- Peaktime -->
@@ -55,8 +54,6 @@
             <div ng-repeat="courthour in currentcourt.peaktime track by $index">
                 <p ng-show="courthour">
                     {{courthour.begin}}~{{courthour.end}}
-                    <span class="glyphicon glyphicon-minus"
-                    ng-click="removeFromArray($index)"></span>
                 </p>
             </div>
             <!-- Net -->
@@ -73,6 +70,5 @@
             <p ng-show="currentcourt.indoor">室內</p>
             <p ng-show="!currentcourt.indoor">室外</p>
         </div>
-        <div id="courtEditPage" class="col-lg-12" ng-include="'app/courts/temp/edit.page.html'"></div>
     </div>
 </div>

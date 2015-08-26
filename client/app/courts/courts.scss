@@ -49,9 +49,24 @@
     background-color: grey;
 }
 .picture-area {
-    background-color: red;
     text-align: center;
 }
 .words {
     background-color: green;
+}
+.editPage {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    width: 100%; 
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    text-align: center;
+}
+.whitebackground {
+    background: white;
+    margin: 10% auto;
+    padding: 5%;
+    width: 80%;
 }

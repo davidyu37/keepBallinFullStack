@@ -3,8 +3,8 @@
 angular.module('keepballin') 
 	.factory('mapOptions', function() {
 		return {
-			//center is set at 捷運大安站
-			center: new google.maps.LatLng(25.033259, 121.543565),
+			//center is set at 台北科技大學
+			center: new google.maps.LatLng(25.043204, 121.537544),
 			zoom: 15,
 			mapTypeId: google.maps.MapTypeId.ROADMAP,
 			disableDefaultUI: true,

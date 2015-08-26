@@ -55,10 +55,23 @@ angular.module('keepballin')
     		Court.remove({ id: id });
     	};
     	
-    	$scope.editmode = function(state) {
-    		console.log('edit');
-    	};
+    	$scope.edit = false;
 
+    	//Logic for court editing page
+    	$scope.editmode = function(court) {
+    		$scope.edit = !($scope.edit);
+    		console.log(court);
+    		if(court) {
+    			console.log(court._id);
+    			Court.update({ id: court._id }, court);
+    		}
+    	};
+    	//Prevent the edit page from closing when clicking one the form
+    	$scope.stopPropagate = function(event) {
+    		event.stopPropagation();
+    	}
+
+    	//Logic for marker editing
     	$scope.finishedit = function(marker) {
     		console.log(marker);
     		
@@ -73,10 +86,6 @@ angular.module('keepballin')
     		
     	};
 
-    	$scope.editDetail = function(markernow, currentcourt) {
-    		console.log(markernow);
-    		console.log(currentcourt);
-    	};
     	//Options for the hours
 		$scope.getHours = function() {
 			var hours = [];
@@ -92,12 +101,13 @@ angular.module('keepballin')
 			return hours
 		}
 
-		$scope.removeFromArray = function(index, myObjs) {
-			if(index && myObjs) {
-				delete myObjs[index];
-			} else {
-				console.log('do nothing');
-				angular.noop;
+		$scope.removeFromArray = function(hashKey, myObjs) {
+			console.log(myObjs);
+			
+			for(var i=0; i < myObjs.length; i++) {
+				if(hashKey == myObjs[i].$$hashKey) {
+					myObjs.splice(i, 1);
+				}
 			}
 		}
 
@@ -121,21 +131,6 @@ angular.module('keepballin')
 	    // Geolocating function
 	    $scope.geolocate = function() {Geolocate(userLocation, map)};
 	    //Geolocate ends here
-
-		// Place district selection dropdown on map
-		var districtSelection = document.getElementById('districtSelect');
-		map.controls[google.maps.ControlPosition.TOP_CENTER].push(districtSelection);
-		//Fire displayDistrict() after the user clicks on the desired district
-		// $scope.displayDistrict = function(e, selectedDistrict, $scope){
-		// 	//e is the event that a tag triggers
-		// 	e.preventDefault();
-		// 	//selectedDistrict is the object that all the information about that district
-		// 	//Make markers for all the courts inside of the 
-		// 	for (var i = 0; i < selectedDistrict.courts.length; i++){
-	 //        	createMarker(selectedDistrict.courts[i], map, markers, infoWindow);
-	 //    	}
-		// 	// createMarker();
-		// };
 
 }]);//mapCtrl ends here
 
