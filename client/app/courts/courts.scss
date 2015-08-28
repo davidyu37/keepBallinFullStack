@@ -44,16 +44,27 @@
 #districtSelect {
     margin-top: 80px;
 }
-
+/* The container for all the court's detail */
 .court-detail {
-    background-color: grey;
+    @media(min-width: $screen-sm-min) {
+        background: rgba(0,0,0,0.7);
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        color: white;
+    }
+    width: 100%;
+    text-align: center;    
+}
+
+.court-detail.ng-hide {
+    opacity:0;
 }
 .picture-area {
     text-align: center;
 }
-.words {
-    background-color: green;
-}
+/* Edit page stuff starts here */
+/* The dark transparent overlay for the edit page */
 .editPage {
     position: fixed;
     top: 0;
@@ -62,11 +73,61 @@
     width: 100%; 
     height: 100%;
     background: rgba(0,0,0,0.8);
-    text-align: center;
+    -webkit-transition:all linear 0.5s;
+    transition:all linear 0.5s;
+    
 }
+/*This is for ng-animate*/
+.editPage.ng-hide {
+    opacity: 0;
+}
+/*The white space that contains the edit form*/
 .whitebackground {
+    @media(min-width: $screen-sm-min) {
+        font-size: 120%;
+        height: 90%;
+    }
+    color: black;
     background: white;
-    margin: 10% auto;
+    margin: 5% auto;
     padding: 5%;
-    width: 80%;
+    width: 80%;    
+}
+/* The check box with words(toilet, water fountain) */
+.checkboxWithWords {
+    @media(min-width: $screen-sm-min) {
+        margin-bottom: 0;
+        display: inline-block;
+    }
+    margin-bottom: 15px;
+}
+
+.selectors {
+    margin: 0 auto;
+    width: 60%;
+    display: table; 
+}
+
+.cell {
+    display: table-cell;
+    vertical-align: middle;
+}
+.editDetailButton {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 0px;
+    right: 25px;
+}
+
+/* Edit page stuff ends here */
+
+.slideBtn {
+    width: 50px;
+    height: 50px;
+    color: white;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transition: all 0.5s ease-in-out;
 }

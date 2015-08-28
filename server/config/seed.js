@@ -8,6 +8,7 @@
 var Thing = require('../api/thing/thing.model');
 var User = require('../api/user/user.model');
 var Court = require('../api/court/court.model');
+var Time = require('../api/time/time.model');
 
 User.find({}).remove(function() {
   User.create({

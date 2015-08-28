@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('keepballin')
-	.controller('CourtsCtrl', ['$scope', '$compile', 'socket', 'Panorama', 'mapOptions', 'Geolocate', 'AddMarker', 'Court', 'Auth',  
-		function ($scope, $compile, socket, Panorama, mapOptions, Geolocate, AddMarker, Court, Auth) {
+	.controller('CourtsCtrl', ['$scope', '$animate', '$timeout', '$compile', 'socket', 'Panorama', 'mapOptions', 'Geolocate', 'AddMarker', 'Court', 'Auth',  
+		function ($scope, $animate, $timeout, $compile, socket, Panorama, mapOptions, Geolocate, AddMarker, Court, Auth) {
 		//Initialize map
 	    $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
 	    var map = $scope.map;
@@ -21,9 +21,12 @@ angular.module('keepballin')
 	    $scope.isAdmin = Auth.isAdmin();
 	    $scope.getCurrentUser = Auth.getCurrentUser();
 
+
 	    //The current court user is looking at
-	    $scope.currentcourt
-	    $scope.markernow
+	    $scope.currentcourt;
+	    $scope.markernow;
+		//Is the details of the court expanded?
+		$scope.expanded = false;	   
 
 	    //Empty markers
 	    $scope.markers = [];
@@ -54,8 +57,14 @@ angular.module('keepballin')
     	$scope.deletemarker = function(id) {
     		Court.remove({ id: id });
     	};
+
+    	//Prevent ng animate from firing on refresh
+    	$animate.enabled(false);
+    	$timeout(function () {
+        	$animate.enabled(true);
+    	}, 1000);
+
     	
-    	$scope.edit = false;
 
     	//Logic for court editing page
     	$scope.editmode = function(court) {
@@ -69,12 +78,11 @@ angular.module('keepballin')
     	//Prevent the edit page from closing when clicking one the form
     	$scope.stopPropagate = function(event) {
     		event.stopPropagation();
-    	}
+    	};
 
     	//Logic for marker editing
     	$scope.finishedit = function(marker) {
-    		console.log(marker);
-    		
+    		console.log(marker);	
     		//Grab the court data according to its id
     		if(marker) {
     			var updated = Court.get({ id: marker.id });
@@ -101,16 +109,27 @@ angular.module('keepballin')
 			return hours
 		}
 
+		//Convert object to array
+		$scope.toArray = function(object) {
+			var array = $.map(object, function(value, index) {
+			    return [value];
+			});
+			return array;
+		}
+		/*The problem: After deleting smaller index element, 
+		the bigger index element still contains the same index,
+		which is bigger the than the objects length
+		Therefore, the loop begins from 0, it get undefined
+		*/
+		//Solution: convert object to array on add and edit
 		$scope.removeFromArray = function(hashKey, myObjs) {
-			console.log(myObjs);
-			
 			for(var i=0; i < myObjs.length; i++) {
 				if(hashKey == myObjs[i].$$hashKey) {
 					myObjs.splice(i, 1);
 				}
 			}
 		}
-
+		
 		$scope.checkValue = function(value) {
 			if (value) {
 				console.log('add 1');

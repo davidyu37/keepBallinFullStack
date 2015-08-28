@@ -1,5 +1,5 @@
-<h2 ng-hide="enableEdit">{{markernow.title}}</h2>
-<div class="infoWindowContent" ng-hide="enableEdit">{{markernow.content}}</div>
+<h2 ng-hide="enableEdit" ng-bind="markernow.title"></h2>
+<div class="infoWindowContent" ng-hide="enableEdit" ng-bind="markernow.content"></div>
 
 <form ng-show="enableEdit">
 	<h2><label>
