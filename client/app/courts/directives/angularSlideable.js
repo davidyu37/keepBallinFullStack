@@ -26,31 +26,73 @@ angular.module('keepballin')
         }
     };
 })
-.directive('slideToggle', function() {
+.directive('slideToggle', ['$window', function($window) {
     return {
         restrict: 'A',
-        link: function(scope, element, attrs) {
+        scope: {
+            expanded: '=expanded',
+            map: '=map'
+        },
+        link: function($scope, element, attrs) {
             var button, target, content;
             
-            attrs.expanded = false;
+
+            // if ($window.matchMedia( "(min-width: 768px)" ).matches) {
+        
+            //     console.log('fired');
+
+            // } 
+            
             
             element.bind('click', function() {
+                scroll(true);
+            });
+
+            $scope.$watch('expanded', function(newVal, oldVal){
+                if(newVal) {
+                    console.log('value changed');
+                    scroll();
+                }
+            });
+
+            //Close the detail when drag start
+            $scope.map.addListener('dragstart', (function(){
+                console.log('dragstate is' + $scope.expanded);
+                if($scope.expanded == true) {
+                    $scope.expanded = false;
+                    scroll();
+                    $scope.$apply();    
+                }
+            }));
+
+            //Scrolling function to be reuse
+            function scroll(toggle) {
                 if (!button) button = document.querySelector('.slideBtn');
                 if (!target) target = document.querySelector(attrs.slideToggle);
                 if (!content) content = target.querySelector('.slideable_content');
+                if(toggle) {
+                    $scope.expanded = !$scope.expanded;
+                    $scope.$apply();    
+                }
                 
-                if(!attrs.expanded) {
-                    // content.style.border = '1px solid rgba(0,0,0,0)';
+                if($scope.expanded) {
                     var y = content.clientHeight;
-                    // content.style.border = 0;
-                    target.style.height = y + 'px';
-                    button.style.bottom = y + 'px';
+                    console.log(y);
+                    if(y) {
+                        target.style.height = y + 'px';
+                        button.style.bottom = y + 'px';                       
+                    } else {
+                        var defaultHeight = 183;
+                        target.style.height = defaultHeight + 'px';
+                        button.style.bottom = defaultHeight + 'px'; 
+                    }
                 } else {
                     target.style.height = '0px';
                     button.style.bottom = '0px';
                 }
-                attrs.expanded = !attrs.expanded;
-            });
+                console.log('expanded state '+ $scope.expanded);
+            }
+
         }
     }
-});
+}]);

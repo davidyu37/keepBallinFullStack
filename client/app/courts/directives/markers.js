@@ -13,7 +13,8 @@ angular.module('keepballin')
 			infowindow: '=infowindow',
 			editmode: '=editmode',
 			finishedit: '=finishedit',
-			deletemarker: '=deletemarker'
+			deletemarker: '=deletemarker',
+			expanded: '=expanded'
 
 		},
 		link: function($scope, $element) {
@@ -47,6 +48,9 @@ angular.module('keepballin')
 
 			        $scope.currentcourt = Court.get({id : marker.id});
 			        console.log($scope.currentcourt);
+			        //Open court's detail when user clicks on marker
+			        $scope.expanded=true;
+			        console.log($scope.expanded);
 
 			        var infoContent = '<div id=\"infoWin_'+ marker.id + '\"';
 			        infoContent += 'ng-include="\'app/courts/temp/info.html\'">';

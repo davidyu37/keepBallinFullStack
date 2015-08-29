@@ -8,7 +8,8 @@
     infowindow="infowindow" 
     editmode="editmode" 
     finishedit="finishedit"
-    deletemarker="deletemarker"></div>
+    deletemarker="deletemarker"
+    expanded="expanded"></div>
     <button title="定位(解除瀏覽器的封鎖才可以使用喔)" type="button" id="geolocate" class="geolocateBtn"
     ng-click="geolocate()">
     	<span class="glyphicon glyphicon-screenshot"></span>
@@ -24,8 +25,9 @@
 	</div> -->
 	<div><button class="btn btn-primary" id="addMarker" ng-init="enable=false" ng-show="isAdmin" ng-click="enable = !enable; enableAddMarker(enable)">{{addMode}}</button></div>
 
-    <button class="btn btn-primary slideBtn" slide-toggle="#detail">
-        <span class="glyphicon glyphicon-arrow-up"></span>
+    <button class="btn btn-primary slideBtn" slide-toggle="#detail" expanded="expanded" map="map" ng-model="expanded">
+        <span class="glyphicon"
+        ng-class="{'glyphicon-arrow-up': !expanded, 'glyphicon-arrow-down': expanded}"></span>
     </button>
     <!-- ng-init="expanded=false" ng-class="{'glyphicon-menu-up': !expanded, 'glyphicon-menu-down': expanded}" -->
     <div id="detail" class="court-detail slideable" ng-show="currentcourt">
