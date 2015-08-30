@@ -39,11 +39,20 @@
     color: $brand-primary;
 }
 /* close button ends here */
-
-/* District selection dropdown */
-#districtSelect {
-    margin-top: 80px;
+/* Add marker button */
+#addMarker {
+    border-radius: 50%;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    margin-top: 15px;
+    margin-right: 18px;
+    width: 50px;
+    height: 50px;
+    border: 0;
+    -webkit-transition:all linear 0.3s;
+    transition:all linear 0.3s;
 }
+
+/* Add marker button ends here*/
 /* The container for all the court's detail */
 .court-detail {
     @media(min-width: $screen-sm-min) {
@@ -61,7 +70,15 @@
     opacity:0;
 }
 .picture-area {
+    
     text-align: center;
+    button{
+        background: none;
+        /*background: rgba(0,0,0,0.9);*/
+        position: absolute;
+        right: 0;
+        bottom: 0;
+    }
 }
 /* Edit page stuff starts here */
 /* The dark transparent overlay for the edit page */

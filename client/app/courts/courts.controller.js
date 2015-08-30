@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('keepballin')
-	.controller('CourtsCtrl', ['$scope', '$animate', '$timeout', '$compile', 'socket', 'Panorama', 'mapOptions', 'Geolocate', 'AddMarker', 'Court', 'Auth',  
-		function ($scope, $animate, $timeout, $compile, socket, Panorama, mapOptions, Geolocate, AddMarker, Court, Auth) {
+	.controller('CourtsCtrl', ['$scope', '$window', '$animate', '$timeout', '$compile', 'socket', 'Panorama', 'mapOptions', 'Geolocate', 'AddMarker', 'Court', 'Auth',  
+		function ($scope, $window, $animate, $timeout, $compile, socket, Panorama, mapOptions, Geolocate, AddMarker, Court, Auth) {
 		//Initialize map
 	    $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
 	    var map = $scope.map;
@@ -43,19 +43,18 @@ angular.module('keepballin')
       		socket.unsyncUpdates('court');
     	});
 	    //Add Marker begins here
-	    //Add the addMarker button to map
-	    var addMarkerBtn = document.getElementById('addMarker');
-	    map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(addMarkerBtn);
-	    //Message on the button
-	    $scope.addMode = "加地點";
-	    
 	    //Enable add marker mode
 	    $scope.enableAddMarker = function(state) {
 	    	AddMarker(state, $scope, map);
     	};
 
     	$scope.deletemarker = function(id) {
-    		Court.remove({ id: id });
+    		var check = $window.confirm('確定要刪掉這個球場嗎？');
+    		if (check) {	
+	    		Court.remove({ id: id });
+    		} else {
+    			angular.noop;
+    		}
     	};
 
     	//Prevent ng animate from firing on refresh
@@ -75,6 +74,13 @@ angular.module('keepballin')
     			Court.update({ id: court._id }, court);
     		}
     	};
+    	//Logic for picture upload
+    	$scope.uploadmode = function(pics) {
+    		$scope.upload = !($scope.upload);
+    		console.log(pics);
+    		
+    	};
+
     	//Prevent the edit page from closing when clicking one the form
     	$scope.stopPropagate = function(event) {
     		event.stopPropagation();
@@ -150,6 +156,11 @@ angular.module('keepballin')
 	    // Geolocating function
 	    $scope.geolocate = function() {Geolocate(userLocation, map)};
 	    //Geolocate ends here
+	    //Add the addMarker button to map
+	    var addMarkerBtn = document.getElementById('addMarker');
+	    map.controls[google.maps.ControlPosition.RIGHT_CENTER].push(addMarkerBtn);
+	    //Message on the button
+	    $scope.addMode = "加地點";
 
 }]);//mapCtrl ends here
 

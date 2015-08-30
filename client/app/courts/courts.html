@@ -23,19 +23,35 @@
 	    <li ng-repeat="district in districts"><a href="" ng-click="displayDistrict($event, district)">{{district.name}}</a></li>
 	  </ul>
 	</div> -->
-	<div><button class="btn btn-primary" id="addMarker" ng-init="enable=false" ng-show="isAdmin" ng-click="enable = !enable; enableAddMarker(enable)">{{addMode}}</button></div>
-
-    <button class="btn btn-primary slideBtn" slide-toggle="#detail" expanded="expanded" map="map" ng-model="expanded">
+	<!-- <button class="btn btn-primary" id="addMarker" ng-init="enable=false" ng-show="isAdmin" ng-click="enable = !enable; enableAddMarker(enable)">{{addMode}}</button> -->
+    <button class="btn" 
+    ng-class="{'btn-primary': !enable, 'btn-success': enable}"
+    id="addMarker" ng-init="enable=false" ng-show="isAdmin" ng-click="enable = !enable; enableAddMarker(enable)">
+        <span class="glyphicon" 
+        ng-class="{'glyphicon-map-marker': !enable, 'glyphicon-ok': enable}"></span>
+    </button>
+    <!-- Slide button for court detail -->
+    <button class="btn btn-primary slideBtn" slide-toggle="#detail" expanded="expanded" map="map" ng-model="expanded" 
+    ng-show="currentcourt">
         <span class="glyphicon"
         ng-class="{'glyphicon-arrow-up': !expanded, 'glyphicon-arrow-down': expanded}"></span>
     </button>
-    <!-- ng-init="expanded=false" ng-class="{'glyphicon-menu-up': !expanded, 'glyphicon-menu-down': expanded}" -->
+    
     <div id="detail" class="court-detail slideable" ng-show="currentcourt">
         <div class="row">
             <div class="col-sm-3 picture-area">
                 <!-- Court name -->
-                <!-- <h1>{{markernow.title}}</h1> -->
                 <img src="../assets/images/court_pics/example.jpeg" alt="">
+                <button ng-click="uploadmode()" ng-model="upload" 
+                ng-show="currentcourt">
+                    <span class="glyphicon glyphicon-camera"></span>
+                </button>
+                <div id="uploadPic" class="editPage col-lg-12" 
+                ng-include="'app/courts/temp/upload.page.html'" 
+                ng-init="upload=false" ng-show="upload" 
+                ng-click="uploadmode()"
+                ></div>
+                
             </div>
             <div class="col-sm-3">
                 <!-- City -->

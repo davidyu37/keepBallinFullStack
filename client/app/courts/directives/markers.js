@@ -50,7 +50,6 @@ angular.module('keepballin')
 			        console.log($scope.currentcourt);
 			        //Open court's detail when user clicks on marker
 			        $scope.expanded=true;
-			        console.log($scope.expanded);
 
 			        var infoContent = '<div id=\"infoWin_'+ marker.id + '\"';
 			        infoContent += 'ng-include="\'app/courts/temp/info.html\'">';

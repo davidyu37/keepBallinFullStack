@@ -50,14 +50,14 @@ angular.module('keepballin')
 
             $scope.$watch('expanded', function(newVal, oldVal){
                 if(newVal) {
-                    console.log('value changed');
+                    
                     scroll();
                 }
             });
 
             //Close the detail when drag start
             $scope.map.addListener('dragstart', (function(){
-                console.log('dragstate is' + $scope.expanded);
+                
                 if($scope.expanded == true) {
                     $scope.expanded = false;
                     scroll();
@@ -77,7 +77,7 @@ angular.module('keepballin')
                 
                 if($scope.expanded) {
                     var y = content.clientHeight;
-                    console.log(y);
+                    
                     if(y) {
                         target.style.height = y + 'px';
                         button.style.bottom = y + 'px';                       
@@ -90,7 +90,7 @@ angular.module('keepballin')
                     target.style.height = '0px';
                     button.style.bottom = '0px';
                 }
-                console.log('expanded state '+ $scope.expanded);
+                
             }
 
         }
