@@ -26,8 +26,9 @@ Grid.mongo = mongoose.mongo;
 //     var writestream = gfs.createWriteStream({
 //         filename: 'court picture'
 //     });
+//     // console.log(fs.createReadStream('../client/assets/images/court_pics/example.jpeg').pipe(writestream));
 //     fs.createReadStream('../client/assets/images/court_pics/example.jpeg').pipe(writestream);
- 
+//  	console.log(fs.createReadStream('../client/assets/images/court_pics/example.jpeg').pipe(writestream));
 //     writestream.on('close', function (file) {
 //         // do something with `file`
 //         console.log(file.filename + 'Written To DB');

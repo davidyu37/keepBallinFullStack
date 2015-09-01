@@ -6,6 +6,8 @@
 
 var errors = require('./components/errors');
 var path = require('path');
+// var multipart = require('connect-multiparty');
+var busboyBodyParser = require('busboy-body-parser');
 
 module.exports = function(app) {
 
@@ -15,8 +17,15 @@ module.exports = function(app) {
   //   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   //   next();
   // });
+  
+  // Multipart 
+  // app.use(multipart());
+
+  //Use busboy
+  app.use(busboyBodyParser());
 
   // Insert routes below
+  app.use('/upload', require('./api/upload'));
   app.use('/api/users', require('./api/user'));
   app.use('/api/courts', require('./api/court'));
 

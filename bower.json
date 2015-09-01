@@ -17,6 +17,8 @@
     "json3": "~3.3.1",
     "lodash": "~2.4.1",
     "moment": "~2.10.6",
+    "ng-file-upload": "~7.0.15",
+    "ng-file-upload-shim": "~7.0.15",
     "skrollr": "~0.6.30"
   },
   "devDependencies": {
