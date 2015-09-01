@@ -1,7 +1,8 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+    Schema = mongoose.Schema,
+    ObjectId = Schema.ObjectId;
 
 var UploadSchema = new Schema({
   name: String,

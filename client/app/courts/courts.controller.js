@@ -21,10 +21,6 @@ angular.module('keepballin')
 	    $scope.isAdmin = Auth.isAdmin();
 	    $scope.getCurrentUser = Auth.getCurrentUser();
 
-	    $scope.test = function(what) {
-	    	console.log(what);
-	    	console.log(what.files[0]);
-	    }
 	    //The current court user is looking at
 	    $scope.currentcourt;
 	    $scope.markernow;

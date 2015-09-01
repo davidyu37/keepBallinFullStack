@@ -17,9 +17,6 @@ module.exports = function(app) {
   //   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   //   next();
   // });
-  
-  // Multipart 
-  // app.use(multipart());
 
   //Use busboy
   app.use(busboyBodyParser());

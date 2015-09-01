@@ -2,8 +2,12 @@
 
 var _ = require('lodash');
 var Upload = require('./upload.model');
-var mongoose = require('mongoose');
+var mongoose = require('mongoose'),
+Schema = mongoose.Schema,
+ObjectId = Schema.ObjectId;
+var db = mongoose.connection.db;
 var Grid = require('gridfs-stream');
+var GridStore = mongoose.mongo.GridStore;
 Grid.mongo = mongoose.mongo;
 var gfs = new Grid(mongoose.connection.db);
 
@@ -15,36 +19,7 @@ exports.index = function(req, res) {
     console.log('got something from upload');
     return res.status(200).json(uploads);
   });
-};
-
-// Get a single upload
-exports.show = function(req, res) {
-  console.log('show');
-  console.log(req.params.id);
-
-  gfs.findOne({ _id: req.params.id}, function (err, file) {
-    console.log(file.contentType);
-    res.writeHead(200, {'Content-Type': file.contentType});
-    
-    var readstream = gfs.createReadStream({
-        filename: file.filename
-    });
- 
-      readstream.on('data', function(data) {
-          res.write(data);
-      });
-      
-      readstream.on('end', function() {
-          res.end();        
-      });
- 
-    readstream.on('error', function (err) {
-      console.log('An error occurred!', err);
-      throw err;
-    });
-  });
- 
-  // gfs.files.find({ _id: req.params.id }).toArray(function (err, files) {
+    // gfs.files.find({ _id: req.params.id }).toArray(function (err, files) {
  
   //     if(files.length===0){
   //     return res.status(400).send({
@@ -71,26 +46,60 @@ exports.show = function(req, res) {
   //     throw err;
   //   });
   // });
+};
+
+// Get a single upload
+exports.show = function(req, res) {
+  console.log('show');
+  console.log(req.params.id);
+
+  // gfs.findOne({ metadata: {court_id: req.params.id} }, function (err, file) {
+  //   console.log(file.contentType);
+  //   res.writeHead(200, {'Content-Type': file.contentType});
+    
+  //   var readstream = gfs.createReadStream({
+  //       filename: file.filename
+  //   });
  
-  // Upload.findById(req.params.id, function (err, upload) {
-  //   if(err) { return handleError(res, err); }
-  //   if(!upload) { return res.status(404).send('Not Found'); }
-  //   return res.json(upload);
+  //     readstream.on('data', function(data) {
+  //         res.write(data);
+  //     });
+      
+  //     readstream.on('end', function() {
+  //         res.end();        
+  //     });
+ 
+  //   readstream.on('error', function (err) {
+  //     console.log('An error occurred!', err);
+  //     throw err;
+  //   });
   // });
+ 
 };
 
 // Creates a new upload in the DB.
 exports.create = function(req, res, next) {
-  console.log(req.files.file);
+  var court_id = req.body.court_id;
+  console.log(req.body.court_id);
   var part = req.files.file;
  
+
+  // var gs = new GridStore(db, part.name, "w", options);
+  // gs.open(function(err, gs) {
+  //   gs.write();
+  //   gs.close();
+  // })
   var writeStream = gfs.createWriteStream({
     filename: part.name,
     mode: 'w',
-    content_type:part.mimetype
+    content_type:part.mimetype,
+    chunkSize: 1024,
+    root: 'uploads',
+    metadata: {
+      court_id: court_id
+    }
   });
-
-
+  
   writeStream.on('close', function() {
     return res.status(200).send({
     message: 'Success'

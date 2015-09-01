@@ -14,16 +14,7 @@
     ng-click="geolocate()">
     	<span class="glyphicon glyphicon-screenshot"></span>
     </button>
-    <!-- <div id="districtSelect" class="dropdown">
-	  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-	    選擇區域
-	    <span class="caret"></span>
-	  </button>
-	  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-	    <li ng-repeat="district in districts"><a href="" ng-click="displayDistrict($event, district)">{{district.name}}</a></li>
-	  </ul>
-	</div> -->
-	<!-- <button class="btn btn-primary" id="addMarker" ng-init="enable=false" ng-show="isAdmin" ng-click="enable = !enable; enableAddMarker(enable)">{{addMode}}</button> -->
+    <!-- Make a button that let user select the courts to appear -->
     <button class="btn" 
     ng-class="{'btn-primary': !enable, 'btn-success': enable}"
     id="addMarker" ng-init="enable=false" ng-show="isAdmin" ng-click="enable = !enable; enableAddMarker(enable)">
@@ -41,7 +32,10 @@
         <div class="row">
             <div class="col-sm-3 picture-area">
                 <!-- Court name -->
-                <img src="../assets/images/court_pics/example.jpeg" alt="">
+                <div ng-controller="uploadCtrl">
+                    <img ng-model="courtId"
+                    ng-init="courtId = $parent.currentcourt._id" src=""/> 
+                </div>
                 <button ng-click="uploadmode()" ng-model="upload" 
                 ng-show="currentcourt">
                     <span class="glyphicon glyphicon-camera"></span>
@@ -56,8 +50,6 @@
             <div class="col-sm-3">
                 <!-- City -->
                 <h2>{{markernow.title}}</h2>
-                <!-- <h2>{{currentcourt.city}}&nbsp
-                <span ng-show="currentcourt.district">{{currentcourt.district}}區</span> -->
                 </h2>
                 <!-- Hours -->
                 <p>開放時間:</p>

@@ -1,37 +1,25 @@
-<!-- <div flow-init="{target: '/upload'}"
-     flow-files-submitted="$flow.upload()"
-     flow-file-success="$file.msg = $message" 
-		class="whitebackground" 
-		ng-click="stopPropagate($event)">
-	  <span class="btn" flow-btn ng-click="test($flow)">Upload File</span>
-
-	  <ul ng-repeat="file in $flow.files track by $index">
-	  	<li>{{$index+1}}-{{file.name}}<img style="height: 200px; width: 300px" class="thumbnail" flow-img="file"/></li>
-	  	
-	  </ul>
-</div> -->
 <div class="whitebackground" ng-click="stopPropagate($event)">
-<div ng-controller="uploadCtrl">
-	<!-- Username -->
-    <!-- <input type="text" ng-model="username"></br></br>
-    watching model: -->
-    <div class="button" ngf-select ng-model="file" ngf-multiple="false">Select File</div>
-    <input type="text" ng-model="id"/>
-    <input type="submit" ng-click="getPicture(id)"/>
-    Upload Log:
-    <pre>{{log}}</pre>
-    <img src="{{url}}"/>
+    <form class="uploadForm" ng-controller="uploadCtrl" name="form">
+      Single Image with validations
+      <div class="button" ngf-select ng-model="file" name="file">Select</div>
+      Multiple files
+      <div class="button" ngf-select ng-model="files" ngf-multiple="true">Select</div>
+      Drop files: <div ngf-drop ng-model="files" class="drop-box">Drop</div>
+      <button class="button" type="submit" 
+      ng-click="form.court_id = $parent.currentcourt._id; submit(form)">submit</button>
+      <div>{{$parent.currentcourt._id}}</div>
+    </form>
 </div>
+<!-- <div class="whitebackground" ng-click="stopPropagate($event)">
+    <div ng-controller="uploadCtrl">
+        <div class="button" ngf-select ng-model="file" ngf-multiple="false">Select File</div>
+        <input type="text" ng-model="id"/>
+        <input type="submit" ng-click="getPicture(id)"/>
+        Upload Log:
+        <pre>{{log}}</pre>
+        <img src="{{url}}"/>
+        
+        <input type="submit" ng-click="courtId(currentcourt._id)"/>
+    </div>
 </div>
-    <!-- on file change multiple:
-    <div class="button" ngf-select="upload($files)" ngf-multiple="true">Select File</div>
-    Drop File:
-    <div ngf-drop ngf-select ng-model="files" class="drop-box" 
-        ngf-drag-over-class="dragover" ngf-multiple="true" ngf-allow-dir="true"
-        accept="image/*,application/pdf" 
-        ngf-pattern="'image/*,application/pdf'">Drop pdfs or images here or click to upload</div>
-    <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div> -->
-    <!-- Files:
-    <ul>
-        <li ng-repeat="f in files" style="font:smaller">{{f.name}} {{f.$error}} {{f.$errorParam}}</li>
-    </ul> -->
+ -->
