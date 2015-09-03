@@ -2,12 +2,14 @@
 
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
-    ObjectId = Schema.ObjectId;
+    ObjectId = Schema.ObjectId,
+    Grid = require('gridfs-stream');
 
 var UploadSchema = new Schema({
-  name: String,
-  info: String,
-  active: Boolean
+	court_id: String,
+  file: [Schema.Types.Mixed]
 });
+
+UploadSchema.plugin(Grid);
 
 module.exports = mongoose.model('Upload', UploadSchema);

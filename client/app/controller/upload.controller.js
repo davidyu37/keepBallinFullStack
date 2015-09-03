@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('keepballin')
-	.controller('uploadCtrl', ['$scope', 'Upload', '$timeout', '$http', function ($scope, Upload, $timeout, $http) {
+	.controller('uploadCtrl', ['$scope', '$q', 'Upload', '$timeout', '$http', 'Court', function ($scope, $q, Upload, $timeout, $http, Court) {
     // $scope.$watch('files', function () {
     //     $scope.upload($scope.files);
     // });
@@ -14,18 +14,17 @@ angular.module('keepballin')
 
     $scope.$watch('currentcourt._id', function(newVal, oldVal) {
         if(newVal) {
-            console.log(newVal);
-            // $scope.getPicture(newVal);
+            $scope.getPicture(newVal);
         }
     });
 
     $scope.getPicture = function(id) {
-        console.log('id is '+ id);
         $http({
             url: '/upload/' + id, 
             method: "GET",
             data: {id: id}
          }).then(function(data){
+            console.log(data);
             $scope.url = data.config.url;
 
          });
@@ -38,10 +37,11 @@ angular.module('keepballin')
     $scope.url = '';
 
     $scope.submit = function(form) {
-    
-      if (form.file.$valid && $scope.file && !$scope.file.$error) {
-        $scope.upload([$scope.file], form.court_id);
-      }
+        //Store the court id now
+        var courtId = $scope.currentcourt._id;
+        //Get data for current court to modify
+        var courtNow = Court.get({id : courtId});
+
       if (form.file.$valid && $scope.files && !$scope.files.$error) {
         $scope.upload($scope.files, form.court_id);
       }
@@ -50,11 +50,12 @@ angular.module('keepballin')
 
 
     $scope.upload = function (files, court_id) {
-       
+        
+
         if (files && files.length) {
             for (var i = 0; i < files.length; i++) {
               var file = files[i];
-              
+              console.log(file);
               if (!file.$error) {
                 
                 Upload.upload({
@@ -70,7 +71,8 @@ angular.module('keepballin')
                                 evt.config.file.name + '\n' + $scope.log;
                 }).success(function (data, status, headers, config) {
                     $timeout(function() {
-                        $scope.log = 'file: ' + config.file.name + ', Response: ' + JSON.stringify(data) + '\n' + $scope.log;
+                        // $scope.log = 'file: ' + config.file.name + ', Response: ' + JSON.stringify(data) + '\n' + $scope.log;
+                        
                     });
                 });
               }

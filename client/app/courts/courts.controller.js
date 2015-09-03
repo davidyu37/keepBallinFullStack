@@ -67,9 +67,8 @@ angular.module('keepballin')
     	//Logic for court editing page
     	$scope.editmode = function(court) {
     		$scope.edit = !($scope.edit);
-    		console.log(court);
     		if(court) {
-    			console.log(court._id);
+    			console.log(court);
     			Court.update({ id: court._id }, court);
     		}
     	};

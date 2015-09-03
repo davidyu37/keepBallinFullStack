@@ -25,7 +25,7 @@ var CourtSchema = new Schema({
   toilet: {exist: Boolean, desc: String},
   ceiling: Boolean,
   indoor: {type: Boolean, default: false},
-  pics: [{picId: ObjectId, desc: String, src: String}],
+  pics: [Number],
   likes: Number,
   hidden: {type: Boolean, default: true},
   comments: [{author: String, body: String, date: Date}]

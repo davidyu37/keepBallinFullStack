@@ -1,9 +1,7 @@
 <div class="whitebackground" ng-click="stopPropagate($event)">
     <form class="uploadForm" ng-controller="uploadCtrl" name="form">
-      Single Image with validations
-      <div class="button" ngf-select ng-model="file" name="file">Select</div>
       Multiple files
-      <div class="button" ngf-select ng-model="files" ngf-multiple="true">Select</div>
+      <div class="button" ngf-select ng-model="files" name="file" ngf-multiple="true">Select</div>
       Drop files: <div ngf-drop ng-model="files" class="drop-box">Drop</div>
       <button class="button" type="submit" 
       ng-click="form.court_id = $parent.currentcourt._id; submit(form)">submit</button>

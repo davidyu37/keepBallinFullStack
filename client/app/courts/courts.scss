@@ -69,17 +69,6 @@
 .court-detail.ng-hide {
     opacity:0;
 }
-.picture-area {
-    
-    text-align: center;
-    button{
-        background: none;
-        /*background: rgba(0,0,0,0.9);*/
-        position: absolute;
-        right: 0;
-        bottom: 0;
-    }
-}
 /* Edit page stuff starts here */
 /* The dark transparent overlay for the edit page */
 .editPage {
@@ -151,12 +140,6 @@
 }
 /* style for upload pics */
 
-.uploadForm {
-    button {
-        position: relative;
-    }
-}
-
 .button {
     -moz-appearance: button;
     /* Firefox */
@@ -177,4 +160,29 @@
 }
 .dragover {
     border: 5px dashed blue;
+}
+
+.picture-area {
+    height: 100%;
+
+    text-align: center;
+    button{
+        background: none;
+        /*background: rgba(0,0,0,0.9);*/
+        position: absolute;
+        right: 10px;
+        top: 0;
+        z-index: 100;
+    }
+}
+
+.uploadForm {
+    button {
+        position: relative;
+    }
+}
+
+.courtPic {
+    width: 100%;
+    height: auto;
 }

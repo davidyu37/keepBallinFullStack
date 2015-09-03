@@ -32,14 +32,14 @@
         <div class="row">
             <div class="col-sm-3 picture-area">
                 <!-- Court name -->
-                <div ng-controller="uploadCtrl">
-                    <img ng-model="courtId"
-                    ng-init="courtId = $parent.currentcourt._id" src=""/> 
-                </div>
                 <button ng-click="uploadmode()" ng-model="upload" 
                 ng-show="currentcourt">
                     <span class="glyphicon glyphicon-camera"></span>
                 </button>
+                <div ng-controller="uploadCtrl">
+                    <img src="{{url}}" class="courtPic"/> 
+                </div>
+                &nbsp
                 <div id="uploadPic" class="editPage col-lg-12" 
                 ng-include="'app/courts/temp/upload.page.html'" 
                 ng-init="upload=false" ng-show="upload" 
