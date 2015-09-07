@@ -9,6 +9,7 @@ var path = require('path');
 // var multipart = require('connect-multiparty');
 var busboyBodyParser = require('busboy-body-parser');
 
+
 module.exports = function(app) {
 
   // // Allow CORS loading
@@ -22,7 +23,7 @@ module.exports = function(app) {
   app.use(busboyBodyParser());
 
   // Insert routes below
-  app.use('/upload', require('./api/upload'));
+  app.use('/api/uploads', require('./api/upload'));
   app.use('/api/users', require('./api/user'));
   app.use('/api/courts', require('./api/court'));
 

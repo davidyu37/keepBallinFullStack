@@ -16,7 +16,16 @@ exports.register = function(socket) {
 }
 
 function onSave(socket, doc, cb) {
-  socket.emit('upload:save', doc);
+	var binaryData = {
+		image: true,
+		court_id: doc.court_id,
+		filename: doc.filename,
+		url: doc.url,
+		// buffer: doc.buffer,
+		mimetype: doc.mimetype,
+		_id: doc._id
+	};
+  socket.emit('upload:save', binaryData);
 }
 
 function onRemove(socket, doc, cb) {

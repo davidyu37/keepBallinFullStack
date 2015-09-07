@@ -25,29 +25,40 @@
     <button class="btn btn-primary slideBtn" slide-toggle="#detail" expanded="expanded" map="map" ng-model="expanded" 
     ng-show="currentcourt">
         <span class="glyphicon"
-        ng-class="{'glyphicon-arrow-up': !expanded, 'glyphicon-arrow-down': expanded}"></span>
+        ng-class="{'glyphicon-chevron-up': !expanded, 'glyphicon-chevron-down': expanded}"></span>
     </button>
     
     <div id="detail" class="court-detail slideable" ng-show="currentcourt">
         <div class="row">
-            <div class="col-sm-3 picture-area">
+            <div ng-mouseover="hovered=true" ng-mouseleave="hovered=false" class="picture-area" ng-class="{'col-sm-12': hovered, 'col-sm-3': !hovered}">
                 <!-- Court name -->
-                <button ng-click="uploadmode()" ng-model="upload" 
-                ng-show="currentcourt">
-                    <span class="glyphicon glyphicon-camera"></span>
-                </button>
+                
                 <div ng-controller="uploadCtrl">
-                    <img src="{{url}}" class="courtPic"/> 
+                    <div class="wrapper">
+                        <div ng-hide="hovered" class="singleImage">
+                            <img ng-src="{{slides[0].url}}">
+                        </div>
+                        <div ng-show="hovered" ng-repeat="slide in slides" class="carousel">
+                            <div>
+                                <img ng-src="{{slide.url}}">
+                                <button class="picDeleteBtn" ng-click="deletePic(slide)">
+                                    <span class="glyphicon glyphicon-trash">
+                                    </span>
+                                </button>
+                            </div>
+                        </div> 
+                    </div>
+                   <!--  <div style="height: 305px">
+                        <carousel interval="myInterval" no-wrap="noWrapSlides" template-url="'app/courts/temp/carousel.html'">
+                          <slide ng-repeat="slide in slides" active="slide.active">
+                            <img ng-src="{{slide.url}}" style="margin:auto;">
+                          </slide>
+                        </carousel>
+                    </div> -->
                 </div>
                 &nbsp
-                <div id="uploadPic" class="editPage col-lg-12" 
-                ng-include="'app/courts/temp/upload.page.html'" 
-                ng-init="upload=false" ng-show="upload" 
-                ng-click="uploadmode()"
-                ></div>
-                
             </div>
-            <div class="col-sm-3">
+            <div class="infoBox" ng-class="{'col-sm-3': !hovered}" ng-hide="hovered">
                 <!-- City -->
                 <h2>{{markernow.title}}</h2>
                 </h2>
@@ -66,7 +77,7 @@
                     </p>
                 </div>
             </div>
-            <div class="col-sm-3">
+            <div class="infoBox" ng-class="{'col-sm-3': !hovered}" ng-hide="hovered">
                 <!-- Indoor -->
                 <h2>球場情報</h2>
                 <div class="col-sm-6">
@@ -86,22 +97,31 @@
                     <p>廁所:{{currentcourt.toilet.exist | exist}}&nbsp{{currentcourt.toilet.desc}}</p>
                 </div>
             </div>
-            <div class="col-sm-3">
+            <div class="infoBox" ng-class="{'col-sm-3': !hovered}" ng-hide="hovered">
                 <h2>管理員留言</h2>
-                <p>{{markernow.content}}</p>
-                <!--Edit button-->
-                <!-- <button class="btn-warning editDetailButton"
-                ng-click="editmode()" ng-model="edit" 
-                ng-show="currentcourt">
-                編輯細節</button> -->
-                <button class="btn-warning editDetailButton"
-                ng-click="editmode()" ng-model="edit" 
-                ng-show="currentcourt"><span class="glyphicon glyphicon-pencil"></span></button>
+                <p>{{currentcourt.desc}}</p>
+                <!--Upload page-->
+                <div id="uploadPic" class="editPage col-lg-12" 
+                ng-include="'app/courts/temp/upload.page.html'" 
+                ng-init="upload=false" ng-show="upload" 
+                ng-click="uploadmode()"
+                ></div>
                 <!--Edit page-->
                 <div id="courtEditPage" class="editPage col-lg-12" 
                 ng-include="'app/courts/temp/edit.page.html'" 
                 ng-init="edit=false" ng-show="edit" 
                 ng-click="editmode()"></div>
+            </div>
+            <div class="editBtns">
+                <!--Upload button-->
+                <button class="editDetailButton" ng-click="uploadmode()" ng-model="upload" 
+                ng-show="currentcourt">
+                    <span class="glyphicon glyphicon-camera"></span>
+                </button>
+                <!--Edit button-->
+                <button class="editDetailButton"
+                ng-click="editmode()" ng-model="edit" 
+                ng-show="currentcourt"><span class="glyphicon glyphicon-pencil"></span></button>
             </div>
         </div>
     </div>

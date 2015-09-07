@@ -78,14 +78,10 @@ angular.module('keepballin')
                 if($scope.expanded) {
                     var y = content.clientHeight;
                     
-                    if(y) {
-                        target.style.height = y + 'px';
-                        button.style.bottom = y + 'px';                       
-                    } else {
-                        var defaultHeight = 183;
-                        target.style.height = defaultHeight + 'px';
-                        button.style.bottom = defaultHeight + 'px'; 
-                    }
+                    var defaultHeight = 183;
+                    target.style.height = defaultHeight + 'px';
+                    button.style.bottom = defaultHeight + 'px'; 
+                    
                 } else {
                     target.style.height = '0px';
                     button.style.bottom = '0px';

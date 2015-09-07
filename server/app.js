@@ -16,26 +16,6 @@ var fs = require('fs');
 
 Grid.mongo = mongoose.mongo;
 
-//How to upload file with gridfs
-// conn.once('open', function () {
-//     console.log('open');
-//     var gfs = Grid(conn.db);
- 
-//     // streaming to gridfs
-//     //filename to store in mongodb
-//     var writestream = gfs.createWriteStream({
-//         filename: 'court picture'
-//     });
-//     // console.log(fs.createReadStream('../client/assets/images/court_pics/example.jpeg').pipe(writestream));
-//     fs.createReadStream('../client/assets/images/court_pics/example.jpeg').pipe(writestream);
-//  	console.log(fs.createReadStream('../client/assets/images/court_pics/example.jpeg').pipe(writestream));
-//     writestream.on('close', function (file) {
-//         // do something with `file`
-//         console.log(file.filename + 'Written To DB');
-//     });
-// });
-
-
 // Connect to database
 mongoose.connect(config.mongo.uri, config.mongo.options);
 mongoose.connection.on('error', function(err) {

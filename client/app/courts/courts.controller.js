@@ -73,10 +73,8 @@ angular.module('keepballin')
     		}
     	};
     	//Logic for picture upload
-    	$scope.uploadmode = function(pics) {
+    	$scope.uploadmode = function() {
     		$scope.upload = !($scope.upload);
-    		console.log(pics);
-    		
     	};
 
     	//Prevent the edit page from closing when clicking one the form
@@ -162,86 +160,4 @@ angular.module('keepballin')
 
 }]);//mapCtrl ends here
 
-//Data
-var districts = [
-	{
-		name: '北投區',
-		courts: []
-	},
-	{
-		name: '士林區',
-		courts: []
-	},
-	{
-		name: '內湖區',
-		courts: []
-	},
-	{
-		name: '中山區',
-		courts: []
-	},
-	{
-		name: '大同區',
-		courts: []
-	},
-	{
-		name: '松山區',
-		courts: []	
-	},
-	{
-		name: '萬華區',
-		courts: []	
-	},
-	{
-		name: '中正區',
-		courts: []	
-	},
-	{
-		name: '大安區',
-		courts: [
-		    {
-		        court : '台北科技大學',
-		        desc : 'This is the best court in the world!',
-		        lat : 25.043204,
-		        long : 121.537544
-		    },
-		    {
-		        court : '仁愛國中',
-		        desc : 'This court is aiiiiite!',
-		        lat : 25.036629,
-		        long : 121.550943
-		    },
-		    {
-		        court : '懷生國中',
-		        desc : 'This is the second best court in the world!',
-		        lat : 25.040370,
-		        long : 121.540789
-		    },
-		    {
-		        court : '師大附中',
-		        desc : 'This court is live!',
-		        lat : 25.035833,
-		        long : 121.540549
-		    },
-		    {
-		        court : '延平中學',
-		        desc : 'Sin court...\'nuff said!',
-		        lat : 25.036516,
-		        long : 121.538686
-		    }
-		]
-	},
-	{
-		name: '信義區',
-		courts: []	
-	},
-	{
-		name: '南港區',
-		courts: []	
-	},
-	{
-		name: '文山區',
-		courts: []	
-	}
-];
 

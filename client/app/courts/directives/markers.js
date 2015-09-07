@@ -47,6 +47,7 @@ angular.module('keepballin')
 			        $scope.markernow = marker;
 
 			        $scope.currentcourt = Court.get({id : marker.id});
+			        console.log($scope.currentcourt);
 			        
 			        //Open court's detail when user clicks on marker
 			        $scope.expanded=true;
