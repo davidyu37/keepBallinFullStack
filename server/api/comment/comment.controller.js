@@ -3,13 +3,20 @@
 var _ = require('lodash');
 var Comment = require('./comment.model');
 
-// Get list of comments
 exports.index = function(req, res) {
-  Comment.find(function (err, comments) {
+  Comment.loadRecent(function (err, comments) {
     if(err) { return handleError(res, err); }
-    return res.status(200).json(comments);
+    return res.json(200, comments);
   });
 };
+
+// Get list of comments
+// exports.index = function(req, res) {
+//   Comment.find(function (err, comments) {
+//     if(err) { return handleError(res, err); }
+//     return res.status(200).json(comments);
+//   });
+// };
 
 // Get a single comment
 exports.show = function(req, res) {
@@ -20,13 +27,24 @@ exports.show = function(req, res) {
   });
 };
 
-// Creates a new comment in the DB.
 exports.create = function(req, res) {
-  Comment.create(req.body, function(err, comment) {
+  // don't include the date, if a user specified it
+  delete req.body.date;
+ 
+  var comment = new Comment(_.merge({ author: req.user._id }, req.body));
+  comment.save(function(err, comment) {
     if(err) { return handleError(res, err); }
-    return res.status(201).json(comment);
+    return res.json(201, comment);
   });
 };
+
+// // Creates a new comment in the DB.
+// exports.create = function(req, res) {
+//   Comment.create(req.body, function(err, comment) {
+//     if(err) { return handleError(res, err); }
+//     return res.status(201).json(comment);
+//   });
+// };
 
 // Updates an existing comment in the DB.
 exports.update = function(req, res) {

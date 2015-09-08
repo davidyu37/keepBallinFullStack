@@ -6,7 +6,7 @@
   </form>
 </div> -->
 <div class="whitebackground" ng-click="stopPropagate($event)">
-    <form class="uploadForm" ng-controller="uploadCtrl" name="form">
+    <form class="uploadForm" ng-controller="uploadCtrl" name="uploadForm">
       <h2>選檔案，或拖曳檔案丟進來紅框</h2>
       <div  ngf-select ngf-drop ng-model="files" ngf-multiple="true" class="drop-box">
         <h2 class="message">丟吧</h2>  
@@ -39,10 +39,10 @@
       </div>
       <!-- <img src="files[0].data.url" ngf-background="{{url}}" ngf-no-object-url="true"> -->
       <div class="col-md-12">
-        <div class="uploadbtn"
-        ng-click="form.court_id = $parent.currentcourt._id; submit(form)">
-        送出
-        </div>
+        <input class="uploadbtn"
+        ng-click="uploadForm.court_id = $parent.currentcourt._id; submit(uploadForm)" 
+        ng-disabled="!files"
+        value="送出"/>
       </div>
       
     </form>

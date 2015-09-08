@@ -27,7 +27,7 @@
         <span class="glyphicon"
         ng-class="{'glyphicon-chevron-up': !expanded, 'glyphicon-chevron-down': expanded}"></span>
     </button>
-    
+    <!-- Court detail starts here -->
     <div id="detail" class="court-detail slideable" ng-show="currentcourt">
         <div class="row">
             <div ng-mouseover="hovered=true" ng-mouseleave="hovered=false" class="picture-area" ng-class="{'col-sm-12': hovered, 'col-sm-3': !hovered}">
@@ -120,4 +120,8 @@
             </div>
         </div>
     </div>
+    <!-- Court detail ends -->
+    <!-- Comments start here -->
+    <div ng-include="'app/courts/temp/comments.html'"></div>
+    <!-- Comments end -->
 </div>

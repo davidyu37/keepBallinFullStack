@@ -45,6 +45,8 @@ angular.module('keepballin')
     $scope.submit = function(form) {
       if (form.courtpic.$valid && $scope.files && !$scope.files.$error) {
         $scope.upload($scope.files, form.court_id);
+      } else {
+        $window.alert('請加檔案');
       }
     };
 

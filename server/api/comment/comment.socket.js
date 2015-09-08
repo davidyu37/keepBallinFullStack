@@ -16,7 +16,9 @@ exports.register = function(socket) {
 }
 
 function onSave(socket, doc, cb) {
-  socket.emit('comment:save', doc);
+  Comment.populate(doc, {path:'author', select: 'name'}, function(err, comment) {
+    socket.emit('comment:save', comment);
+  });
 }
 
 function onRemove(socket, doc, cb) {
