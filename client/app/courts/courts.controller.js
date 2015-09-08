@@ -25,7 +25,14 @@ angular.module('keepballin')
 	    $scope.currentcourt;
 	    $scope.markernow;
 		//Is the details of the court expanded?
-		$scope.expanded = false;	   
+		$scope.expanded = false;
+
+		//Broadcast the currentcourt
+		$scope.$watch('currentcourt._id', function(newVal, oldVal) {
+	        if(newVal) {
+	        	$scope.$broadcast('courtIdChanged', {newId: newVal});
+	        }
+	    });	   
 
 	    //Empty markers
 	    $scope.markers = [];
@@ -155,8 +162,7 @@ angular.module('keepballin')
 	    //Add the addMarker button to map
 	    var addMarkerBtn = document.getElementById('addMarker');
 	    map.controls[google.maps.ControlPosition.RIGHT_CENTER].push(addMarkerBtn);
-	    //Message on the button
-	    $scope.addMode = "加地點";
+	    
 
 }]);//mapCtrl ends here
 

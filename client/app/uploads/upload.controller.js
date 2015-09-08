@@ -4,11 +4,10 @@ angular.module('keepballin')
 	.controller('uploadCtrl', ['$scope', '$q', '$window', 'Upload', 'Download', '$timeout', '$http', 'Court', 'socket', 'Lightbox', function ($scope, $q, $window, Upload, Download, $timeout, $http, Court, socket, Lightbox) {
     //Slides of pictures
     $scope.slides = [];
-    //If court id change, get new pictures
-    $scope.$watch('currentcourt._id', function(newVal, oldVal) {
-        if(newVal) {
-            $scope.getPicture(newVal);
-        }
+   
+    //Get picture when court id change
+    $scope.$on('courtIdChanged', function(e, args) {
+        $scope.getPicture(args.newId);
     });
 
     //socket.io instant updates
@@ -19,7 +18,6 @@ angular.module('keepballin')
 
     //Using court id to collect an array of pictures
     $scope.getPicture = function(id) {
-        console.log('get picture');
         var pics = Download.query({court_id: id},function(data) {
             if(!data) {
                 angular.noop;

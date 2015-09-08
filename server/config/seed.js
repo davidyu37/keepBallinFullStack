@@ -9,8 +9,15 @@ var Thing = require('../api/thing/thing.model');
 var User = require('../api/user/user.model');
 var Court = require('../api/court/court.model');
 var Upload = require('../api/upload/upload.model');
+var Comment = require('../api/comment/comment.model');
 
-Upload.find({}).remove();
+Upload.find({}).remove(function() {
+  console.log('uploads cleared');
+});
+
+Comment.find({}).remove(function() {
+  console.log('comments cleared');
+});
 
 User.find({}).remove(function() {
   User.create({

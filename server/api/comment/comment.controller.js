@@ -20,16 +20,16 @@ exports.index = function(req, res) {
 
 // Get a single comment
 exports.show = function(req, res) {
-  Comment.findById(req.params.id, function (err, comment) {
+  Comment.loadRecentByCourtId(req.params.court_id, function(err, comments) {
     if(err) { return handleError(res, err); }
-    if(!comment) { return res.status(404).send('Not Found'); }
-    return res.json(comment);
+    if(!comments) { return res.status(404).send('Not Found'); }
+    return res.json(comments);
   });
 };
 
 exports.create = function(req, res) {
-  // don't include the date, if a user specified it
-  delete req.body.date;
+  // console.log(req);
+  // delete req.body.date;
  
   var comment = new Comment(_.merge({ author: req.user._id }, req.body));
   comment.save(function(err, comment) {
