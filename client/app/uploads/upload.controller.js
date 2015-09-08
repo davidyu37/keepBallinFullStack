@@ -1,17 +1,10 @@
 'use strict';
 
 angular.module('keepballin')
-	.controller('uploadCtrl', ['$scope', '$q', '$window', 'Upload', 'Download', '$timeout', '$http', 'Court', 'socket', function ($scope, $q, $window, Upload, Download, $timeout, $http, Court, socket) {
-    // $scope.$watch('files', function () {
-    //     $scope.upload($scope.files);
-    // });
-    // $scope.$watch('file', function () {
-    //     if ($scope.file != null) {
-    //         $scope.upload([$scope.file]);
-    //     }
-    // });
+	.controller('uploadCtrl', ['$scope', '$q', '$window', 'Upload', 'Download', '$timeout', '$http', 'Court', 'socket', 'Lightbox', function ($scope, $q, $window, Upload, Download, $timeout, $http, Court, socket, Lightbox) {
+    //Slides of pictures
     $scope.slides = [];
-
+    //If court id change, get new pictures
     $scope.$watch('currentcourt._id', function(newVal, oldVal) {
         if(newVal) {
             $scope.getPicture(newVal);
@@ -24,6 +17,7 @@ angular.module('keepballin')
         socket.unsyncUpdates('upload');
     });
 
+    //Using court id to collect an array of pictures
     $scope.getPicture = function(id) {
         console.log('get picture');
         var pics = Download.query({court_id: id},function(data) {
@@ -35,17 +29,20 @@ angular.module('keepballin')
             }
         });
     };
-    
+    //Lightbox
+    $scope.openLightboxModal = function (index) {
+        Lightbox.openModal($scope.slides, index);
+    };
+
+    //Log is the progress percentage for upload, empty the courtinfos for other previews
     $scope.log = 0;
-
     $scope.courtinfos = [];
-
+    //Clear the preview pictures
     $scope.clearPreview = function() {
         $scope.courtinfos = [];
     }
-
+    //Submit pictures
     $scope.submit = function(form) {
-
       if (form.courtpic.$valid && $scope.files && !$scope.files.$error) {
         $scope.upload($scope.files, form.court_id);
       }
@@ -61,7 +58,7 @@ angular.module('keepballin')
             angular.noop;
         }
     };
-
+    //Go through the files' array and upload
     $scope.upload = function (files, court_id) {        
 
         if (files && files.length) {
@@ -98,8 +95,8 @@ angular.module('keepballin')
                         //Reset the progress bar
                         $scope.log = 0;
                         // $scope.log = 'file: ' + config.file.name + ', Response: ' + JSON.stringify(data) + '\n' + $scope.log;
-                        
-                    }).then($scope.getPicture($scope.currentcourt._id));
+                        $scope.getPicture($scope.currentcourt._id)
+                    });
                 });
               }
             }

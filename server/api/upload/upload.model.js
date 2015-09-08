@@ -9,7 +9,8 @@ var UploadSchema = new Schema({
 	court_id: String,
 	filename: String,
 	url: String,
-	mimetype: String
+	mimetype: String,
+	date: { type: Date, default: Date.now }
 });
 
 // UploadSchema.plugin(Grid);

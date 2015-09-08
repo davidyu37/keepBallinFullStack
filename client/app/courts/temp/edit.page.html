@@ -1,19 +1,22 @@
 <div class="whitebackground" ng-click="stopPropagate($event)">
 <form class="form-horizontal" name="editform">
     <div class="form-group">
-        <div class="col-sm-12">
+        <div class="col-sm-4">
             <!-- Court name -->
             <label for="" class="control-label">球場名:</label>
             <input type="text" ng-model="currentcourt.court" placeholder="簡潔明瞭的地名">
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-4">
             <!-- City -->
             <label for="" class="control-label">城市:</label>
             <input type="text" ng-model="currentcourt.city" placeholder="什麼市？">
         </div>
-        <div class="col-sm-6">
-            <input type="text" ng-model="currentcourt.district" placeholder="什麼區？">
-            <label for="" class="control-label">區</label>
+        <div class="col-sm-4">
+            <label for="" class="control-label">區域:</label>
+            <div class="input-group">
+                <input type="text" ng-model="currentcourt.district" placeholder="什麼區？">
+                <span class="input-group-addon">區</span>
+            </div>
         </div>
     </div>
         
@@ -28,23 +31,23 @@
     </div>
     <div class="form-group">
         <div class="row selectors">
-            <div class="col-sm-5">
+            <div class="col-sm-6">
                 <select class="form-control" name="court begin hour" ng-model="currentcourt.hours[index1].begin" ng-change="currentcourt.hours[index1].end = currentcourt.hours[index1].begin">
                     <option value="">選擇開始時間</option>
                     <option ng-repeat="hour in getHours()" value="{{hour}}">{{hour}}</option>
                 </select>
             </div>
-            <div class="col-sm-5">
+            <div class="col-sm-6">
                 <select class="form-control" name="court hour" ng-model="currentcourt.hours[index1].end">
                     <option value="">選擇結束時間</option>
                     <option ng-repeat="hour in getHours()" value="{{hour}}">{{hour}}</option>
                 </select>    
             </div>
-            <div class="col-sm-2 cell">
+            <!-- <div class="col-sm-2 cell">
                 <span class="glyphicon glyphicon-plus" ng-init="index1=0"
                 ng-click="index1 = index1 + checkValue(currentcourt.hours[index1])">  
                 </span>
-            </div>
+            </div> -->
         </div>
         
     </div>
@@ -59,23 +62,23 @@
     </div>
     <div class="form-group">
         <div class="row selectors">
-            <div class="col-sm-5">
+            <div class="col-sm-6">
                 <select class="form-control" name="court begin hour" ng-model="currentcourt.peaktime[index2].begin" ng-change="currentcourt.peaktime[index2].end = currentcourt.peaktime[index2].begin">
                     <option value="">選擇開始時間</option>
                     <option ng-repeat="hour in getHours()" value="{{hour}}">{{hour}}</option>
                 </select>
             </div>
-            <div class="col-sm-5">
+            <div class="col-sm-6">
                 <select class="form-control" name="court hour" ng-model="currentcourt.peaktime[index2].end">
                     <option value="">選擇結束時間</option>
                     <option ng-repeat="hour in getHours()" value="{{hour}}">{{hour}}</option>
                 </select>    
             </div>
-            <div class="col-sm-2 cell">
+            <!-- <div class="col-sm-2 cell">
                 <span class="glyphicon glyphicon-plus" ng-init="index2=0"
                 ng-click="index2 = index2 + checkValue(currentcourt.peaktime[index2])">  
                 </span>
-            </div>
+            </div> -->
         </div>
     </div>  
 
@@ -90,11 +93,11 @@
             <label for="" class="control-label">籃框數:</label>
             <input type="number" min="0" ng-model="currentcourt.basketnumber" placeholder="阿拉伯數字">        
         </div>
-    </div>
-    <div class="checkboxWithWords">
-        <!-- Floor -->
-        <label for="" class="control-label">地質:</label>
-        <input type="text" ng-model="currentcourt.floor" placeholder="球場地板怎麼樣？">
+        <div class="col-sm-4">
+            <!-- Floor -->
+            <label for="" class="control-label">地質:</label>
+            <input type="text" ng-model="currentcourt.floor" placeholder="球場地板怎麼樣？">
+        </div>
     </div>
     <div class="checkboxWithWords">
         <!-- Water -->
@@ -114,7 +117,8 @@
     <!-- Indoor -->
     <label for="indoor" class="control-label">是室內嗎？</label>
     <input type="checkbox" ng-model="currentcourt.indoor">
-    
+    <label for="" class="control-label">管理員留言:</label>
+    <textarea class="form-control" rows="3" ng-model="currentcourt.desc"></textarea>
 </form>
 <button class="btn-primary pull-right" ng-click="editmode(currentcourt)">好了</button>
 

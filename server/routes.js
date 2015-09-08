@@ -23,6 +23,7 @@ module.exports = function(app) {
   app.use(busboyBodyParser());
 
   // Insert routes below
+  app.use('/api/comments', require('./api/comment'));
   app.use('/api/uploads', require('./api/upload'));
   app.use('/api/users', require('./api/user'));
   app.use('/api/courts', require('./api/court'));

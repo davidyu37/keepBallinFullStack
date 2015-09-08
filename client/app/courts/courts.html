@@ -40,7 +40,9 @@
                         </div>
                         <div ng-show="hovered" ng-repeat="slide in slides" class="carousel">
                             <div>
-                                <img ng-src="{{slide.url}}">
+                                <a ng-click="openLightboxModal($index)">
+                                    <img ng-src="{{slide.url}}">
+                                </a>
                                 <button class="picDeleteBtn" ng-click="deletePic(slide)">
                                     <span class="glyphicon glyphicon-trash">
                                     </span>
@@ -48,13 +50,6 @@
                             </div>
                         </div> 
                     </div>
-                   <!--  <div style="height: 305px">
-                        <carousel interval="myInterval" no-wrap="noWrapSlides" template-url="'app/courts/temp/carousel.html'">
-                          <slide ng-repeat="slide in slides" active="slide.active">
-                            <img ng-src="{{slide.url}}" style="margin:auto;">
-                          </slide>
-                        </carousel>
-                    </div> -->
                 </div>
                 &nbsp
             </div>
