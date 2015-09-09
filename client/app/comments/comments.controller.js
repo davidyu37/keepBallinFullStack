@@ -22,13 +22,11 @@ angular.module('keepballin')
     // });
 
     $scope.getComments = function(courtId) {
-      console.log('get comments');
 
       var pics = Comment.query({court_id: courtId},function(comments) {
             if(!comments) {
                 angular.noop;
             } else {
-                console.log(comments);
                 $scope.comments = comments;
                 socket.syncUpdates('comment', $scope.comments, function(event, comment, comments) {
                   // This callback is fired after the comments array is updated by the socket listeners

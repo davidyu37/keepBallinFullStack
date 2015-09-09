@@ -53,7 +53,7 @@ angular.module('keepballin')
 			        $scope.expanded=true;
 
 			        var infoContent = '<div id=\"infoWin_'+ marker.id + '\"';
-			        infoContent += 'ng-include="\'app/courts/temp/info.html\'">';
+			        infoContent += 'ng-include="\'app/courts/temp/info.window.html\'">';
 	   				
 	              	infowindow.setContent(infoContent);
 	              	infowindow.open($scope.map, marker);

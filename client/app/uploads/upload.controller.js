@@ -4,7 +4,7 @@ angular.module('keepballin')
 	.controller('uploadCtrl', ['$scope', '$q', '$window', 'Upload', 'Download', '$timeout', '$http', 'Court', 'socket', 'Lightbox', function ($scope, $q, $window, Upload, Download, $timeout, $http, Court, socket, Lightbox) {
     //Slides of pictures
     $scope.slides = [];
-   
+    
     //Get picture when court id change
     $scope.$on('courtIdChanged', function(e, args) {
         $scope.getPicture(args.newId);

@@ -45,17 +45,21 @@ Court.find({}).remove(function() {
     district: '大安',
     lat: 25.043204,
     long: 121.537544,
+    address: '106台北市大安區建國南路一段81號',
     desc: '偶爾辦系隊比賽',
     hours: [{begin: '0700', end: '2200'}],
     peaktime: [{begin: '1800', end: '2000'}],
-    net: '有',
+    net: true,
+    nettype: '繩網',
     basketnumber: 11,
     floor: '水泥地',
     water: {exist: true, desc: '在宿舍旁'},
     toilet: {exist: false},
     ceiling: false,
+    lights: true,
     likes: 300,
-    hidden: true,
+    bench: true,
+    rent: false
   }, function() {
       console.log('finished populating mapMarker');
     }

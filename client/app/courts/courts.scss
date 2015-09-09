@@ -81,6 +81,7 @@
     background: rgba(0,0,0,0.8);
     -webkit-transition:all linear 0.5s;
     transition:all linear 0.5s;
+    overflow: scroll;
     
 }
 /*This is for ng-animate*/
@@ -241,6 +242,17 @@
     background: none;
     span {
         color: $brand-danger;
+    }
+}
+
+.picPlaceholder {
+    @media(min-width: $screen-sm-min) {
+        position: absolute;
+        top: 0;
+        width: 100px;
+        height: auto;
+        margin: auto;
+        background: rgba(0,0,0,0.8);
     }
 }
 

@@ -15,20 +15,23 @@ var CourtSchema = new Schema({
   district: String,
   lat: Number,
   long: Number,
+  address: String,
   desc: String,
   hours: [TimeSchema],
   peaktime: [TimeSchema],
-  net: String,
+  net: Boolean,
+  nettype: String,
   basketnumber: Number,
   floor: String,
   water: {exist: Boolean, desc: String},
   toilet: {exist: Boolean, desc: String},
   ceiling: Boolean,
+  lights: Boolean,
   indoor: {type: Boolean, default: false},
-  pics: [Number],
   likes: Number,
-  hidden: {type: Boolean, default: true},
-  comments: [{author: String, body: String, date: Date}]
+  bench: Boolean,
+  rent: Boolean,
+  rentprice: Number
 });
 
 module.exports = mongoose.model('Court', CourtSchema);
