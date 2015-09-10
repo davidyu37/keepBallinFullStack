@@ -21,9 +21,9 @@ exports.index = function(req, res) {
   });
 };
 
-// Get a single upload
+// Get uploads by court_id
 exports.show = function(req, res) {
-  Upload.find({'court_id': req.params.court_id}, 'url', function(err, upload) {
+  Upload.find({'court_id': req.params.court_id}, function(err, upload) {
     if(!upload) { return }
     if(err) { return handleError(res, err); }
     return res.json(upload);
@@ -58,6 +58,28 @@ exports.create = function(req, res, next) {
   });
 };
 
+
+// Deletes a upload from the DB.
+exports.destroy = function(req, res) {
+  var filename = path.join('./client/assets/uploads/images', req.params.filename);
+  fs.unlink(filename, function (err) {
+    if (err) {
+      console.error("delete error:  " + err.message);
+    } else {
+      console.log('successfully deleted ' + filename);
+      Upload.findById(req.params.id, function (err, upload) {
+        if(err) { return handleError(res, err); }
+        if(!upload) { return res.status(404).send('Not Found'); }
+        
+        upload.remove(function(err) {
+          if(err) { return handleError(res, err); }
+          return res.status(204).send('No Content');
+        });
+      });
+    }
+  });
+};
+
 // Updates an existing upload in the DB.
 exports.update = function(req, res) {
   if(req.body._id) { delete req.body._id; }
@@ -68,19 +90,6 @@ exports.update = function(req, res) {
     updated.save(function (err) {
       if (err) { return handleError(res, err); }
       return res.status(200).json(upload);
-    });
-  });
-};
-
-// Deletes a upload from the DB.
-exports.destroy = function(req, res) {
-  Upload.findById(req.params.id, function (err, upload) {
-    if(err) { return handleError(res, err); }
-    if(!upload) { return res.status(404).send('Not Found'); }
-    
-    upload.remove(function(err) {
-      if(err) { return handleError(res, err); }
-      return res.status(204).send('No Content');
     });
   });
 };

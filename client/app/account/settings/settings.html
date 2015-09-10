@@ -1,37 +1,23 @@
-<div class="container">
+<div class="container spaceFromTop">
   <div class="row">
     <div class="col-sm-12">
-      <h1>Change Password</h1>
+      <h1>個人檔案</h1>
     </div>
     <div class="col-sm-12">
-      <form class="form" name="form" ng-submit="changePassword(form)" novalidate>
-
-        <div class="form-group">
-          <label>Current Password</label>
-
-          <input type="password" name="password" class="form-control" ng-model="user.oldPassword"
-                 mongoose-error/>
-          <p class="help-block" ng-show="form.password.$error.mongoose">
-              {{ errors.other }}
-          </p>
-        </div>
-
-        <div class="form-group">
-          <label>New Password</label>
-
-          <input type="password" name="newPassword" class="form-control" ng-model="user.newPassword"
-                 ng-minlength="3"
-                 required/>
-          <p class="help-block"
-             ng-show="(form.newPassword.$error.minlength || form.newPassword.$error.required) && (form.newPassword.$dirty || submitted)">
-            Password must be at least 3 characters.
-          </p>
-        </div>
-
-        <p class="help-block"> {{ message }} </p>
-
-        <button class="btn btn-lg btn-primary" type="submit">Save changes</button>
-      </form>
+      <tabset justified="true">
+        <tab heading="我是誰?" ng-click="getTemplate(0)"></tab>
+        <tab heading="我的球隊" ng-click="getTemplate(1)"></tab>
+        <tab heading="我的比賽" ng-click="getTemplate(2)"></tab>
+        <tab heading="我的目標" ng-click="getTemplate(3)"></tab>
+      </tabset>
+    </div>
+    <div class="col-sm-12">
+      <div class="col-sm-12 wrapContent">
+        <div ng-show="profile" ng-include="'app/account/settings/temp/profile.html'"></div>
+        <div ng-show="team" ng-include="'app/account/settings/temp/team.html'"></div>
+        <div ng-show="match" ng-include="'app/account/settings/temp/match.html'"></div>
+        <div ng-show="goal" ng-include="'app/account/settings/temp/goal.html'"></div>  
+      </div>
     </div>
   </div>
 </div>

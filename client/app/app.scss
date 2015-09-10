@@ -19,6 +19,19 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
 html, body {
   width: auto !important;
   overflow-x: hidden !important;
+  height: 100%;
+}
+#wrap {
+  min-height: 100%;
+  height: auto;
+  /* Negative indent footer by its height */
+  margin: 0 auto -60px;
+  /* Pad bottom by footer height */
+  padding: 0 0 60px;
+}
+
+.spaceFromTop {
+  margin-top: 60px;
 }
 
 //Take out all blue border after clicking on button
@@ -27,10 +40,12 @@ button:focus {outline:0;}
 // Component styles are injected through grunt
 // injector
 @import 'account/login/login.scss';
+@import 'account/settings/setting.scss';
 @import 'admin/admin.scss';
 @import 'courts/courts.scss';
 @import 'main/main.scss';
 @import 'main/temp/_weatherIcon.scss';
+@import 'footer/footer.scss';
 @import 'modal/modal.scss';
 @import 'navbar/navbar.scss';
 // endinjector

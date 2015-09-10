@@ -1,0 +1,35 @@
+<div class="col-sm-4" ng-controller="uploadCtrl">
+  <div class="profilePicOverlay" ng-mouseover="showOverlay=true" ng-mouseleave="showOverlay=false">
+    <img class="img-responsive thumbnail" ng-src="{{profilenow}}" alt="profilepicplaceholder">
+    <i ngf-select="uploadprofile(newpic)" ng-model="newpic" ng-show="showOverlay" class="glyphicon glyphicon-camera glyph-overlay"></i>
+  </div>
+</div>
+<div class="col-sm-8">
+  <accordion close-others="true">
+    <accordion-group is-open="name.open">
+      <accordion-heading>球員名:&nbsp{{userNow.name}}
+        <i class="pull-right glyphicon accordHead" ng-class="{'glyphicon-chevron-down': name.open, 'glyphicon-chevron-right': !name.open}">
+        </i>
+      </accordion-heading>
+      <div ng-include="'app/account/settings/temp/profile.accordion/name.html'"></div>
+    </accordion-group>
+    <accordion-group is-open="email.open">
+      <accordion-heading>Email:&nbsp{{userNow.email}}
+        <i class="pull-right glyphicon accordHead" ng-class="{'glyphicon-chevron-down': email.open, 'glyphicon-chevron-right': !email.open}">
+        </i>
+      </accordion-heading>
+      <div ng-include="'app/account/settings/temp/profile.accordion/email.html'"></div>
+    </accordion-group>
+    <accordion-group is-open="pw.open">
+      <accordion-heading>密碼
+        <i class="pull-right glyphicon accordHead" ng-class="{'glyphicon-chevron-down': pw.open, 'glyphicon-chevron-right': !pw.open}">
+        </i>
+      </accordion-heading>
+      <div ng-include="'app/account/settings/temp/profile.accordion/password.html'"></div>
+    </accordion-group>
+
+    
+    
+  </accordion>
+  
+</div>

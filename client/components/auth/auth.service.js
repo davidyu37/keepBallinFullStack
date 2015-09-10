@@ -58,7 +58,6 @@ angular.module('keepballin')
        */
       createUser: function(user, callback) {
         var cb = callback || angular.noop;
-
         return User.save(user,
           function(data) {
             $cookieStore.put('token', data.token);
@@ -85,6 +84,30 @@ angular.module('keepballin')
         return User.changePassword({ id: currentUser._id }, {
           oldPassword: oldPassword,
           newPassword: newPassword
+        }, function(user) {
+          return cb(user);
+        }, function(err) {
+          return cb(err);
+        }).$promise;
+      },
+      /* Change user name */
+      changeName: function(newName, callback) {
+        var cb = callback || angular.noop;
+
+        return User.changeName({ id: currentUser._id }, {
+          newName: newName
+        }, function(user) {
+          return cb(user);
+        }, function(err) {
+          return cb(err);
+        }).$promise;
+      },
+
+      changeEmail: function(newEmail, callback) {
+        var cb = callback || angular.noop;
+
+        return User.changeEmail({ id: currentUser._id }, {
+          newEmail: newEmail
         }, function(user) {
           return cb(user);
         }, function(err) {

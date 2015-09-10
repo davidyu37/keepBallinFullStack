@@ -30,8 +30,10 @@
 
     <!-- Add your site or application content here -->
     <div ng-include="'components/navbar/navbar.html'"></div>
-    <div ui-view=""></div>
-
+    <div id="wrap">
+      <div ui-view=""></div>
+    </div>
+    <div ng-include="'components/footer/footer.html'"></div>
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -76,6 +78,9 @@
           <script src="app/account/account.js"></script>
           <script src="app/account/login/login.controller.js"></script>
           <script src="app/account/settings/settings.controller.js"></script>
+          <script src="app/account/settings/temp/profile.accordion/controllers/email.controller.js"></script>
+          <script src="app/account/settings/temp/profile.accordion/controllers/name.controller.js"></script>
+          <script src="app/account/settings/temp/profile.accordion/controllers/password.controller.js"></script>
           <script src="app/account/signup/signup.controller.js"></script>
           <script src="app/admin/admin.controller.js"></script>
           <script src="app/admin/admin.js"></script>
@@ -103,6 +108,7 @@
           <script src="app/weather/weather.controller.js"></script>
           <script src="components/auth/auth.service.js"></script>
           <script src="components/auth/user.service.js"></script>
+          <script src="components/footer/footer.controller.js"></script>
           <script src="components/modal/modal.service.js"></script>
           <script src="components/mongoose-error/mongoose-error.directive.js"></script>
           <script src="components/navbar/navbar.controller.js"></script>

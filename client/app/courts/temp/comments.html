@@ -1,8 +1,13 @@
 <div class="container" ng-controller="CommentCtrl">
   <!-- <iframe width="100%" height="410" src="//www.youtube.com/embed/DcJFdCmN98s" frameborder="0"></iframe> -->
-  <h1>球友即時留言</h1>
-  <form class="comment-form" ng-submit=" addComment()" name="commentForm">
-    <textarea class="form-control" ng-model="newComment" rows="3" placeholder="Enter a new comment" required></textarea>
+  <h1>{{currentcourt.court}}球友們說</h1>
+  <form class="comment-form" ng-submit="addComment()" name="commentForm">
+    <textarea 
+          tooltip="輸入完想說的話，請按TAB鍵再按ENTER送出"
+          tooltip-placement="top"
+          tooltip-trigger="mouseenter"
+          tooltip-enable="!inputModel"
+          class="form-control" ng-model="$parent.newComment" rows="3" placeholder="跟球友分享球場狀況" required></textarea>
     <input class="btn btn-primary pull-right" type="submit" ng-disabled="commentForm.$invalid" value="Post">
   </form>
  

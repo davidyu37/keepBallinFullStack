@@ -1,21 +1,31 @@
 'use strict';
 
 angular.module('keepballin')
-  .controller('SettingsCtrl', function ($scope, User, Auth) {
+  .controller('SettingsCtrl', ['$scope', 'Auth', function ($scope, Auth) {
     $scope.errors = {};
-
-    $scope.changePassword = function(form) {
-      $scope.submitted = true;
-      if(form.$valid) {
-        Auth.changePassword( $scope.user.oldPassword, $scope.user.newPassword )
-        .then( function() {
-          $scope.message = 'Password successfully changed.';
-        })
-        .catch( function() {
-          form.password.$setValidity('mongoose', false);
-          $scope.errors.other = 'Incorrect password';
-          $scope.message = '';
-        });
+    $scope.settingUrl = '';
+    $scope.profile = true;
+    // $scope.team = false;
+    // $scope.match = false;
+    // $scope.goal = false;
+    $scope.userNow = Auth.getCurrentUser();
+    $scope.getTemplate = function(temp) {
+      $scope.profile = false;
+      $scope.team = false;
+      $scope.match = false;
+      $scope.goal = false;
+    
+      switch (temp) {
+        case 0: $scope.profile = true;
+        break;
+        case 1: $scope.team = true;
+        break;
+        case 2: $scope.match = true;
+        break;
+        case 3: $scope.goal = true;
+        break;
       }
-		};
-  });
+    }
+
+    
+  }]);

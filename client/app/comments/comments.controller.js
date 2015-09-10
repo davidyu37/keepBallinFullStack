@@ -27,6 +27,7 @@ angular.module('keepballin')
             if(!comments) {
                 angular.noop;
             } else {
+                console.log(comments);
                 $scope.comments = comments;
                 socket.syncUpdates('comment', $scope.comments, function(event, comment, comments) {
                   // This callback is fired after the comments array is updated by the socket listeners

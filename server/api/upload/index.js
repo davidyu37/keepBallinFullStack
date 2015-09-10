@@ -11,6 +11,6 @@ router.get('/pictures/:court_id', controller.show);
 router.post('/pictures', controller.create);
 router.put('/:id', controller.update);
 router.patch('/:id', controller.update);
-router.delete('/pictures/:id', controller.destroy);
+router.delete('/pictures/:id/:filename', controller.destroy);
 
 module.exports = router;

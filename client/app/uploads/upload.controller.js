@@ -4,7 +4,10 @@ angular.module('keepballin')
 	.controller('uploadCtrl', ['$scope', '$q', '$window', 'Upload', 'Download', '$timeout', '$http', 'Court', 'socket', 'Lightbox', function ($scope, $q, $window, Upload, Download, $timeout, $http, Court, socket, Lightbox) {
     //Slides of pictures
     $scope.slides = [];
-    
+    //Profile pic
+    $scope.newpic = '';
+    //Default profile avatar
+    $scope.profilenow = 'assets/images/profile/profile.jpg';
     //Get picture when court id change
     $scope.$on('courtIdChanged', function(e, args) {
         $scope.getPicture(args.newId);
@@ -22,8 +25,8 @@ angular.module('keepballin')
             if(!data) {
                 angular.noop;
             } else {
-                $scope.slides = pics;
-                
+                console.log(pics);
+                $scope.slides = pics;    
             }
         });
     };
@@ -49,10 +52,9 @@ angular.module('keepballin')
     };
 
     $scope.deletePic = function(pic) {
-        console.log(pic._id);
         var check = $window.confirm('確定要刪掉這張照片嗎？');
-        if (check) {    
-            Download.remove({ id: pic._id });
+        if (check) {   
+            Download.delete({ id: pic._id, filename: pic.filename });
             $scope.getPicture($scope.currentcourt._id);
         } else {
             angular.noop;
@@ -69,7 +71,6 @@ angular.module('keepballin')
                 Upload.upload({
                     url: 'api/uploads/pictures',
                     fields: {
-                        'username': $scope.username,
                         'court_id': court_id
                     },
                     file: file
@@ -102,6 +103,32 @@ angular.module('keepballin')
             }
         }
     };
+    //Upload for profile picture
+    $scope.uploadprofile = function(file) {
+      if (file && !file.$error) {
+        
+        Upload.upload({
+            url: 'api/uploads/pictures',
+            fields: {
+                'username': $scope.username
+            },
+            file: file
+        }).progress(function (evt) {
+            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+            $scope.log = progressPercentage;
+            // $scope.log = 'progress: ' + progressPercentage + '% ' +
+            //             evt.config.file.name + '\n' + $scope.log;
+        }).success(function (data, status, headers, config) {
+            $timeout(function() {
+                console.log(data);
+                $scope.profilenow = data.url;
+                //Reset the progress bar
+                $scope.log = 0;
+            });
+        });
+      }      
+    };
+
 
     
 
