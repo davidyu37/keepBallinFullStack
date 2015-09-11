@@ -10,8 +10,13 @@ var UploadSchema = new Schema({
 	filename: String,
 	url: String,
 	mimetype: String,
-	date: { type: Date, default: Date.now }
-});
+	date: { type: Date, default: Date.now },
+	user: {
+		type: Schema.Types.ObjectId,
+    	ref: 'User'
+	}
+
+}, {strict: false});
 
 // UploadSchema.plugin(Grid);
 

@@ -1,32 +1,25 @@
 'use strict';
 
 angular.module('keepballin')
-	.controller('uploadCtrl', ['$scope', '$q', '$window', 'Upload', 'Download', '$timeout', '$http', 'Court', 'socket', 'Lightbox', function ($scope, $q, $window, Upload, Download, $timeout, $http, Court, socket, Lightbox) {
+	.controller('uploadCtrl', ['$scope', '$window', 'Upload', 'Download', '$timeout', 'Court', 'socket', 'Lightbox', 'Auth', function ($scope, $window, Upload, Download, $timeout, Court, socket, Lightbox, Auth) {
     //Slides of pictures
     $scope.slides = [];
-    //Profile pic
-    $scope.newpic = '';
-    //Default profile avatar
-    $scope.profilenow = 'assets/images/profile/profile.jpg';
     //Get picture when court id change
     $scope.$on('courtIdChanged', function(e, args) {
         $scope.getPicture(args.newId);
     });
-
     //socket.io instant updates
     socket.syncUpdates('upload', $scope.slides);
     $scope.$on('$destroy', function () {
         socket.unsyncUpdates('upload');
     });
-
     //Using court id to collect an array of pictures
     $scope.getPicture = function(id) {
         var pics = Download.query({court_id: id},function(data) {
             if(!data) {
                 angular.noop;
             } else {
-                console.log(pics);
-                $scope.slides = pics;    
+                $scope.slides = pics;  
             }
         });
     };
@@ -34,7 +27,6 @@ angular.module('keepballin')
     $scope.openLightboxModal = function (index) {
         Lightbox.openModal($scope.slides, index);
     };
-
     //Log is the progress percentage for upload, empty the courtinfos for other previews
     $scope.log = 0;
     $scope.courtinfos = [];
@@ -50,7 +42,6 @@ angular.module('keepballin')
         $window.alert('請加檔案');
       }
     };
-
     $scope.deletePic = function(pic) {
         var check = $window.confirm('確定要刪掉這張照片嗎？');
         if (check) {   
@@ -103,27 +94,28 @@ angular.module('keepballin')
             }
         }
     };
+    /* For profile picture stuff */
+    //Profile pic
+    $scope.newpic = '';
+    //Default profile avatar
+    $scope.profilenow = 'assets/images/profile/profile.jpg';
     //Upload for profile picture
     $scope.uploadprofile = function(file) {
       if (file && !file.$error) {
         
         Upload.upload({
-            url: 'api/uploads/pictures',
-            fields: {
-                'username': $scope.username
-            },
+            url: 'api/uploads/pictures/profile',
+            // fields: {
+            //     'username': $scope.username
+            // },
             file: file
         }).progress(function (evt) {
             var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-            $scope.log = progressPercentage;
-            // $scope.log = 'progress: ' + progressPercentage + '% ' +
-            //             evt.config.file.name + '\n' + $scope.log;
+            
         }).success(function (data, status, headers, config) {
             $timeout(function() {
                 console.log(data);
                 $scope.profilenow = data.url;
-                //Reset the progress bar
-                $scope.log = 0;
             });
         });
       }      
