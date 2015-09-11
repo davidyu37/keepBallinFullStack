@@ -26,7 +26,7 @@ CommentSchema.statics = {
 CommentSchema.statics = {
   loadRecentByCourtId: function(court_id, cb) {
     this.find({'court_id': court_id})
-      .populate({path:'author', select: 'name'})
+      .populate({path:'author', select: 'name avatar'})
       .sort('-date')
       .limit(20)
       .exec(cb);

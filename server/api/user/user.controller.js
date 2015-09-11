@@ -109,6 +109,20 @@ exports.changeEmail = function(req, res, next) {
   });
 };
 
+exports.changeAvatar = function(req, res, next) {
+  var userId = req.user._id;
+  var newPic = String(req.body.newPic);
+
+  User.findById(userId, function (err, user) {
+    if (err) return console.error(err);
+    user.avatar = newPic;
+    user.save(function(err) {
+      if(err) return console.error(err);
+      res.status(200).send('OK');
+    })
+  });
+};
+
 
 /**
  * Get my info

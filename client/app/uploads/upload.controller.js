@@ -97,10 +97,18 @@ angular.module('keepballin')
     /* For profile picture stuff */
     //Profile pic
     $scope.newpic = '';
+    //Loading
+    $scope.loading = false;
     //Default profile avatar
-    $scope.profilenow = 'assets/images/profile/profile.jpg';
+    var userNow = Auth.getCurrentUser();
+    if(userNow.avatar) {
+        $scope.profilenow = userNow.avatar;
+    } else {
+        $scope.profilenow = 'assets/images/profile/profile.jpg';
+    }
     //Upload for profile picture
     $scope.uploadprofile = function(file) {
+        
       if (file && !file.$error) {
         
         Upload.upload({
@@ -111,11 +119,16 @@ angular.module('keepballin')
             file: file
         }).progress(function (evt) {
             var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-            
+            $scope.loading = true;
         }).success(function (data, status, headers, config) {
             $timeout(function() {
                 console.log(data);
                 $scope.profilenow = data.url;
+
+                var user = Auth.changeAvatar(data.url)
+                .then( function() {
+                  $scope.loading = false;
+                });
             });
         });
       }      

@@ -114,6 +114,18 @@ angular.module('keepballin')
           return cb(err);
         }).$promise;
       },
+      /* put new url of user's profile picture */
+      changeAvatar: function(newPic, callback) {
+        var cb = callback || angular.noop;
+
+        return User.changeAvatar({ id: currentUser._id }, {
+          newPic: newPic
+        }, function(user) {
+          return cb(user);
+        }, function(err) {
+          return cb(err);
+        }).$promise;
+      },
 
       /**
        * Gets all available info on authenticated user

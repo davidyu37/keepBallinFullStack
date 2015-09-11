@@ -1,3 +1,7 @@
+@import "loader.scss";
+@import "bubble.scss";
+
+
 /* css for google map */
 #map {
     height: 100vh;
@@ -61,6 +65,7 @@
         bottom: 0;
         left: 0;
         color: white;
+        z-index: 1000;
     }
     width: 100%;
     text-align: center;    
@@ -69,15 +74,20 @@
 .court-detail.ng-hide {
     opacity:0;
 }
+
+.detail-inner {
+    margin-top: 15px;
+}
+
 /* Edit page stuff starts here */
 /* The dark transparent overlay for the edit page */
 .editPage {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 1000;
     width: 100%; 
     height: 100%;
+    z-index: 1000;
     background: rgba(0,0,0,0.8);
     -webkit-transition:all linear 0.5s;
     transition:all linear 0.5s;
@@ -254,6 +264,34 @@
         margin: auto;
         background: rgba(0,0,0,0.8);
     }
+}
+/* Comment stuff starts here */
+
+.commentSection{
+    z-index:0;    
+}
+
+.comment-list {
+    list-style: none;
+    height: auto;
+    margin-top: 10%;
+    padding: 5% 10%;
+}
+
+.avatar {
+    width: 100%;
+    height: auto;
+}
+
+.avatarBox {
+    margin: 20% auto;
+    width: 50px;
+    height: 50px;
+}
+
+.oneComment {
+    margin-bottom: 10px;
+
 }
 
 

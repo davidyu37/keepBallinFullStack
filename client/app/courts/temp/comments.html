@@ -1,20 +1,42 @@
-<div class="container" ng-controller="CommentCtrl">
+<div class="container commentSection" ng-controller="CommentCtrl">
   <!-- <iframe width="100%" height="410" src="//www.youtube.com/embed/DcJFdCmN98s" frameborder="0"></iframe> -->
   <h1>{{currentcourt.court}}球友們說</h1>
   <form class="comment-form" ng-submit="addComment()" name="commentForm">
-    <textarea 
-          tooltip="輸入完想說的話，請按TAB鍵再按ENTER送出"
-          tooltip-placement="top"
-          tooltip-trigger="mouseenter"
-          tooltip-enable="!inputModel"
-          class="form-control" ng-model="$parent.newComment" rows="3" placeholder="跟球友分享球場狀況" required></textarea>
-    <input class="btn btn-primary pull-right" type="submit" ng-disabled="commentForm.$invalid" value="Post">
+      <div class="col-xs-1">
+        <div class="avatarBox">
+          <img class="avatar img-rounded" ng-src="{{userNow.avatar}}" alt="">
+        </div>
+      </div>
+      <div class="col-xs-11">
+        <textarea 
+              tooltip="可按TAB鍵再按ENTER送出"
+              tooltip-placement="top"
+              tooltip-trigger="mouseenter"
+              tooltip-enable="!inputModel"
+              class="form-control" ng-model="$parent.newComment" rows="3" placeholder="跟球友分享球場狀況" required>
+        </textarea>
+      </div>
+      
+   
+    <input class="btn btn-primary pull-right" type="submit" ng-disabled="commentForm.$invalid" value="送出">
   </form>
  
   <ul class="comment-list">
-    <li ng-repeat="comment in comments">
-      <header>{{ comment.author.name }}</header>
-      <p>{{ comment.content }}</p>
+    <li ng-repeat="comment in comments" class="oneComment">
+      <div class="row">
+        <div class="col-xs-1">
+          <div class="avatarBox">
+            <img class="avatar img-rounded" ng-src="{{comment.author.avatar}}" alt="avatar">
+          </div>
+        </div>
+        <div class="col-xs-11">
+          <div class="bubble">
+          <p class="pull-right">{{comment.date | date:'short'}}</p>
+            <h5>{{ comment.author.name }}&nbsp說:</h5>
+            <p>{{ comment.content }}</p>
+          </div>
+        </div>
+      </div>
     </li>
   </ul>
 </div>

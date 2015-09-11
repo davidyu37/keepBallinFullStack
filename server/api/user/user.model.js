@@ -12,6 +12,7 @@ var UserSchema = new Schema({
     type: String,
     default: 'user'
   },
+  avatar: {type: String, default: 'assets/images/profile/profile.jpg'},
   hashedPassword: String,
   provider: String,
   salt: String,

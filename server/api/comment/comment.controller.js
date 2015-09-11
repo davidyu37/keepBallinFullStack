@@ -30,7 +30,7 @@ exports.show = function(req, res) {
 exports.create = function(req, res) {
   // console.log(req);
   // delete req.body.date;
- 
+  console.log(req.user);
   var comment = new Comment(_.merge({ author: req.user._id }, req.body));
   comment.save(function(err, comment) {
     if(err) { return handleError(res, err); }

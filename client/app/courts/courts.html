@@ -29,7 +29,7 @@
     </button>
     <!-- Court detail starts here -->
     <div id="detail" class="court-detail slideable" ng-show="currentcourt">
-        <div class="row">
+        <div class="row detail-inner">
             <!-- Picture Area -->
             <div 
             ng-controller="uploadCtrl">             
@@ -145,17 +145,6 @@
             <div class="infoBox" ng-class="{'col-sm-3': !hovered}" ng-hide="hovered">
                 <h2>管理員留言</h2>
                 <p>{{currentcourt.desc}}</p>
-                <!--Upload page-->
-                <div id="uploadPic" class="editPage col-lg-12" 
-                ng-include="'app/courts/temp/upload.page.html'" 
-                ng-init="upload=false" ng-show="upload" 
-                ng-click="uploadmode()"
-                ></div>
-                <!--Edit page-->
-                <div id="courtEditPage" class="editPage col-lg-12" 
-                ng-include="'app/courts/temp/edit.page.html'" 
-                ng-init="edit=false" ng-show="edit" 
-                ng-click="editmode()"></div>
             </div>
             <div class="editBtns">
                 <!--Upload button-->
@@ -169,8 +158,18 @@
                 ng-show="currentcourt"><span class="glyphicon glyphicon-pencil"></span></button>
             </div>
         </div>
-
     </div>
+    <!--Upload page-->
+    <div id="uploadPic" class="editPage col-lg-12" 
+    ng-include="'app/courts/temp/upload.page.html'" 
+    ng-init="upload=false" ng-show="upload" 
+    ng-click="uploadmode()"
+    ></div>
+    <!--Edit page-->
+    <div id="courtEditPage" class="editPage col-lg-12" 
+    ng-include="'app/courts/temp/edit.page.html'" 
+    ng-init="edit=false" ng-show="edit" 
+    ng-click="editmode()"></div>
     <!-- Court detail ends -->
     <!-- Comments start here -->
     <div ng-show="currentcourt" ng-include="'app/courts/temp/comments.html'"></div>

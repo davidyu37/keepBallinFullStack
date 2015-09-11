@@ -1,10 +1,10 @@
 'use strict';
  
 angular.module('keepballin')
-  .controller('CommentCtrl', ['$scope', '$http', 'socket','Comment', function ($scope, $http, socket, Comment) {
+  .controller('CommentCtrl', ['$scope', '$http', 'socket','Comment', 'Auth', function ($scope, $http, socket, Comment, Auth) {
     $scope.newComment = '';
  
-   
+    
     // $http.get('/api/comments').success(function(comments) {
     //   $scope.comments = comments;
     //   console.log(comments);
@@ -20,6 +20,7 @@ angular.module('keepballin')
     //     });
     //   });
     // });
+    $scope.userNow = Auth.getCurrentUser();
 
     $scope.getComments = function(courtId) {
 
@@ -28,6 +29,7 @@ angular.module('keepballin')
                 angular.noop;
             } else {
                 console.log(comments);
+
                 $scope.comments = comments;
                 socket.syncUpdates('comment', $scope.comments, function(event, comment, comments) {
                   // This callback is fired after the comments array is updated by the socket listeners

@@ -13,6 +13,7 @@ router.get('/me', auth.isAuthenticated(), controller.me);
 router.put('/:id/password', auth.isAuthenticated(), controller.changePassword);
 router.put('/:id/name', auth.isAuthenticated(), controller.changeName);
 router.put('/:id/email', auth.isAuthenticated(), controller.changeEmail);
+router.put('/:id/avatar', auth.isAuthenticated(), controller.changeAvatar);
 router.get('/:id', auth.isAuthenticated(), controller.show);
 router.post('/', controller.create);
 

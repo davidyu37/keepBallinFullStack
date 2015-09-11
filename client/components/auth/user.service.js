@@ -24,6 +24,12 @@ angular.module('keepballin')
           controller: 'email'
         }
       },
+      changeAvatar: {
+        method: 'PUT',
+        params: {
+          controller: 'avatar'
+        }
+      },
       get: {
         method: 'GET',
         params: {
