@@ -30,6 +30,15 @@ angular.module('keepballin')
           controller: 'avatar'
         }
       },
+      changeDetail: {
+        method: 'PUT',
+      },
+      changeRole: {
+        method: 'PUT',
+        params: {
+          controller: 'changerole'
+        }
+      },
       get: {
         method: 'GET',
         params: {

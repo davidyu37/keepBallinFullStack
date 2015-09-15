@@ -11,6 +11,21 @@ angular.module('keepballin')
     $scope.open = function($event) {
         $scope.status.opened = true;
     };
+   	// Datepicker directive expects a Date object, give it
+    $scope.convertedDate = new Date($scope.user.birthday);
 
+    $scope.changeDetail = function(form) {
+    	$scope.user.birthday = $scope.convertedDate;
+		$scope.submitted = true;
+		if(form.$valid) {
+			Auth.changeDetail($scope.user)
+		.then( function() {
+		  $scope.message = '更改成功';
+		})
+		.catch( function() {
+		  $scope.message = '';
+		});
+		}
+	};
     
   }]);//NameCtrl ends 

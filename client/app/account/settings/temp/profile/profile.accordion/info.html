@@ -1,9 +1,9 @@
 <div class="col-sm-12" ng-controller="InfoCtrl">
-  <form class="form" name="form" ng-submit="changeName(form)" novalidate>
+  <form class="form" name="form" ng-submit="changeDetail(form)" novalidate>
     <div class="form-group">
       <label for="position">出生日期</label>
       <p class="input-group">
-        <input type="date" class="form-control" datepicker-popup ng-model="dt" is-open="status.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+        <input type="date" class="form-control" datepicker-popup ng-model="convertedDate" is-open="status.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
         <span class="input-group-btn">
         <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
         </span>

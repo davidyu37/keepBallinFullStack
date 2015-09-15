@@ -4,6 +4,7 @@ var User = require('./user.model');
 var passport = require('passport');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
+var _ = require('lodash');
 
 var validationError = function(res, err) {
   return res.status(422).json(err);
@@ -122,6 +123,36 @@ exports.changeAvatar = function(req, res, next) {
     })
   });
 };
+
+/* Update the user's detail */
+
+exports.changeDetail = function(req, res, next) {
+  var userId = req.user._id;
+  if(req.body._id) { delete req.body._id; }
+  User.findById(userId, function (err, user) {
+    if (err) { return handleError(res, err); }
+    if(!user) { return res.status(404).send('Not Found'); }
+    var updated = _.merge(user, req.body);
+    updated.save(function (err) {
+      if (err) { return handleError(res, err); }
+      return res.status(200).json(user);
+    });
+  });
+}
+//Change role restricted to admin
+exports.changeRole = function(req, res, next) {
+  var userId = req.params.id;
+  var role = String(req.body.role);
+
+  User.findById(userId, function (err, user) {
+    if (err) return console.error(err);
+    user.role = role;
+    user.save(function(err) {
+      if(err) return console.error(err);
+      res.status(200).send('OK');
+    })
+  });
+}
 
 
 /**

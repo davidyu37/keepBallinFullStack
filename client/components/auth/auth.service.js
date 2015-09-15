@@ -114,6 +114,19 @@ angular.module('keepballin')
           return cb(err);
         }).$promise;
       },
+      //Restricted to admin
+
+      // changeRole: function(User, callback) {
+      //   var cb = callback || angular.noop;
+
+      //   return User.changeRole({ id: User.id }, {
+      //     newRole: User.role
+      //   }, function(user) {
+      //     return cb(user);
+      //   }, function(err) {
+      //     return cb(err);
+      //   }).$promise;
+      // },
       /* put new url of user's profile picture */
       changeAvatar: function(newPic, callback) {
         var cb = callback || angular.noop;
@@ -121,6 +134,18 @@ angular.module('keepballin')
         return User.changeAvatar({ id: currentUser._id }, {
           newPic: newPic
         }, function(user) {
+          return cb(user);
+        }, function(err) {
+          return cb(err);
+        }).$promise;
+      },
+
+      changeDetail: function(newData, callback) {
+        var cb = callback || angular.noop;
+        console.log(newData);
+        return User.changeDetail({ id: currentUser._id }, 
+          newData
+          ,function(user) {
           return cb(user);
         }, function(err) {
           return cb(err);

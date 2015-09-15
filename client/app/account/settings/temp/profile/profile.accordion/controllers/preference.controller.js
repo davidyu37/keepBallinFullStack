@@ -5,52 +5,25 @@ angular.module('keepballin')
   	$scope.user = Auth.getCurrentUser();
     console.log($scope.user);
 
+    /* Selections for positions on preference.html */
     $scope.positions = [
-      '控球後衛',
-      '得分後衛',
-      '小前鋒',
-      '大前鋒',
-      '中鋒'
+      'PG-控球後衛',
+      'SG-得分後衛',
+      'SF-小前鋒',
+      'PF-大前鋒',
+      'C-中鋒'
     ];
-    // $scope.positions = [
-    //   {
-    //     abbr: 'PG',
-    //     english: 'Point Guard',
-    //     chinese: '控球後衛'
-    //   },
-    //   {
-    //     abbr: 'SG',
-    //     english: 'Shooting Guard',
-    //     chinese: '得分後衛'
-    //   },
-    //   {
-    //     abbr: 'SF',
-    //     english: 'Small Forward',
-    //     chinese: '小前鋒'
-    //   },
-    //   {
-    //     abbr: 'PF',
-    //     english: 'Power Forward',
-    //     chinese: '大前鋒'
-    //   },
-    //   {
-    //     abbr: 'C',
-    //     english: 'Center',
-    //     chinese: '中鋒'
-    //   }
-    // ];
-
-    // $scope.changeEmail = function(form) {
-    //   $scope.submitted = true;
-    //   if(form.$valid) {
-    //     Auth.changeEmail($scope.user.email)
-    //     .then( function() {
-    //       $scope.message = '密碼更新成功';
-    //     })
-    //     .catch( function() {
-    //       $scope.errors.other = '密碼錯誤';
-    //       $scope.message = '';
-    //     });
-    //   }
-	   // };
+    
+    $scope.changeDetail = function(form) {
+      $scope.submitted = true;
+      if(form.$valid) {
+        Auth.changeDetail($scope.user)
+        .then( function() {
+          $scope.message = '更改成功';
+        })
+        .catch( function() {
+          $scope.message = '';
+        });
+      }
+	};
   }]);//NameCtrl ends 

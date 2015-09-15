@@ -32,12 +32,24 @@ User.find({}).remove(function() {
     name: '林小胖',
     email: 'fat@fat.com',
     password: 'fat',
-    position: '中鋒',
+    position: 'C-中鋒',
     jerseynumber: 65,
     height: 170,
     weight: 80,
     birthday: new Date('01/01/1990')
-  }, {
+  },
+  {
+    provider: 'local',
+    name: '鐘高個',
+    email: 'tall@tall.com',
+    password: 'tall',
+    position: 'PF-大前鋒',
+    jerseynumber: 80,
+    height: 193,
+    weight: 100,
+    birthday: new Date('01/01/1990')
+  },
+  {
     provider: 'local',
     role: 'admin',
     name: 'Admin',

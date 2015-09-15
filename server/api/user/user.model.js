@@ -6,7 +6,7 @@ var crypto = require('crypto');
 var authTypes = ['github', 'twitter', 'facebook', 'google'];
 // For defining relationship between users and teams
 var relationship = require('mongoose-relationship');
-var DateOnly = require('mongoose-dateonly')(mongoose);
+
 
 var UserSchema = new Schema({
   name: String,
@@ -20,11 +20,12 @@ var UserSchema = new Schema({
     ref: 'Team',
     childPath: 'members'
   },
+  open: {type: Boolean, default: false},
   position: String,
   jerseynumber: Number,
   height: Number,
   weight: Number,
-  birthdate: DateOnly,
+  birthday: Date,
   avatar: {type: String, default: 'assets/images/profile/profile.jpg'},
   hashedPassword: String,
   provider: String,
