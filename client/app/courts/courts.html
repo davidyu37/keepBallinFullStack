@@ -9,13 +9,15 @@
     editmode="editmode" 
     finishedit="finishedit"
     deletemarker="deletemarker"
-    expanded="expanded"></div>
+    expanded="expanded"
+    ng-show="map"
+    ></div>
     <button title="定位(解除瀏覽器的封鎖才可以使用喔)" type="button" id="geolocate" class="geolocateBtn"
     ng-click="geolocate()">
     	<span class="glyphicon glyphicon-screenshot"></span>
     </button>
     <!-- Make a button that let user select the courts to appear -->
-    <button class="btn" 
+    <button class="btn"
     ng-class="{'btn-primary': !enable, 'btn-success': enable}"
     id="addMarker" ng-init="enable=false" ng-show="isAdmin" ng-click="enable = !enable; enableAddMarker(enable)">
         <span class="glyphicon" 
@@ -172,6 +174,6 @@
     ng-click="editmode()"></div>
     <!-- Court detail ends -->
     <!-- Comments start here -->
-    <div ng-show="currentcourt" ng-include="'app/courts/temp/comments.html'"></div>
+    <div ng-show="currentcourt" ng-include="'app/comments/comments.html'"></div>
     <!-- Comments end -->
 </div>

@@ -4,7 +4,7 @@
   <form class="comment-form" ng-submit="addComment()" name="commentForm">
       <div class="col-xs-1">
         <div class="avatarBox">
-          <img class="avatar img-rounded" ng-src="{{userNow.avatar}}" alt="">
+          <img class="avatar img-rounded" ng-src="{{avatar}}" alt="">
         </div>
       </div>
       <div class="col-xs-11">
@@ -32,7 +32,11 @@
         <div class="col-xs-11">
           <div class="bubble">
           <p class="pull-right">{{comment.date | date:'short'}}</p>
-            <h5>{{ comment.author.name }}&nbsp說:</h5>
+            <h5>
+              <a ng-href="/profile/{{comment.author._id}}">
+              {{ comment.author.name }}</a>
+              &nbsp說:
+            </h5>
             <p>{{ comment.content }}</p>
           </div>
         </div>

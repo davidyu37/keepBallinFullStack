@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('keepballin')
-  .config(function ($stateProvider) {
+  .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('login', {
         url: '/login',
@@ -15,8 +15,33 @@ angular.module('keepballin')
       })
       .state('settings', {
         url: '/settings',
-        templateUrl: 'app/account/settings/settings.html',
-        controller: 'SettingsCtrl',
+        views: {
+          '': {
+            templateUrl: 'app/account/settings/settings.html',
+            controller: 'SettingsCtrl',
+            authenticate: true
+          },
+          'teamsignup@settings': {
+            templateUrl: 'app/account/settings/temp/team/team.signup.html',
+            authenticate: true
+          }
+        }
+      })
+      .state('settings.info', {
+        url: '/teaminfo',
+        templateUrl: 'app/account/settings/temp/team/team.info.html',
         authenticate: true
-      });
+      })
+      .state('settings.member', {
+        url: '/teammember',
+        templateUrl: 'app/account/settings/temp/team/team.member.html',
+        authenticate: true
+        
+      })
+      .state('settings.represent', {
+        url: '/teamrepresent',
+        templateUrl: 'app/account/settings/temp/team/team.represent.html',
+        authenticate: true
+      })
+    $urlRouterProvider.otherwise('/settings');
   });

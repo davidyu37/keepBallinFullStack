@@ -99,13 +99,9 @@ angular.module('keepballin')
     $scope.newpic = '';
     //Loading
     $scope.loading = false;
-    //Default profile avatar
-    var userNow = Auth.getCurrentUser();
-    if(userNow.avatar) {
-        $scope.profilenow = userNow.avatar;
-    } else {
-        $scope.profilenow = 'assets/images/profile/profile.jpg';
-    }
+
+    $scope.profilenow = Auth.getCurrentUser().avatar;
+    
     //Upload for profile picture
     $scope.uploadprofile = function(file) {
         
@@ -118,6 +114,7 @@ angular.module('keepballin')
             // },
             file: file
         }).progress(function (evt) {
+            console.log(evt);
             var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
             $scope.loading = true;
         }).success(function (data, status, headers, config) {

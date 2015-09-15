@@ -138,6 +138,19 @@ exports.me = function(req, res, next) {
   });
 };
 
+/* Get user by id */
+exports.getUser = function(req, res, next) {
+  console.log(req.params.id);
+  var userId = req.params.id;
+  User.findOne({
+    _id: userId
+  }, '-salt -hashedPassword', function(err, user) { // don't ever give out the password or salt
+    if (err) return next(err);
+    if (!user) return res.status(401).send('Unauthorized');
+    res.json(user);
+  });
+};
+
 /**
  * Authentication callback
  */

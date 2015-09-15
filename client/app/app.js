@@ -9,7 +9,8 @@ angular.module('keepballin', [
   'ui.router',
   'ui.bootstrap',
   'ngFileUpload',
-  'bootstrapLightbox'
+  'bootstrapLightbox',
+  'ui.select'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider

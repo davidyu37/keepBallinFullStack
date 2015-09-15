@@ -14,6 +14,7 @@
     <!-- build:css(client) app/vendor.css -->
       <!-- bower:css -->
       <link rel="stylesheet" href="bower_components/angular-bootstrap-lightbox/dist/angular-bootstrap-lightbox.css" />
+      <link rel="stylesheet" href="bower_components/ui-select/dist/select.css" />
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,client}) app/app.css -->
@@ -66,6 +67,7 @@
       <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
       <script src="bower_components/ng-file-upload-shim/ng-file-upload-shim.js"></script>
       <script src="bower_components/skrollr/src/skrollr.js"></script>
+      <script src="bower_components/ui-select/dist/select.js"></script>
       <!-- endbower -->
       <script src="socket.io-client/socket.io.js"></script>
     <!-- endbuild -->
@@ -78,9 +80,13 @@
           <script src="app/account/account.js"></script>
           <script src="app/account/login/login.controller.js"></script>
           <script src="app/account/settings/settings.controller.js"></script>
-          <script src="app/account/settings/temp/profile.accordion/controllers/email.controller.js"></script>
-          <script src="app/account/settings/temp/profile.accordion/controllers/name.controller.js"></script>
-          <script src="app/account/settings/temp/profile.accordion/controllers/password.controller.js"></script>
+          <script src="app/account/settings/temp/match/match.controller.js"></script>
+          <script src="app/account/settings/temp/profile/profile.accordion/controllers/email.controller.js"></script>
+          <script src="app/account/settings/temp/profile/profile.accordion/controllers/info.controller.js"></script>
+          <script src="app/account/settings/temp/profile/profile.accordion/controllers/name.controller.js"></script>
+          <script src="app/account/settings/temp/profile/profile.accordion/controllers/password.controller.js"></script>
+          <script src="app/account/settings/temp/profile/profile.accordion/controllers/preference.controller.js"></script>
+          <script src="app/account/settings/temp/team/teamsignup.controller.js"></script>
           <script src="app/account/signup/signup.controller.js"></script>
           <script src="app/admin/admin.controller.js"></script>
           <script src="app/admin/admin.js"></script>
@@ -93,7 +99,6 @@
           <script src="app/courts/directives/markers.js"></script>
           <script src="app/courts/services/Geolocate.js"></script>
           <script src="app/courts/services/addMarker.js"></script>
-          <script src="app/courts/services/api.js"></script>
           <script src="app/courts/services/courts.service.js"></script>
           <script src="app/courts/services/mapOptions.js"></script>
           <script src="app/courts/services/panorama.js"></script>
@@ -103,6 +108,8 @@
           <script src="app/filter/exist.js"></script>
           <script src="app/main/main.controller.js"></script>
           <script src="app/main/main.js"></script>
+          <script src="app/profile/profile.controller.js"></script>
+          <script src="app/profile/profile.js"></script>
           <script src="app/uploads/download.service.js"></script>
           <script src="app/uploads/upload.controller.js"></script>
           <script src="app/weather/weather.controller.js"></script>

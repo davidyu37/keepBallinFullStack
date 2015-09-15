@@ -25,7 +25,20 @@ angular.module('keepballin')
         case 3: $scope.goal = true;
         break;
       }
-    }
+    };
+
+    $scope.showSignup = false;
+
+    $scope.showToggle = function() {
+
+        $scope.showSignup = !($scope.showSignup);
+        console.log($scope.showSignup);    
+    };
+    
+    $scope.stopPropagate = function(event) {
+      event.stopPropagation();
+    };
+
 
     
   }]);

@@ -5,7 +5,6 @@ angular.module('keepballin')
 		return function(state, scope, map) {
 			if(state) {
 				map.setOptions({ draggableCursor: 'crosshair' });
-				scope.addMode = "加完了";
 
 				var court = new Court();
 
@@ -22,7 +21,6 @@ angular.module('keepballin')
 	    	} else {
 	    		google.maps.event.clearListeners(map, 'click');
 	    		map.setOptions({ draggableCursor: 'url(http://maps.google.com/mapfiles/openhand.cur), move' });
-	    		scope.addMode = "加地點";
 	    	} 
 		}
 	}]);

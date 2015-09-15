@@ -3,11 +3,10 @@
 angular.module('keepballin')
   .controller('EmailCtrl', ['$scope', 'User', 'Auth', function ($scope, User, Auth) {
   	$scope.user = Auth.getCurrentUser();
-
     $scope.changeEmail = function(form) {
       $scope.submitted = true;
       if(form.$valid) {
-        Auth.changeName($scope.user.email)
+        Auth.changeEmail($scope.user.email)
         .then( function() {
           $scope.message = '密碼更新成功';
         })

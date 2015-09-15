@@ -4,21 +4,21 @@
 
 'use strict';
 
-var time = require('./time.model');
+var Team = require('./team.model');
 
 exports.register = function(socket) {
-  time.schema.post('save', function (doc) {
+  Team.schema.post('save', function (doc) {
     onSave(socket, doc);
   });
-  time.schema.post('remove', function (doc) {
+  Team.schema.post('remove', function (doc) {
     onRemove(socket, doc);
   });
 }
 
 function onSave(socket, doc, cb) {
-  socket.emit('time:save', doc);
+  socket.emit('team:save', doc);
 }
 
 function onRemove(socket, doc, cb) {
-  socket.emit('time:remove', doc);
+  socket.emit('team:remove', doc);
 }

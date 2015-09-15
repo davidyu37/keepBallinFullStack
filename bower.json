@@ -20,7 +20,8 @@
     "moment": "~2.10.6",
     "ng-file-upload": "~7.0.15",
     "ng-file-upload-shim": "~7.0.15",
-    "skrollr": "~0.6.30"
+    "skrollr": "~0.6.30",
+    "ui-select": "angular-ui-select#~0.12.1"
   },
   "devDependencies": {
     "angular-mocks": ">=1.2.*",

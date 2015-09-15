@@ -4,6 +4,9 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var crypto = require('crypto');
 var authTypes = ['github', 'twitter', 'facebook', 'google'];
+// For defining relationship between users and teams
+var relationship = require('mongoose-relationship');
+var DateOnly = require('mongoose-dateonly')(mongoose);
 
 var UserSchema = new Schema({
   name: String,
@@ -12,6 +15,16 @@ var UserSchema = new Schema({
     type: String,
     default: 'user'
   },
+  team: {
+    type: Schema.Types.ObjectId,
+    ref: 'Team',
+    childPath: 'members'
+  },
+  position: String,
+  jerseynumber: Number,
+  height: Number,
+  weight: Number,
+  birthdate: DateOnly,
   avatar: {type: String, default: 'assets/images/profile/profile.jpg'},
   hashedPassword: String,
   provider: String,
@@ -20,6 +33,9 @@ var UserSchema = new Schema({
   google: {},
   github: {}
 });
+
+// Add relationship plugin
+UserSchema.plugin(relationship, { relationshipPathName: 'team'});
 
 /**
  * Virtuals

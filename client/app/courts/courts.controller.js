@@ -3,9 +3,12 @@
 angular.module('keepballin')
 	.controller('CourtsCtrl', ['$scope', '$window', '$animate', '$timeout', '$compile', 'socket', 'Panorama', 'mapOptions', 'Geolocate', 'AddMarker', 'Court', 'Auth',  
 		function ($scope, $window, $animate, $timeout, $compile, socket, Panorama, mapOptions, Geolocate, AddMarker, Court, Auth) {
+	    
 		//Initialize map
 	    $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
 	    var map = $scope.map;
+
+
 	    //Panorama stuff from here
 	    var panorama = map.getStreetView();
 	    //Create an undefined var in order to check the current existence of the btn
@@ -107,7 +110,7 @@ angular.module('keepballin')
 		$scope.getHours = function() {
 			var hours = [];
 			for (var i = 0; i < 24; i++) {
-				var hour
+				var hour;
 				if(i < 10) {
 					hour = '0'+ i + '00'; 
 				} else {
@@ -115,39 +118,8 @@ angular.module('keepballin')
 				}
 				hours.push(hour);
 			}
-			return hours
-		}
-
-		//Convert object to array
-		$scope.toArray = function(object) {
-			var array = $.map(object, function(value, index) {
-			    return [value];
-			});
-			return array;
-		}
-		/*The problem: After deleting smaller index element, 
-		the bigger index element still contains the same index,
-		which is bigger the than the objects length
-		Therefore, the loop begins from 0, it get undefined
-		*/
-		//Solution: convert object to array on add and edit
-		$scope.removeFromArray = function(hashKey, myObjs) {
-			for(var i=0; i < myObjs.length; i++) {
-				if(hashKey == myObjs[i].$$hashKey) {
-					myObjs.splice(i, 1);
-				}
-			}
-		}
-		
-		$scope.checkValue = function(value) {
-			if (value) {
-				console.log('add 1');
-				return 1;
-			} else {
-				console.log('do nothing');
-				angular.noop;
-			}
-		}
+			return hours;
+		};
 
 	    //Add Marker ends here
 	    //Geolocate begins here

@@ -35,6 +35,9 @@ angular.module('keepballin')
         params: {
           id:'me'
         }
+      },
+      getUser: {
+        method: 'GET'
       }
 	  });
   });

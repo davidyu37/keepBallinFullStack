@@ -4,7 +4,7 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var CommentSchema = new Schema({
-  court_id: String,
+  courtId: String,
   content: String,
   date: { type: Date, default: Date.now },
   author: {
@@ -24,8 +24,8 @@ CommentSchema.statics = {
 };
 
 CommentSchema.statics = {
-  loadRecentByCourtId: function(court_id, cb) {
-    this.find({'court_id': court_id})
+  loadRecentByCourtId: function(courtId, cb) {
+    this.find({'courtId': courtId})
       .populate({path:'author', select: 'name avatar'})
       .sort('-date')
       .limit(20)

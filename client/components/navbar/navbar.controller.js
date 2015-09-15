@@ -14,14 +14,19 @@ angular.module('keepballin')
       'icon': 'glyphicon-map-marker'
     },
     {
+      'title': '球員',
+      'link': '/players',
+      'icon': 'glyphicon-user'
+    },
+    {
+      'title': '球隊',
+      'link': '/teams',
+      'icon': 'glyphicon-flag'
+    },
+    {
       'title': '活動',
       'link': '/events',
       'icon': 'glyphicon-bullhorn'
-    },
-    {
-      'title': '聯絡',
-      'link': '/register',
-      'icon': 'glyphicon-envelope'
     }];
 
     $scope.isCollapsed = true;

@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('keepballin')
 	.controller('weatherController',['$scope', '$http', '$interval', '$filter', function($scope, $http, $interval, $filter	){
 		//Main data json for current weather

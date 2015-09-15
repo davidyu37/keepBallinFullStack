@@ -48,7 +48,7 @@ angular.module('keepballin')
                 scroll(true);
             });
 
-            $scope.$watch('expanded', function(newVal, oldVal){
+            $scope.$watch('expanded', function(newVal){
                 if(newVal) {
                     
                     scroll();
@@ -58,7 +58,7 @@ angular.module('keepballin')
             //Close the detail when drag start
             $scope.map.addListener('dragstart', (function(){
                 
-                if($scope.expanded == true) {
+                if($scope.expanded === true) {
                     $scope.expanded = false;
                     scroll();
                     $scope.$apply();    
@@ -76,7 +76,6 @@ angular.module('keepballin')
                 }
                 
                 if($scope.expanded) {
-                    var y = content.clientHeight;
                     
                     var defaultHeight = 200;
                     target.style.height = defaultHeight + 'px';

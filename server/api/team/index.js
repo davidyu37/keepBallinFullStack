@@ -1,7 +1,7 @@
 'use strict';
 
 var express = require('express');
-var controller = require('./time.controller');
+var controller = require('./team.controller');
 
 var router = express.Router();
 
