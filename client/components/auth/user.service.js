@@ -47,6 +47,13 @@ angular.module('keepballin')
       },
       getUser: {
         method: 'GET'
+      },
+      searchParams: {
+        method: 'GET',
+        isArray: true,
+        params: {
+          controller: 'search'
+        }
       }
 	  });
   });

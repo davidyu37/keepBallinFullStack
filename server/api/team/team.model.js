@@ -43,6 +43,6 @@ var TeamSchema = new Schema({
   }],
   contact: String
 
-});
+}, {strict: false});
 
 module.exports = mongoose.model('Team', TeamSchema);

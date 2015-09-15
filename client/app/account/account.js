@@ -22,25 +22,25 @@ angular.module('keepballin')
             authenticate: true
           },
           'teamsignup@settings': {
-            templateUrl: 'app/account/settings/temp/team/team.signup.html',
+            templateUrl: 'app/team/temp/team.signup.html',
             authenticate: true
           }
         }
       })
       .state('settings.info', {
         url: '/teaminfo',
-        templateUrl: 'app/account/settings/temp/team/team.info.html',
+        templateUrl: 'app/team/temp/team.info.html',
         authenticate: true
       })
       .state('settings.member', {
         url: '/teammember',
-        templateUrl: 'app/account/settings/temp/team/team.member.html',
+        templateUrl: 'app/team/temp/team.member.html',
         authenticate: true
         
       })
       .state('settings.represent', {
         url: '/teamrepresent',
-        templateUrl: 'app/account/settings/temp/team/team.represent.html',
+        templateUrl: 'app/team/temp/team.represent.html',
         authenticate: true
       })
     $urlRouterProvider.otherwise('/settings');

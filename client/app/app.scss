@@ -42,7 +42,6 @@ button:focus {outline:0;}
 @import 'account/login/login.scss';
 @import 'account/settings/setting.scss';
 @import 'account/settings/temp/match/match.scss';
-@import 'account/settings/temp/team/teamsignup.scss';
 @import 'admin/admin.scss';
 @import 'comments/comments.scss';
 @import 'courts/_bubble.scss';
@@ -52,7 +51,10 @@ button:focus {outline:0;}
 @import 'main/main.scss';
 @import 'main/temp/_weatherIcon.scss';
 @import 'profile/profile.scss';
-@import 'ui-select/ui-select.scss';
+@import 'searchbox/customized.scss';
+@import 'searchbox/searchbox.scss';
+@import 'select/select.scss';
+@import 'team/teamsignup.scss';
 @import 'footer/footer.scss';
 @import 'modal/modal.scss';
 @import 'navbar/navbar.scss';

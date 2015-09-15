@@ -20,6 +20,13 @@ exports.index = function(req, res) {
     res.status(200).json(users);
   });
 };
+//Search params
+exports.search = function(req, res) {
+  User.find({}, 'name', function (err, users) {
+    if(err) return res.status(500).send(err);
+    res.status(200).json(users);
+  });
+};
 
 /**
  * Creates a new user

@@ -13,6 +13,7 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(client) app/vendor.css -->
       <!-- bower:css -->
+      <link rel="stylesheet" href="bower_components/angular-advanced-searchbox/dist/angular-advanced-searchbox.min.css" />
       <link rel="stylesheet" href="bower_components/angular-bootstrap-lightbox/dist/angular-bootstrap-lightbox.css" />
       <link rel="stylesheet" href="bower_components/ui-select/dist/select.css" />
       <!-- endbower -->
@@ -54,8 +55,9 @@
       <!-- bower:js -->
       <script src="bower_components/jquery/dist/jquery.js"></script>
       <script src="bower_components/angular/angular.js"></script>
-      <script src="bower_components/angular-animate/angular-animate.js"></script>
       <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+      <script src="bower_components/angular-advanced-searchbox/dist/angular-advanced-searchbox-tpls.js"></script>
+      <script src="bower_components/angular-animate/angular-animate.js"></script>
       <script src="bower_components/angular-bootstrap-lightbox/dist/angular-bootstrap-lightbox.js"></script>
       <script src="bower_components/angular-cookies/angular-cookies.js"></script>
       <script src="bower_components/angular-resource/angular-resource.js"></script>
@@ -86,7 +88,6 @@
           <script src="app/account/settings/temp/profile/profile.accordion/controllers/name.controller.js"></script>
           <script src="app/account/settings/temp/profile/profile.accordion/controllers/password.controller.js"></script>
           <script src="app/account/settings/temp/profile/profile.accordion/controllers/preference.controller.js"></script>
-          <script src="app/account/settings/temp/team/teamsignup.controller.js"></script>
           <script src="app/account/signup/signup.controller.js"></script>
           <script src="app/admin/admin.controller.js"></script>
           <script src="app/admin/admin.js"></script>
@@ -110,6 +111,8 @@
           <script src="app/main/main.js"></script>
           <script src="app/profile/profile.controller.js"></script>
           <script src="app/profile/profile.js"></script>
+          <script src="app/team/controllers/teamsignup.controller.js"></script>
+          <script src="app/team/services/team.service.js"></script>
           <script src="app/uploads/download.service.js"></script>
           <script src="app/uploads/upload.controller.js"></script>
           <script src="app/weather/weather.controller.js"></script>

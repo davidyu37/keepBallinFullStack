@@ -3,7 +3,6 @@
 angular.module('keepballin')
   .controller('PreferenceCtrl', ['$scope', 'User', 'Auth', function ($scope, User, Auth) {
   	$scope.user = Auth.getCurrentUser();
-    console.log($scope.user);
 
     /* Selections for positions on preference.html */
     $scope.positions = [

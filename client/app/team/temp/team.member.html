@@ -1,7 +1,18 @@
 <div class="form-inline text-center">
 	<div class="form-group">
 	    <label for="captain" class="control-label">隊長</label>
-	    <input type="text" class="form-control" name="captain" ng-model="formData.captain">
+	    <!-- <input type="text" class="form-control" name="captain" ng-model="formData.captain"> -->
+	    <p>Selected: {{person.selected}}</p>
+		<ui-select ng-model="person.selected"
+		         theme="bootstrap"
+		         ng-disabled="disabled"
+		         reset-search-input="false">
+		<ui-select-match placeholder="Enter an person...">{{$select.selected.name}}</ui-select-match>
+		<ui-select-choices repeat="person in availablePeople | filter: {name: $select.search}" 
+		refresh-delay="0">
+		  <div ng-bind-html="person.name | highlight: $select.search"></div>
+		</ui-select-choices>
+		</ui-select>	
 	</div>
 	<div class="form-group">
 	    <label for="coach" class="control-label">教練</label>
