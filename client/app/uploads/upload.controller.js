@@ -114,7 +114,6 @@ angular.module('keepballin')
             // },
             file: file
         }).progress(function (evt) {
-            console.log(evt);
             var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
             $scope.loading = true;
         }).success(function (data, status, headers, config) {
@@ -130,8 +129,5 @@ angular.module('keepballin')
         });
       }      
     };
-
-
-    
 
 }]);

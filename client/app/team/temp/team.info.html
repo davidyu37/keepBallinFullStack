@@ -9,11 +9,22 @@
 	</div>
 	<div class="form-group">
 	    <label for="teampic" class="control-label">球隊照片</label>
-	    <div type="file" class="form-control teampic" name="teampic" ng-model="formData.teampic" ngf-select ngf-multiple="true">選檔案</div>
+	    <div class="input-group">
+		    <div ng-hide="load" type="file" class="form-control teampic" name="teampic" ng-model="picture" ngf-select="upload(picture)">選檔案</div>
+		    <img ng-src="{{preview}}" class="img-responsive">
+		    <span class="input-group-addon" ng-show="load">
+			    <div class="loaderWrapper">
+		        	<div class="loader">Loading</div>
+		      	</div>
+		    </span>
+	    </div>
 	</div>
 </div>
-
-<div class="form-group">
+<div class="form-group text-center">
+    <label for="contact">聯絡電話</label>
+    <input type="tel" class="form-control" name="contact" ng-model="formData.contact"/>
+</div>
+<div class="form-group text-center">
     <label for="intro">球隊簡介</label>
     <textarea type="text" class="form-control" name="intro" ng-model="formData.intro"></textarea>
 </div>

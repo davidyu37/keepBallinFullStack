@@ -22,7 +22,7 @@ exports.index = function(req, res) {
 };
 //Search params
 exports.search = function(req, res) {
-  User.find({}, 'name', function (err, users) {
+  User.find({}, '-salt -hashedPassword -email', function (err, users) {
     if(err) return res.status(500).send(err);
     res.status(200).json(users);
   });

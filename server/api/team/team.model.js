@@ -9,7 +9,10 @@ var TeamSchema = new Schema({
   	type: Schema.Types.ObjectId, 
   	ref: 'User'
   },
-  teampic: String,
+  teampic: {
+    type: Schema.Types.ObjectId, 
+    ref: 'Upload'
+  },
   founded: Date,
   intro: String,
   represent: String,

@@ -5,15 +5,13 @@ angular.module('keepballin')
     $scope.errors = {};
     $scope.settingUrl = '';
     $scope.profile = true;
-    // $scope.team = false;
-    // $scope.match = false;
-    // $scope.goal = false;
+   
     $scope.userNow = Auth.getCurrentUser();
     $scope.getTemplate = function(temp) {
       $scope.profile = false;
       $scope.team = false;
       $scope.match = false;
-      $scope.goal = false;
+      $scope.court = false;
     
       switch (temp) {
         case 0: $scope.profile = true;
@@ -22,7 +20,7 @@ angular.module('keepballin')
         break;
         case 2: $scope.match = true;
         break;
-        case 3: $scope.goal = true;
+        case 3: $scope.court = true;
         break;
       }
     };

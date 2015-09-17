@@ -35,14 +35,16 @@ exports.show = function(req, res) {
 exports.create = function(req, res, next) {
   var file = req.files.file;
   var court_id = req.body.court_id;
+  var user_id = req.user._id;
   var filename = path.join('./client/assets/uploads/images/courts', file.name);
 
   // Information saving along with file
   var courtpic = {
     court_id: court_id,
     filename: file.name,
-    url: path.join('../assets/uploads/images/courts', file.name),
-    mimetype: file.mimetype
+    url: path.join('assets/uploads/images/courts', file.name),
+    mimetype: file.mimetype,
+    user: user_id 
   };
   writeFile(filename, file.data, courtpic, res);
 };
@@ -79,11 +81,28 @@ exports.profilepic = function(req, res) {
   // Information saving along with file
   var profilePic = {
     filename: file.name,
-    url: path.join('../assets/uploads/images/profile', file.name),
+    url: path.join('assets/uploads/images/profile', file.name),
     mimetype: file.mimetype,
     user: user_id
   };
   writeFile(filename, file.data, profilePic, res);
+};
+
+//Upload team photo
+exports.teampic = function(req, res) {
+  
+  var file = req.files.file;
+  var user_id = req.user._id;
+  var filename = path.join('./client/assets/uploads/images/team', file.name);
+
+  // Information saving along with file
+  var teamPic = {
+    filename: file.name,
+    url: path.join('assets/uploads/images/team', file.name),
+    mimetype: file.mimetype,
+    user: user_id
+  };
+  writeFile(filename, file.data, teamPic, res);
 };
 
 function writeFile(url, data, objectForUpload, res) {

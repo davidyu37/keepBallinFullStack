@@ -15,12 +15,13 @@
 		  <input type="radio" name="belong" value="club" ng-model="belong">社團
 		</label>
 		<label class="radio-inline">
-		  <input type="radio" name="belong" value="private" ng-model="formData.private">私人
+		  <input type="radio" name="belong" value="private" ng-model="formData.private" ng-click="belong=''">私人
 		</label>
 		<label class="radio-inline">
 		  <input type="radio" name="belong" value="other" ng-model="belong">其他
 		</label>
 	</fieldset>
+
 	<!-- School -->
 	<div class="form-inline">
 		<div class="form-group" ng-show="belong=='school'">

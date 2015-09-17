@@ -2,31 +2,110 @@
 	<div class="form-group">
 	    <label for="captain" class="control-label">隊長</label>
 	    <!-- <input type="text" class="form-control" name="captain" ng-model="formData.captain"> -->
-	    <p>Selected: {{person.selected}}</p>
-		<ui-select ng-model="person.selected"
-		         theme="bootstrap"
-		         ng-disabled="disabled"
-		         reset-search-input="false">
-		<ui-select-match placeholder="Enter an person...">{{$select.selected.name}}</ui-select-match>
-		<ui-select-choices repeat="person in availablePeople | filter: {name: $select.search}" 
-		refresh-delay="0">
-		  <div ng-bind-html="person.name | highlight: $select.search"></div>
-		</ui-select-choices>
+		<ui-select ng-model="formData.captain"
+			class="nameBox"
+			theme="bootstrap"
+			ng-disabled="disabled"
+			reset-search-input="false">
+			<ui-select-match placeholder="請輸入人名">
+			{{$select.selected.name}}
+			</ui-select-match>
+			<ui-select-choices repeat="captain in availablePeople | filter: {name: $select.search}" 
+			refresh-delay="0">
+			  <div ng-bind-html="captain.name | highlight: $select.search"></div>
+			</ui-select-choices>
 		</ui-select>	
 	</div>
 	<div class="form-group">
 	    <label for="coach" class="control-label">教練</label>
-	    <input type="text" class="form-control" name="coach" ng-model="formData.coach">
+	    <!-- <input type="text" class="form-control" name="coach" ng-model="formData.coach"> -->
+	    <ui-select ng-model="formData.coach"
+		    class="nameBox"
+			theme="bootstrap"
+			ng-disabled="disabled"
+			reset-search-input="false">
+			<ui-select-match placeholder="請輸入人名">
+			{{$select.selected.name}}
+			</ui-select-match>
+			<ui-select-choices repeat="coach in availablePeople | filter: {name: $select.search}" 
+			refresh-delay="0">
+			  <div ng-bind-html="coach.name | highlight: $select.search"></div>
+			</ui-select-choices>
+		</ui-select>
 	</div>
 	<div class="form-group">
 	    <label for="manager" class="control-label">球隊經理</label>
-	    <input type="text" class="form-control" name="manager" ng-model="formData.manager">
+	    <!-- <input type="text" class="form-control" name="manager" ng-model="formData.manager"> -->
+	    <ui-select ng-model="formData.manager"
+		    class="nameBox"
+			theme="bootstrap"
+			ng-disabled="disabled"
+			reset-search-input="false">
+			<ui-select-match placeholder="請輸入人名">
+			{{$select.selected.name}}
+			</ui-select-match>
+			<ui-select-choices repeat="manager in availablePeople | filter: {name: $select.search}" 
+			refresh-delay="0">
+			  <div ng-bind-html="manager.name | highlight: $select.search"></div>
+			</ui-select-choices>
+		</ui-select>
 	</div>
 </div>
-
-<div class="form-group">
-    <label for="intro">球隊成員</label>
-    <input type="text" class="form-control" name="intro" ng-model="formData.member">
+<div class="form-inline text-center">
+	<div class="form-group">
+	    <label for="intro" class="control-label">球隊成員</label>
+	    <!-- <input type="text" class="form-control" name="intro" ng-model="formData.member"> -->
+	    <div class="input-group">
+		    <ui-select ng-model="member.selected"
+			    class="nameBox"
+				theme="bootstrap"
+				ng-disabled="disabled"
+				reset-search-input="false">
+				<ui-select-match placeholder="請輸入人名">
+				{{$select.selected.name}}
+				</ui-select-match>
+				<ui-select-choices repeat="member in availablePeople | filter: {name: $select.search}" 
+				refresh-delay="0">
+				  <div ng-bind-html="member.name | highlight: $select.search"></div>
+				</ui-select-choices>
+			</ui-select>
+	    	<span class="input-group-btn">
+	    		<button type="button" class="btn" ng-click="addMember(member.selected)">
+					<span class="glyphicon glyphicon-plus"></span>
+	    		</button>
+	    	</span>
+	    </div>
+	</div>
+	<div >
+		<!-- <div class="previewBox clearfix">
+			<div>
+				<img class="img-responsive" ng-src="{{member.avatar}}" alt="{{member.name}}">
+			</div>
+		</div> -->
+		<ul class="list-group">
+			<li ng-repeat="member in list" class="list-group-item">	
+				<div class="imageWords">
+					<div class="previewBox">
+					    <img class="img-responsive" ng-src="{{member.avatar}}" alt="{{member.name}}">
+				    </div>
+				    <h3>{{member.name}}</h3>
+				    <p>&nbsp{{member.jerseynumber}}&nbsp{{member.position}}</p>
+				</div>
+		  </li>
+		</ul>
+		<!-- <ul class="media-list">
+		  <li  ng-repeat="member in list" class="media">
+		    <div class="media-left">
+		      <div class="previewBox">
+		        <img class="img-responsive media-object" ng-src="{{member.avatar}}" alt="{{member.name}}">
+		      </div>
+		    </div>
+		    <div class="media-body">
+		      <h4 class="media-heading">{{member.name}}</h4>
+		    </div>
+		  </li>
+		</ul> -->
+	</div>
 </div>
 
 <div class="form-group row">

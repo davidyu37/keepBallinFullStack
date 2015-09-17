@@ -14,6 +14,10 @@ var UploadSchema = new Schema({
 	user: {
 		type: Schema.Types.ObjectId,
     	ref: 'User'
+	},
+	team: {
+		type: Schema.Types.ObjectId,
+    	ref: 'Team'
 	}
 
 }, {strict: false});
