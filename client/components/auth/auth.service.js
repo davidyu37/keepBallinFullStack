@@ -114,19 +114,7 @@ angular.module('keepballin')
           return cb(err);
         }).$promise;
       },
-      //Restricted to admin
-
-      // changeRole: function(User, callback) {
-      //   var cb = callback || angular.noop;
-
-      //   return User.changeRole({ id: User.id }, {
-      //     newRole: User.role
-      //   }, function(user) {
-      //     return cb(user);
-      //   }, function(err) {
-      //     return cb(err);
-      //   }).$promise;
-      // },
+      
       /* put new url of user's profile picture */
       changeAvatar: function(newPic, callback) {
         var cb = callback || angular.noop;
@@ -194,6 +182,11 @@ angular.module('keepballin')
        */
       isAdmin: function() {
         return currentUser.role === 'admin';
+      },
+
+      // Check if user has a team
+      hasTeam: function() {
+        return currentUser.team;
       },
 
       /**

@@ -41,7 +41,9 @@ button:focus {outline:0;}
 // injector
 @import 'account/login/login.scss';
 @import 'account/settings/setting.scss';
+@import 'account/settings/temp/court/mycourt.scss';
 @import 'account/settings/temp/match/match.scss';
+@import 'account/settings/temp/team/temp/team.temp.scss';
 @import 'admin/admin.scss';
 @import 'comments/comments.scss';
 @import 'courts/_bubble.scss';

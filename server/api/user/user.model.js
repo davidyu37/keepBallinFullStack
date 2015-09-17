@@ -4,9 +4,6 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var crypto = require('crypto');
 var authTypes = ['github', 'twitter', 'facebook', 'google'];
-// For defining relationship between users and teams
-var relationship = require('mongoose-relationship');
-
 
 var UserSchema = new Schema({
   name: String,
@@ -17,8 +14,7 @@ var UserSchema = new Schema({
   },
   team: {
     type: Schema.Types.ObjectId,
-    ref: 'Team',
-    childPath: 'members'
+    ref: 'Team'
   },
   open: {type: Boolean, default: false},
   position: String,
@@ -35,8 +31,6 @@ var UserSchema = new Schema({
   github: {}
 });
 
-// Add relationship plugin
-UserSchema.plugin(relationship, { relationshipPathName: 'team'});
 
 /**
  * Virtuals

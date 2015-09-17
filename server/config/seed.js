@@ -47,7 +47,40 @@ User.find({}).remove(function() {
     jerseynumber: 80,
     height: 193,
     weight: 100,
-    birthday: new Date('01/01/1990')
+    birthday: new Date('04/01/1990')
+  },
+  {
+    provider: 'local',
+    name: '陳細哥',
+    email: 'skinny@skinny.com',
+    password: 'skinny',
+    position: 'PG-控球後衛',
+    jerseynumber: 12,
+    height: 183,
+    weight: 60,
+    birthday: new Date('05/23/1990')
+  },
+  {
+    provider: 'local',
+    name: '林小支',
+    email: 'small@small.com',
+    password: 'small',
+    position: 'SG-得分後衛',
+    jerseynumber: 23,
+    height: 175,
+    weight: 69,
+    birthday: new Date('05/23/1990')
+  },
+  {
+    provider: 'local',
+    name: '尼大大',
+    email: 'big@big.com',
+    password: 'big',
+    position: 'SF-小前鋒',
+    jerseynumber: 43,
+    height: 190,
+    weight: 80,
+    birthday: new Date('05/23/1990')
   },
   {
     provider: 'local',

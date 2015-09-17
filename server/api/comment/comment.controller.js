@@ -18,7 +18,7 @@ exports.index = function(req, res) {
 //   });
 // };
 
-// Get a single comment
+// Get comments by court id
 exports.show = function(req, res) {
   Comment.loadRecentByCourtId(req.params.courtId, function(err, comments) {
     if(err) { return handleError(res, err); }

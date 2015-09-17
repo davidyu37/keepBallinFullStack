@@ -2,6 +2,7 @@
 
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
+var relationship = require('mongoose-relationship');
 
 var TeamSchema = new Schema({
   name: String,
@@ -44,8 +45,51 @@ var TeamSchema = new Schema({
   	type: Schema.Types.ObjectId, 
   	ref: 'User'
   }],
-  contact: String
-
+  contact: String,
+  owner: {
+    type: Schema.Types.ObjectId, 
+    ref: 'User',
+    childPath: 'team'
+  }
 }, {strict: false});
+
+// Add relationship plugin
+TeamSchema.plugin(relationship, { relationshipPathName: 'owner'});
+
+// TeamSchema.statics = {
+//   loadAll: function(id, cb) {
+//     this.find({'_id': id})
+//       .populate('captain teampic manager members')
+//       .exec(cb);
+//   }
+// };
+
+TeamSchema.statics = {
+  loadAll: function(id, cb) {
+    this.find({'_id': id})
+      .populate(
+      {
+        path: 'captain',
+        select: '-salt -hashedPassword'
+      })
+      .populate('teampic')
+      .populate(
+      {
+        path: 'manager',
+        select: '-salt -hashedPassword'
+      })
+      .populate(
+      {
+        path: 'members',
+        select: '-salt -hashedPassword'
+      })
+      .populate(
+      {
+        path: 'coach',
+        select: '-salt -hashedPassword'
+      })
+      .exec(cb);
+  }
+};
 
 module.exports = mongoose.model('Team', TeamSchema);

@@ -13,16 +13,17 @@ exports.index = function(req, res) {
 
 // Get a single team
 exports.show = function(req, res) {
-  Team.findById(req.params.id, function (err, team) {
+  Team.loadAll(req.params.id, function (err, team) {
     if(err) { return handleError(res, err); }
     if(!team) { return res.status(404).send('Not Found'); }
-    return res.json(team);
+    return res.status(201).json(team[0]);
   });
 };
 
 // Creates a new team in the DB.
 exports.create = function(req, res) {
-  Team.create(req.body, function(err, team) {
+  var team = new Team(_.merge({ owner: req.user._id }, req.body));
+  team.save(function(err, team) {
     if(err) { return handleError(res, err); }
     return res.status(201).json(team);
   });

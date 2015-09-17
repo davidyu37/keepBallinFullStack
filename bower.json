@@ -8,6 +8,7 @@
     "angular-bootstrap": "~0.11.0",
     "angular-bootstrap-lightbox": "~0.8.0",
     "angular-cookies": ">=1.2.*",
+    "angular-google-maps": "~2.2.1",
     "angular-resource": ">=1.2.*",
     "angular-sanitize": ">=1.2.*",
     "angular-socket-io": "~0.6.0",
