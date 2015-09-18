@@ -43,5 +43,4 @@ angular.module('keepballin')
         templateUrl: 'app/team/temp/team.represent.html',
         authenticate: true
       })
-    $urlRouterProvider.otherwise('/settings');
   });

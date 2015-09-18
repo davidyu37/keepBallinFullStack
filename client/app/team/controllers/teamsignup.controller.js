@@ -11,6 +11,16 @@ angular.module('keepballin')
     $scope.preview = '';
     $scope.load = false;
 
+    $scope.isInvalid = function(){
+        
+        // for(var i=0; i < fields.length; i++) {
+        //     if($scope.myForm[fields[i]].$invalid) {
+        //         return true
+        //     }
+        // }
+        // return $scope.myForm[field].$invalid;
+         // && $scope.myForm[field].$dirty
+    };
 
     // function to process the form
     $scope.processForm = function() {
@@ -18,6 +28,7 @@ angular.module('keepballin')
         Team.save($scope.formData);
         $scope.formData = {};
     };
+    
     //Picture user selects
     $scope.picture ='';
     //Upload on select
@@ -75,6 +86,5 @@ angular.module('keepballin')
     		return false
     	}
     };
-
 
   }]);//TeamSignUpCtrl ends

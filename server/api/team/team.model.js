@@ -32,20 +32,28 @@ var TeamSchema = new Schema({
   private: Boolean,
   other: String,
   manager: {
-    type: Schema.Types.ObjectId, 
+    type: Schema.Types.Mixed,
+    name: String, 
     ref: 'User'
   },
   coach: {
-    type: Schema.Types.ObjectId, 
+    type: Schema.Types.Mixed,
+    name: String, 
     ref: 'User'
   },
   win: Number,
   lose: Number,
   members: [{
-  	type: Schema.Types.ObjectId, 
+  	type: Schema.Types.Mixed,
+    name: String, 
   	ref: 'User'
   }],
   contact: String,
+  contactperson: {
+    type: Schema.Types.Mixed, 
+    ref: 'User',
+    name: String
+  },
   owner: {
     type: Schema.Types.ObjectId, 
     ref: 'User',
@@ -56,13 +64,6 @@ var TeamSchema = new Schema({
 // Add relationship plugin
 TeamSchema.plugin(relationship, { relationshipPathName: 'owner'});
 
-// TeamSchema.statics = {
-//   loadAll: function(id, cb) {
-//     this.find({'_id': id})
-//       .populate('captain teampic manager members')
-//       .exec(cb);
-//   }
-// };
 
 TeamSchema.statics = {
   loadAll: function(id, cb) {

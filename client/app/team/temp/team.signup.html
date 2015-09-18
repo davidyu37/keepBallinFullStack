@@ -11,7 +11,7 @@
 
 		</div>	
 		<!-- info, member, represent html are nested in this form -->
-	    <form id="signup-form" ng-submit="processForm()">
+	    <form id="signup-form" name="myForm" ng-submit="processForm()" novalidate>
 
             <!-- our nested state views will be injected here -->
             <div id="form-views" ui-view></div>
