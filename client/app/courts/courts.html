@@ -19,7 +19,10 @@
     <!-- Make a button that let user select the courts to appear -->
     <button class="btn"
     ng-class="{'btn-primary': !enable, 'btn-success': enable}"
-    id="addMarker" ng-init="enable=false" ng-show="isAdmin" ng-click="enable = !enable; enableAddMarker(enable)">
+    id="addMarker" 
+    ng-init="enable=false" 
+    ng-show="isAdmin || isManager" 
+    ng-click="enable = !enable; enableAddMarker(enable)">
         <span class="glyphicon" 
         ng-class="{'glyphicon-map-marker': !enable, 'glyphicon-ok': enable}"></span>
     </button>
@@ -50,7 +53,9 @@
                                 <a ng-click="openLightboxModal($index)">
                                     <img ng-src="{{slide.url}}">
                                 </a>
-                                <button class="picDeleteBtn" ng-click="deletePic(slide)">
+                                <button class="picDeleteBtn" 
+                                ng-click="deletePic(slide)"
+                                ng-show="isAdmin || isManager">
                                     <span class="glyphicon glyphicon-trash">
                                     </span>
                                 </button>
@@ -71,18 +76,15 @@
                 </h2>
                 <!-- Hours -->
                 <p>開放時間:</p>
-                <div ng-repeat="courthour in currentcourt.hours track by $index">
-                    <p ng-show="courthour">
-                        {{courthour.begin}}~{{courthour.end}}
-                    </p>
-                </div>
+                <p ng-show="currentcourt.hours">
+                    {{currentcourt.hours.begin | date:'shortTime'}}~{{currentcourt.hours.end | date:'shortTime'}}
+                </p>
+               
                  <!-- Peaktime -->
                 <p>尖峰:</p>
-                <div ng-repeat="courthour in currentcourt.peaktime track by $index">
-                    <p ng-show="courthour">
-                        {{courthour.begin}}~{{courthour.end}}
-                    </p>
-                </div>
+                <p ng-show="currentcourt.peaktime">
+                    {{currentcourt.peaktime.begin | date:'shortTime'}}~{{currentcourt.peaktime.end | date:'shortTime'}}
+                </p>
             </div>
             <div class="infoBox" ng-class="{'col-sm-3': !hovered}" ng-hide="hovered">
                 <!-- Indoor -->
@@ -150,14 +152,19 @@
             </div>
             <div class="editBtns">
                 <!--Upload button-->
-                <button class="editDetailButton" ng-click="uploadmode()" ng-model="upload" 
-                ng-show="currentcourt">
+                <button class="editDetailButton" 
+                ng-click="uploadmode()" 
+                ng-model="upload" 
+                ng-show="isAdmin || isManager">
                     <span class="glyphicon glyphicon-camera"></span>
                 </button>
                 <!--Edit button-->
                 <button class="editDetailButton"
-                ng-click="editmode()" ng-model="edit" 
-                ng-show="currentcourt"><span class="glyphicon glyphicon-pencil"></span></button>
+                ng-click="editmode()" 
+                ng-model="edit" 
+                ng-show="isAdmin || isManager">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </button>
             </div>
         </div>
     </div>

@@ -3,80 +3,52 @@
     <div class="form-group">
         <div class="col-sm-4">
             <!-- Court name -->
-            <label for="" class="control-label">球場名:</label>
-            <input type="text" ng-model="currentcourt.court" placeholder="簡潔明瞭的地名">
+            <label for="courtname" class="control-label">球場名:</label>
+            <input type="text" ng-model="currentcourt.court" placeholder="簡潔明瞭的地名" class="form-control">
         </div>
         <div class="col-sm-4">
             <!-- City -->
-            <label for="" class="control-label">城市:</label>
-            <input type="text" ng-model="currentcourt.city" placeholder="什麼市？">
+            <label for="city" class="control-label">城市:</label>
+            <input type="text" ng-model="currentcourt.city" placeholder="什麼市？" class="form-control">
         </div>
         <div class="col-sm-4">
-            <label for="" class="control-label">區域:</label>
-           <!--  <div class="input-group"> -->
-                <input type="text" ng-model="currentcourt.district" placeholder="什麼區？">
-                <!-- <span class="input-group-addon">區</span> -->
-           <!--  </div> -->
+            <label for="district" class="control-label">區域:</label>
+            <div class="input-group">
+                <input type="text" ng-model="currentcourt.district" placeholder="什麼區？" class="form-control">
+                <span class="input-group-addon">區</span>
+            </div>
         </div>
     </div>
         
-    <!-- Hours -->
     <div class="form-group">
+        <!-- Hours -->
         <div class="col-sm-6">
-            <label for="hours" class="control-label">開放時間:</label>
-            <div ng-repeat="courthour in currentcourt.hours track by $index">
-                <p ng-show="courthour">{{courthour.begin}}~{{courthour.end}}</p>    
-            </div>
             <div class="form-group">
-                <div class="row selectors">
+                <div class="row">
                     <div class="col-sm-6">
-                        <select class="form-control" name="court begin hour" ng-model="currentcourt.hours[index1].begin" ng-change="currentcourt.hours[index1].end = currentcourt.hours[index1].begin">
-                            <option value="">開始時間</option>
-                            <option ng-repeat="hour in getHours()" value="{{hour}}">{{hour}}</option>
-                        </select>
+                        <label for="hours" class="control-label">開放時間(開始):</label>
+                        <timepicker ng-model="currentcourt.hours.begin" minute-step="15" show-meridian="true"></timepicker>
                     </div>
                     <div class="col-sm-6">
-                        <select class="form-control" name="court hour" ng-model="currentcourt.hours[index1].end">
-                            <option value="">結束時間</option>
-                            <option ng-repeat="hour in getHours()" value="{{hour}}">{{hour}}</option>
-                        </select>    
+                        <label for="hours" class="control-label">開放時間(結束):</label>
+                        <timepicker ng-model="currentcourt.hours.end" minute-step="15" show-meridian="true"></timepicker> 
                     </div>
-                    <!-- <div class="col-sm-2 cell">
-                        <span class="glyphicon glyphicon-plus" ng-init="index1=0"
-                        ng-click="index1 = index1 + checkValue(currentcourt.hours[index1])">  
-                        </span>
-                    </div> -->
                 </div>  
             </div>
         </div>
+        <!-- Peaktime -->
         <div class="col-sm-6">
-            <!-- Peaktime -->
-            <label for="" class="control-label">尖峰:</label>
-            <div ng-repeat="peaktime in currentcourt.peaktime track by $index">
-                <p ng-show="peaktime">
-                    {{peaktime.begin}}~{{peaktime.end}}
-                </p>    
-            </div>
             <div class="form-group">
-                <div class="row selectors">
+                <div class="row">
                     <div class="col-sm-6">
-                        <select class="form-control" name="court begin hour" ng-model="currentcourt.peaktime[index2].begin" ng-change="currentcourt.peaktime[index2].end = currentcourt.peaktime[index2].begin">
-                            <option value="">開始時間</option>
-                            <option ng-repeat="hour in getHours()" value="{{hour}}">{{hour}}</option>
-                        </select>
+                        <label for="peaktime" class="control-label">人多時間(開始):</label>
+                        <timepicker ng-model="currentcourt.peaktime.begin" minute-step="15" show-meridian="true"></timepicker>
                     </div>
                     <div class="col-sm-6">
-                        <select class="form-control" name="court hour" ng-model="currentcourt.peaktime[index2].end">
-                            <option value="">結束時間</option>
-                            <option ng-repeat="hour in getHours()" value="{{hour}}">{{hour}}</option>
-                        </select>    
+                        <label for="peaktime" class="control-label">人多時間(結束):</label>
+                        <timepicker ng-model="currentcourt.peaktime.end" minute-step="15" show-meridian="true"></timepicker> 
                     </div>
-                    <!-- <div class="col-sm-2 cell">
-                        <span class="glyphicon glyphicon-plus" ng-init="index2=0"
-                        ng-click="index2 = index2 + checkValue(currentcourt.peaktime[index2])">  
-                        </span>
-                    </div> -->
-                </div>
+                </div>  
             </div>
         </div>
     </div>
@@ -136,6 +108,6 @@
         <textarea class="form-control" rows="3" ng-model="currentcourt.desc"></textarea>
     </div>
 </form>
-<button class="btn-primary pull-right" ng-click="editmode(currentcourt)">好了</button>
+<button ng-disabled="editform.$invalid" class="btn-primary pull-right" ng-click="editmode(currentcourt)">好了</button>
 
 </div>

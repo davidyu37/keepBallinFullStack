@@ -184,6 +184,10 @@ angular.module('keepballin')
         return currentUser.role === 'admin';
       },
 
+      isManager: function() {
+        return currentUser.role === 'manager';
+      },
+
       // Check if user has a team
       hasTeam: function() {
         return currentUser.team;

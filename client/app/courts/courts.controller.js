@@ -22,6 +22,7 @@ angular.module('keepballin')
 		//Authentication
 		$scope.isLoggedIn = Auth.isLoggedIn();
 	    $scope.isAdmin = Auth.isAdmin();
+	    $scope.isManager = Auth.isManager();
 	    $scope.getCurrentUser = Auth.getCurrentUser();
 
 	    //The current court user is looking at

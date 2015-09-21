@@ -35,7 +35,7 @@ html, body {
 }
 
 //Take out all blue border after clicking on button
-button:focus {outline:0;}
+button:focus {outline:0 !important;} 
 
 // Component styles are injected through grunt
 // injector

@@ -29,6 +29,7 @@ Comment.find({}).remove(function() {
 User.find({}).remove(function() {
   User.create({
     provider: 'local',
+    role: 'manager',
     name: '林小胖',
     email: 'fat@fat.com',
     password: 'fat',
@@ -104,8 +105,8 @@ Court.find({}).remove(function() {
     long: 121.537544,
     address: '106台北市大安區建國南路一段81號',
     desc: '偶爾辦系隊比賽',
-    hours: [{begin: '0700', end: '2200'}],
-    peaktime: [{begin: '1800', end: '2000'}],
+    hours: {begin: new Date('January 01, 1990 07:00:00'), end: new Date('January 01, 1990 22:00:00')},
+    peaktime: {begin: new Date('January 01, 1990 18:00:00'), end: new Date('January 01, 1990 20:00:00')},
     net: true,
     nettype: '繩網',
     basketnumber: 11,

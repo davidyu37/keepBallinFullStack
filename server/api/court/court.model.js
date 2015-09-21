@@ -4,10 +4,6 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     ObjectId = Schema.ObjectId;
 
-var TimeSchema = new Schema({
-  begin: String, end: String
-});
-
 var CourtSchema = new Schema({
   country: {type: String, default: 'Taiwan'},
   court: String,
@@ -17,8 +13,8 @@ var CourtSchema = new Schema({
   long: Number,
   address: String,
   desc: String,
-  hours: [TimeSchema],
-  peaktime: [TimeSchema],
+  hours: {begin: Date, end: Date},
+  peaktime: {begin: Date, end: Date},
   net: Boolean,
   nettype: String,
   basketnumber: Number,

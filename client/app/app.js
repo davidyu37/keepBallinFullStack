@@ -11,8 +11,7 @@ angular.module('keepballin', [
   'ngFileUpload',
   'bootstrapLightbox',
   'angular-advanced-searchbox',
-  'ui.select',
-  'uiGmapgoogle-maps'
+  'ui.select'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider

@@ -6,7 +6,7 @@
 
 
 .infoWindowContent {
-    font-size:  14px;
+    font-size:  120%;
     border-top: 1px solid #ccc;
     padding-top: 10px;
 }
@@ -15,11 +15,24 @@
     margin-right: 18px;
     width: 50px;
     height: 50px;
-    padding: 3px;
-    border: 0;
-    background: white;
+    /*padding: 3px;*/
+    text-align: center;
+    border: 2px solid $brand-primary;
+    background: none;
     border-radius: 50%;
     box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    -webkit-transition:font-size linear 0.3s;
+    transition:font-size linear 0.3s;
+}
+
+.geolocateBtn:hover {
+    background: white;
+    font-size: 150%;
+    display: table;
+    span.glyphicon {
+        display: table-cell;
+        vertical-align: middle;
+    }
 }
 
 .glyphicon-screenshot {
@@ -116,16 +129,6 @@
     margin-bottom: 15px;
 }
 
-.selectors {
-    margin: 0 auto;
-    width: 60%;
-    display: table; 
-}
-
-.cell {
-    display: table-cell;
-    vertical-align: middle;
-}
 .editBtns {
     position: absolute;
     top: 0px;
@@ -262,5 +265,10 @@
     }
 }
 
+.addressBtn {
+    border-radius: 50%;
+    background: none;
+    border: none;
+}
 
 
