@@ -13,15 +13,44 @@
               tooltip-placement="top"
               tooltip-trigger="mouseenter"
               tooltip-enable="!inputModel"
-              class="form-control" ng-model="$parent.newComment" rows="3" placeholder="跟球友分享球場狀況" required>
+              class="form-control" ng-model="newComment" rows="3" placeholder="跟球友分享球場狀況" required>
         </textarea>
       </div>
       
    
     <input class="btn btn-primary pull-right" type="submit" ng-disabled="commentForm.$invalid" value="送出">
   </form>
- 
-  <ul class="comment-list">
+  <ul class="comment-list" infinite-scroll='comments.nextPage()' infinite-scroll-disabled='comments.busy' infinite-scroll-distance='0' infinite-scroll-immediate-check="false" ng-class="{'commentBox': comments.comments.length}">
+  <!-- style="height: 400px; overflow: scroll" -->
+    <li class="oneComment" ng-repeat='comment in comments.comments'>
+      <div class="row">
+        <div class="col-xs-1">
+          <div class="avatarBox">
+            <img class="avatar img-rounded" ng-src="{{comment.author.avatar}}" alt="avatar">
+          </div>
+        </div>
+        <div class="col-xs-11">
+          <div class="bubble">
+          <p class="pull-right">{{comment.date | date:'short'}}</p>
+            <h5>
+              <a ng-href="/profile/{{comment.author._id}}">
+              {{ comment.author.name }}</a>
+              &nbsp說:
+            </h5>
+            <p>{{ comment.content }}</p>
+          </div>
+        </div>
+      </div>
+    </li>
+    <!-- Show spinner when it's loading -->
+    <div ng-show='comments.busy'>
+      <div class="loaderWrapper">
+        <div class="loader">Loading</div>
+      </div>
+    </div>
+  </ul>
+
+  <!-- <ul class="comment-list">
     <li ng-repeat="comment in comments" class="oneComment">
       <div class="row">
         <div class="col-xs-1">
@@ -42,5 +71,5 @@
         </div>
       </div>
     </li>
-  </ul>
+  </ul> -->
 </div>

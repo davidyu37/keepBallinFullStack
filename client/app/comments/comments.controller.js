@@ -1,38 +1,31 @@
 'use strict';
  
 angular.module('keepballin')
-  .controller('CommentCtrl', ['$scope', '$http', 'socket','Comment', 'Auth', function ($scope, $http, socket, Comment, Auth) {
+  .controller('CommentCtrl', ['$scope', '$q', 'socket','Comment', 'Auth', 'CommentSource', function ($scope, $q, socket, Comment, Auth, CommentSource) {
     $scope.newComment = '';
  
     $scope.avatar = Auth.getCurrentUser().avatar;
 
     $scope.profile = 'app/profile/profile.html';
 
-    $scope.getComments = function(courtId) {
-
+    function checkAllComments(courtId) {
+      var deferred = $q.defer();
       Comment.query({courtId: courtId},function(comments) {
-          if(!comments) {
-              angular.noop;
+          if(comments.length) {
+              deferred.resolve(comments.length);
           } else {
-              console.log(comments);
-
-              $scope.comments = comments;
-              socket.syncUpdates('comment', $scope.comments, function(event, comment, comments) {
-                // This callback is fired after the comments array is updated by the socket listeners
-         
-                // sort the array every time its modified
-                comments.sort(function(a, b) {
-                  a = new Date(a.date);
-                  b = new Date(b.date);
-                  return a>b ? -1 : a<b ? 1 : 0;
-                });//comments sort ends
-              });//syncUpdates ends
-          }//Else ends
+            deferred.reject(console.log('do nothing'));
+          }
       });
+      return deferred.promise;
     };
 
     $scope.$on('courtIdChanged', function(e, args) {
-       $scope.getComments(args.newId);
+      $scope.comments = {};
+      var check = checkAllComments(args.newId);
+      check.then(function(length) {
+        $scope.comments = new CommentSource(args.newId, length);
+      });
     });
 
  
@@ -43,16 +36,24 @@ angular.module('keepballin')
  
     // Add comments only if there's a current court
     $scope.addComment = function() {
+
       if(!$scope.currentcourt) {
         angular.noop;
       } else {
+        var courtID = $scope.currentcourt._id;
         var data = {
-          courtId: $scope.currentcourt._id,
+          courtId: courtID,
           content: $scope.newComment
         };
         Comment.save(data, function() {
           $scope.newComment = '';
+          var check = checkAllComments(courtID);
+          check.then(function(length) {
+            $scope.comments = new CommentSource(courtID, length);
+            $scope.comments.nextPage();
+          });
         });
       }
     };
+
   }]); //CommentCtrl ends

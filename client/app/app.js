@@ -10,8 +10,7 @@ angular.module('keepballin', [
   'ui.bootstrap',
   'ngFileUpload',
   'bootstrapLightbox',
-  'angular-advanced-searchbox',
-  'ui.select'
+  'infinite-scroll'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider

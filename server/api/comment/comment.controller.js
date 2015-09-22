@@ -3,14 +3,6 @@
 var _ = require('lodash');
 var Comment = require('./comment.model');
 
-exports.index = function(req, res) {
-  Comment.loadRecent(function (err, comments) {
-    if(err) { return handleError(res, err); }
-    return res.json(200, comments);
-  });
-};
-
-// Get list of comments
 // exports.index = function(req, res) {
 //   Comment.find(function (err, comments) {
 //     if(err) { return handleError(res, err); }
@@ -18,9 +10,17 @@ exports.index = function(req, res) {
 //   });
 // };
 
+// Get list of comments
+exports.async = function(req, res) {
+  Comment.loadNow(req.params.index, req.params.courtId, function (err, comments) {
+    if(err) { return handleError(res, err); }
+    return res.status(200).json(comments);
+  });
+};
+
 // Get comments by court id
 exports.show = function(req, res) {
-  Comment.loadRecentByCourtId(req.params.courtId, function(err, comments) {
+  Comment.loadByCourtId(req.params.courtId, function(err, comments) {
     if(err) { return handleError(res, err); }
     if(!comments) { return res.status(404).send('Not Found'); }
     return res.json(comments);

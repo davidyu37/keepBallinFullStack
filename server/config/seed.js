@@ -23,7 +23,116 @@ Upload.find({}).remove(function() {
 });
 
 Comment.find({}).remove(function() {
-  console.log('comments cleared');
+  Comment.create({
+    content: 'Good'
+  },
+  {
+    content: 'Good'
+  },
+  {
+    content: 'Good'
+  },
+  {
+    content: 'Good'
+  },
+  {
+    content: 'Good'
+  },
+  {
+    content: 'Good'
+  },
+  {
+    content: 'Good'
+  },
+  {
+    content: 'Good'
+  },
+  {
+    content: 'Good'
+  },
+  {
+    content: 'Good'
+  },
+  {
+    content: 'Good'
+  },
+  {
+    content: 'Good'
+  },
+  {
+    content: 'Good'
+  },
+  {
+    content: 'Good'
+  },
+  {
+    content: 'Good'
+  },
+  {
+    content: 'Good'
+  },
+  {
+    content: 'Good'
+  },
+  {
+    content: 'Good'
+  },
+  {
+    content: 'Good'
+  },
+  {
+    content: 'Good'
+  },
+  {
+    content: 'Good'
+  },
+  {
+    content: 'Good'
+  },
+  {
+    content: 'Good'
+  },
+  {
+    content: 'Good'
+  },
+  {
+    content: 'Good'
+  },
+  {
+    content: 'Good'
+  },
+  {
+    content: 'Good'
+  },
+  {
+    content: 'Good'
+  },
+  {
+    content: 'Good'
+  },
+  {
+    content: 'Good'
+  },
+  {
+    content: 'Good'
+  },
+  {
+    content: 'Good'
+  },
+  {
+    content: 'Good'
+  },
+  {
+    content: 'Good'
+  },
+  {
+    content: 'Good'
+  },
+  {
+    content: 'Good'
+  }, function() {
+    console.log('fake comments populated');
+  });
 });
 
 User.find({}).remove(function() {

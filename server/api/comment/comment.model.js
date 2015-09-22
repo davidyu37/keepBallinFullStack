@@ -13,22 +13,36 @@ var CommentSchema = new Schema({
   }
 });
 
-CommentSchema.statics = {
-  loadRecent: function(cb) {
-    this.find({})
-      .populate({path:'author', select: 'name'})
-      .sort('-date')
-      .limit(20)
-      .exec(cb);
-  }
-};
+// CommentSchema.statics = {
+//   loadRecent: function(cb) {
+//     this.find({})
+//       .populate({path:'author', select: 'name'})
+//       .sort('-date')
+//       .limit(20)
+//       .exec(cb);
+//   }
+// };
+
+// CommentSchema.statics = {
+//   loadByCourtId: function(courtId, cb) {
+//     this.find({'courtId': courtId})
+//       .sort('-date')
+//       .exec(cb);
+//   }
+// };
 
 CommentSchema.statics = {
-  loadRecentByCourtId: function(courtId, cb) {
+  loadNow: function(start, courtId, cb) {
     this.find({'courtId': courtId})
       .populate({path:'author', select: 'name avatar'})
       .sort('-date')
-      .limit(20)
+      .skip(start)
+      .limit(10)
+      .exec(cb);
+  },
+  loadByCourtId: function(courtId, cb) {
+    this.find({'courtId': courtId})
+      .sort('-date')
       .exec(cb);
   }
 };
