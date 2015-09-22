@@ -2,6 +2,7 @@
 #map {
     height: 100vh;
     width: 100%;
+    box-shadow: 0 12px 10px -5px rgba(221, 221, 221, 0.8)
 }
 
 
@@ -47,10 +48,6 @@
     text-align: center;
 }
 
-.glyphicon-remove{
-    font-size: 200%;
-    color: $brand-primary;
-}
 /* close button ends here */
 /* Add marker button */
 #addMarker {
@@ -74,8 +71,10 @@
         bottom: 0;
         left: 0;
         color: white;
-        z-index: 1000;
+        z-index: 10;
+        display: block;
     }
+    display: none;
     width: 100%;
     text-align: center;    
 }

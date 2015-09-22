@@ -4,7 +4,7 @@ angular.module('keepballin')
   .controller('CommentCtrl', ['$scope', '$q', 'socket','Comment', 'Auth', 'CommentSource', function ($scope, $q, socket, Comment, Auth, CommentSource) {
     $scope.newComment = '';
  
-    $scope.avatar = Auth.getCurrentUser().avatar;
+    $scope.userNow = Auth.getCurrentUser();
 
     $scope.profile = 'app/profile/profile.html';
 
@@ -35,7 +35,7 @@ angular.module('keepballin')
     });
  
     // Add comments only if there's a current court
-    $scope.addComment = function() {
+    $scope.addComment = function(event) {
 
       if(!$scope.currentcourt) {
         angular.noop;
@@ -49,11 +49,20 @@ angular.module('keepballin')
           $scope.newComment = '';
           var check = checkAllComments(courtID);
           check.then(function(length) {
+            //Create new comments
             $scope.comments = new CommentSource(courtID, length);
+            //Load new comments
             $scope.comments.nextPage();
+            //Refocus onto the text area
+            event.currentTarget[0].focus();
           });
         });
       }
     };
+
+    //Clear text area
+    $scope.clear = function() {
+      $scope.newComment = '';
+    }
 
   }]); //CommentCtrl ends

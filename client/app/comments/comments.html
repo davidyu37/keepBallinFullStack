@@ -1,25 +1,45 @@
 <div class="container commentSection" ng-controller="CommentCtrl">
   <!-- <iframe width="100%" height="410" src="//www.youtube.com/embed/DcJFdCmN98s" frameborder="0"></iframe> -->
-  <h1>{{currentcourt.court}}球友們說</h1>
-  <form class="comment-form" ng-submit="addComment()" name="commentForm">
+  <h1>{{userNow.name}}說</h1>
+  <form class="comment-form" ng-submit="addComment($event)" 
+  novalidate name="commentForm">
+    <div class="row container">
       <div class="col-xs-1">
         <div class="avatarBox">
-          <img class="avatar img-rounded" ng-src="{{avatar}}" alt="">
+          <img class="avatar img-rounded" ng-src="{{userNow.avatar}}" alt="{{userNow.name}}">
         </div>
       </div>
       <div class="col-xs-11">
-        <textarea 
-              tooltip="可按TAB鍵再按ENTER送出"
-              tooltip-placement="top"
-              tooltip-trigger="mouseenter"
-              tooltip-enable="!inputModel"
-              class="form-control" ng-model="newComment" rows="3" placeholder="跟球友分享球場狀況" required>
-        </textarea>
+        <div class="input-group">
+          <textarea
+                name="comment" 
+                tooltip="可按TAB鍵再按ENTER送出"
+                tooltip-placement="top"
+                tooltip-trigger="mouseenter"
+                tooltip-enable="!inputModel"
+                class="form-control" ng-model="newComment" rows="1" placeholder="跟球友分享球場狀況"
+                ng-keydown="done=false"
+                ng-keyup="done=true" 
+                required>
+          </textarea>
+          <div class="input-group-btn" ng-show="newComment">
+            <button class="btn" type="submit" ng-disabled="commentForm.$invalid"
+            ng-class="{'btn-success': done, 'btn-primary': !done}">
+              <span class="glyphicon" ng-class="{'glyphicon-ok': done, 'glyphicon-pencil': !done}">
+              <!-- 'glyphicon-pencil': newComment,  -->
+              </span>
+            </button>
+            <button class="btn" ng-click="$event.preventDefault(); clear(); commentForm.$setPristine();">
+              <span class="glyphicon glyphicon-remove"></span>
+            </button>
+          </div>
+          
+        </div>
       </div>
       
-   
-    <input class="btn btn-primary pull-right" type="submit" ng-disabled="commentForm.$invalid" value="送出">
+    </div>
   </form>
+  <h2>{{currentcourt.court}}球友們說</h2>
   <ul class="comment-list" infinite-scroll='comments.nextPage()' infinite-scroll-disabled='comments.busy' infinite-scroll-distance='0' infinite-scroll-immediate-check="false" ng-class="{'commentBox': comments.comments.length}">
   <!-- style="height: 400px; overflow: scroll" -->
     <li class="oneComment" ng-repeat='comment in comments.comments'>
