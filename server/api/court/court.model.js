@@ -34,4 +34,13 @@ var CourtSchema = new Schema({
   }]
 });
 
+CourtSchema.statics = {
+  getRatings: function(courtID, cb) {
+    this.find({_id: courtID})
+      .select('ratings')
+      .populate({path:'ratings', select: 'rate'})
+      .exec(cb);
+  }
+};
+
 module.exports = mongoose.model('Court', CourtSchema);

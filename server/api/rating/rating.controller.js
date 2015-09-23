@@ -22,7 +22,8 @@ exports.show = function(req, res) {
 
 // Creates a new rating in the DB.
 exports.create = function(req, res) {
-  var conditions = { $and:[{court: req.body.court}, {user: req.body.user}]},
+  
+  var conditions = { $and:[{court: req.body.court}, {user: req.user._id}]},
       update = { 
         user: req.user._id,
         court: req.body.court,
@@ -46,9 +47,10 @@ exports.create = function(req, res) {
       //Find, destroy, and make new
       Rating.findById(ratingID, function(err, doc) {
         if (err) { return handleError(res, err); }
-      }).remove(function() {
-        newRating.save(function(err, data) {
-          return res.status(201).json(data);
+        doc.remove(function() {
+          newRating.save(function(err, data) {
+            return res.status(201).json(data);
+          });
         });
       });
     } else {

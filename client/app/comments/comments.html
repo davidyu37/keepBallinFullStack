@@ -65,8 +65,7 @@
           <div class="bubble">
           <p class="pull-right">{{comment.date | date:'short'}}</p>
             <h5>
-              <a ng-href="/profile/{{comment.author._id}}">
-              {{ comment.author.name }}</a>
+              {{ comment.author.name }}
               &nbsp說:
             </h5>
             <p>{{ comment.content }}</p>

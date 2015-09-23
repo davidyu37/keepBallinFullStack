@@ -29,6 +29,16 @@ exports.show = function(req, res) {
   });
 };
 
+// Get ratings of the court
+exports.getRating = function(req, res) {
+  court.getRatings(req.params.id, function (err, court) {
+    if(err) { return handleError(res, err); }
+    if(!court) { return res.status(404).send('Not Found'); }
+    return res.json(court);
+  });
+};
+
+
 // Creates a new court in the DB.
 exports.create = function(req, res) {
   court.create(req.body, function(err, court) {

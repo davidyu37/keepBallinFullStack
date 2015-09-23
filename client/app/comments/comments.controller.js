@@ -14,7 +14,7 @@ angular.module('keepballin')
           if(comments.length) {
               deferred.resolve(comments.length);
           } else {
-            deferred.reject(console.log('do nothing'));
+            deferred.reject();
           }
       });
       return deferred.promise;
