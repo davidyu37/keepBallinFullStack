@@ -290,6 +290,7 @@
 }
 .editDetailButton {
     @media(min-width: $screen-sm-min) {
-        display: none;
+        display: inline-block;
     }
+    display: none;
 }
