@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('keepballin')
-  .controller('LoginCtrl', function ($scope, Auth, $location, $window) {
+  .controller('LoginCtrl', ['$scope', 'Auth', '$location', '$window', '$modalInstance', function ($scope, Auth, $location, $window, $modalInstance) {
     $scope.user = {};
     $scope.errors = {};
 
@@ -15,7 +15,8 @@ angular.module('keepballin')
         })
         .then( function() {
           // Logged in, redirect to home
-          $location.path('/');
+          // $location.path('/');
+          $modalInstance.close();
         })
         .catch( function(err) {
           $scope.errors.other = err.message;
@@ -23,7 +24,11 @@ angular.module('keepballin')
       }
     };
 
+    $scope.closeModal = function() {
+      $modalInstance.close();
+    };
+
     $scope.loginOauth = function(provider) {
       $window.location.href = '/auth/' + provider;
     };
-  });
+  }]);

@@ -23,3 +23,17 @@ $btnGithubBackgroundHighlight:      #ccc;
 .btn-github {
   @include button-variant($btnTextAlt, $btnGithubBackground, $btnGithubBackgroundHighlight);
 }
+
+// NEW LOGIN HTML STYLES-----------------------------
+
+.insideModal {
+	width: 100%;
+	height: auto;
+	padding: 20px;
+	text-align: center;
+}
+
+.fa-icon-addon {
+	background: none;
+	font-size: 120%;
+}
