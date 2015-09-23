@@ -17,8 +17,10 @@ angular.module('keepballin')
 					var long = event.latLng.L;
 
 					var address = coordinates_to_address(lat, long);
-					address.then(function(data){
-						court = {lat: lat, long: long, address: data};
+					address.then(function(result){
+						var district = result.address_components[3].long_name;
+						var city = result.address_components[4].long_name;
+						court = {lat: lat, long: long, address: result.formatted_address, district: district, city: city};
 						Court.save(court);
 					});
 					
@@ -43,7 +45,7 @@ angular.module('keepballin')
 			            	
 			            	var address = results[0].formatted_address;
 			                
-			                deferred.resolve(address);
+			                deferred.resolve(results[0]);
 
 			            } else {
 			            	deffered.reject(alert('沒住址'));

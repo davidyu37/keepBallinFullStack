@@ -10,7 +10,7 @@
     finishedit="finishedit"
     deletemarker="deletemarker"
     expanded="expanded"
-    ng-show="map"
+    ng-class="{'mapShadow': currentcourt}"
     ></div>
     <button title="定位(解除瀏覽器的封鎖才可以使用喔)" type="button" id="geolocate" class="geolocateBtn"
     ng-click="geolocate()">
@@ -27,10 +27,11 @@
         ng-class="{'glyphicon-map-marker': !enable, 'glyphicon-ok': enable}"></span>
     </button>
     <!-- Slide button for court detail -->
-    <button class="btn btn-primary slideBtn" slide-toggle="#detail" expanded="expanded" map="map" ng-model="expanded" 
+    <button class="btn slideBtn" slide-toggle="#detail" expanded="expanded" map="map" ng-model="expanded" 
     ng-show="currentcourt">
-        <span class="glyphicon"
-        ng-class="{'glyphicon-chevron-up': !expanded, 'glyphicon-chevron-down': expanded}"></span>
+        <i class="fa fa-3x" ng-class="{'fa-angle-double-up black faa-bounce animated': !expanded, 'fa-angle-double-down white': expanded}"></i>
+        <!-- <span class="glyphicon"
+        ng-class="{'glyphicon-chevron-up': !expanded, 'glyphicon-chevron-down': expanded}"></span> -->
     </button>
     <!-- Court detail starts here -->
     <div id="detail" class="court-detail slideable" ng-show="currentcourt">
@@ -180,6 +181,8 @@
     ng-init="edit=false" ng-show="edit" 
     ng-click="editmode()"></div>
     <!-- Court detail ends -->
+    <div class="detailForMobile" ng-show="currentcourt" ng-include="'app/courts/temp/court.detail.html'"></div>
+    
     <!-- Comments start here -->
     <div ng-show="currentcourt" ng-include="'app/comments/comments.html'"></div>
     <!-- Comments end -->

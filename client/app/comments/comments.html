@@ -1,27 +1,35 @@
 <div class="container commentSection" ng-controller="CommentCtrl">
   <!-- <iframe width="100%" height="410" src="//www.youtube.com/embed/DcJFdCmN98s" frameborder="0"></iframe> -->
-  <h1>{{userNow.name}}說</h1>
+  <h1>{{userNow.name}}
+  <span ng-hide="userNow.name">你</span>
+  說</h1>
   <form class="comment-form" ng-submit="addComment($event)" 
   novalidate name="commentForm">
     <div class="row container">
       <div class="col-xs-1">
         <div class="avatarBox">
+          <i ng-hide="userNow.avatar" class="fa fa-3x fa-user"></i>
           <img class="avatar img-rounded" ng-src="{{userNow.avatar}}" alt="{{userNow.name}}">
         </div>
       </div>
       <div class="col-xs-11">
         <div class="input-group">
-          <textarea
+          <span class="input-group-addon">
+            <i class="fa fa-1x fa-quote-left"></i>
+          </span>
+          <input
                 name="comment" 
-                tooltip="可按TAB鍵再按ENTER送出"
+                placeholder="跟球友分享球場狀況"
+                rows="1" 
+                tooltip="請先登入"
                 tooltip-placement="top"
                 tooltip-trigger="mouseenter"
-                tooltip-enable="!inputModel"
-                class="form-control" ng-model="newComment" rows="1" placeholder="跟球友分享球場狀況"
+                tooltip-enable="!userNow.name"
+                class="form-control" 
+                ng-model="newComment" 
                 ng-keydown="done=false"
                 ng-keyup="done=true" 
                 required>
-          </textarea>
           <div class="input-group-btn" ng-show="newComment">
             <button class="btn" type="submit" ng-disabled="commentForm.$invalid"
             ng-class="{'btn-success': done, 'btn-primary': !done}">
@@ -33,7 +41,9 @@
               <span class="glyphicon glyphicon-remove"></span>
             </button>
           </div>
-          
+          <span class="input-group-addon">
+            <i class="fa fa-1x fa-quote-right"></i> 
+          </span>
         </div>
       </div>
       
@@ -41,7 +51,9 @@
   </form>
   <h2>{{currentcourt.court}}球友們說</h2>
   <ul class="comment-list" infinite-scroll='comments.nextPage()' infinite-scroll-disabled='comments.busy' infinite-scroll-distance='0' infinite-scroll-immediate-check="false" ng-class="{'commentBox': comments.comments.length}">
-  <!-- style="height: 400px; overflow: scroll" -->
+    <div ng-show="!comments.comments.length">
+      <h1>這球場還沒有人留言，搶個頭香？</h1>
+    </div>
     <li class="oneComment" ng-repeat='comment in comments.comments'>
       <div class="row">
         <div class="col-xs-1">
@@ -69,27 +81,4 @@
       </div>
     </div>
   </ul>
-
-  <!-- <ul class="comment-list">
-    <li ng-repeat="comment in comments" class="oneComment">
-      <div class="row">
-        <div class="col-xs-1">
-          <div class="avatarBox">
-            <img class="avatar img-rounded" ng-src="{{comment.author.avatar}}" alt="avatar">
-          </div>
-        </div>
-        <div class="col-xs-11">
-          <div class="bubble">
-          <p class="pull-right">{{comment.date | date:'short'}}</p>
-            <h5>
-              <a ng-href="/profile/{{comment.author._id}}">
-              {{ comment.author.name }}</a>
-              &nbsp說:
-            </h5>
-            <p>{{ comment.content }}</p>
-          </div>
-        </div>
-      </div>
-    </li>
-  </ul> -->
 </div>

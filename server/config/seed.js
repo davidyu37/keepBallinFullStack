@@ -9,6 +9,7 @@ var User = require('../api/user/user.model');
 var Court = require('../api/court/court.model');
 var Upload = require('../api/upload/upload.model');
 var Comment = require('../api/comment/comment.model');
+var Rating = require('../api/rating/rating.model');
 
 function randomDate(start, end) {
     return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
@@ -17,6 +18,9 @@ function randomDate(start, end) {
 var random = randomDate(new Date(1950, 0, 1), new Date());
 
 
+Rating.find({}).remove(function() {
+  console.log('ratings cleared');
+});
 
 Upload.find({}).remove(function() {
   console.log('uploads cleared');
@@ -209,7 +213,7 @@ Court.find({}).remove(function() {
     country: 'Taiwan',
     court: '台北科技大學',
     city: '台北市',
-    district: '大安',
+    district: '大安區',
     lat: 25.043204,
     long: 121.537544,
     address: '106台北市大安區建國南路一段81號',

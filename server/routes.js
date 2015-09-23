@@ -16,6 +16,7 @@ module.exports = function(app) {
   app.use(busboyBodyParser());
 
   // Insert routes below
+  app.use('/api/ratings', require('./api/rating'));
   app.use('/api/teams', require('./api/team'));
   app.use('/api/comments', require('./api/comment'));
   app.use('/api/uploads', require('./api/upload'));

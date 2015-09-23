@@ -27,7 +27,11 @@ var CourtSchema = new Schema({
   likes: Number,
   bench: Boolean,
   rent: Boolean,
-  rentprice: Number
+  rentprice: Number,
+  ratings: [{
+    type: Schema.ObjectId, 
+    ref: 'Rating'
+  }]
 });
 
 module.exports = mongoose.model('Court', CourtSchema);

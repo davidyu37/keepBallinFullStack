@@ -79,7 +79,7 @@ angular.module('keepballin')
                     
                     var defaultHeight = 200;
                     target.style.height = defaultHeight + 'px';
-                    button.style.bottom = defaultHeight + 'px'; 
+                    button.style.bottom = (defaultHeight - 50) + 'px'; 
                     
                 } else {
                     target.style.height = '0px';

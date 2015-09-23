@@ -2,9 +2,10 @@
 #map {
     height: 100vh;
     width: 100%;
-    box-shadow: 0 12px 10px -5px rgba(221, 221, 221, 0.8)
 }
-
+.mapShadow {
+    box-shadow: 0 12px 10px -5px rgba(221, 221, 221, 0.8);
+}
 
 .infoWindowContent {
     font-size:  120%;
@@ -146,14 +147,23 @@
         display: block;
         width: 50px;
         height: 50px;
-        color: white;
         position: absolute;
         bottom: 0;
-        left: 0;
-        transition: all 0.5s ease-in-out;
-        
+        left: -webkit-calc(50% - 50px);
+        left: -moz-calc(50% - 50px);
+        left: calc(50% - 50px);
+        background: none;
+        z-index: 100;
+        transition: all 0.5s ease-in-out;   
     }
+}
 
+.white {
+    color: white;
+}
+
+.black {
+    color: black;
 }
 /* style for upload pics */
 
@@ -270,4 +280,16 @@
     border: none;
 }
 
-
+.detailForMobile {
+    @media(min-width: $screen-sm-min) {
+        display: none;
+    }
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #999999;
+}
+.editDetailButton {
+    @media(min-width: $screen-sm-min) {
+        display: none;
+    }
+}
