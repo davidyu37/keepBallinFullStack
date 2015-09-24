@@ -1,13 +1,15 @@
 <div>
-  <div class="jumbotron parallaxContent">
-    <div class="greeting">
+  <div parallax-background class="parallaxBackground basketBackground" parallax-ratio="0.2">
+    <div class="jumbotron parallaxContent">
       <h1>找場，找朋友，打球</h1>
-      <p class="lead">有這麼難嗎？</p>
-      <button type="button" class="btn btn-primary">走啊</button>
+      <!-- <button type="button" class="btn btn-lg btn-primary">走啊</button> -->
+      <a href="/signup">
+        <img class="bounceBall faa-spin faa-bounce animated" src="assets/images/ball.png" alt="">
+      </a>
     </div>
   </div>
-  <div class="row">
-    <div class="leftContainer col-sm-12 col-md-6 col-lg-3">
+  <!-- <div class="row">
+    <div class="leftContainer col-sm-12">
       <div id="weatherBox"class="panel panel-primary" ng-controller="weatherController as wc">
         <span class="weatherLocation">
           <h2>台北</h2>
@@ -16,13 +18,12 @@
         <div ng-include="weatherTime.temp"></div>
       </div> 
     </div> 
-    <div class="col-sm-12 col-md-6 col-lg-9">
+    <div class="col-sm-12">
       <video id="bgVideo" controls preload="true" autoplay loop muted>
         <source src="assets/videos/sample.mp4" type="video/mp4" > 
-        <!-- <source src="Home_Page.ogv" type="video/ogv" >    
-        <source src="Home_Page.webm" type="video/webm" >  -->
+        <source src="Home_Page.ogv" type="video/ogv" >    
+        <source src="Home_Page.webm" type="video/webm" > 
       </video>
-      <div class="transCover"></div>
       <div class="brand-mission">
         <h1>keepBallin 理念</h1>
         <h2>提供籃球熱愛者正確的資訊</h2>
@@ -33,42 +34,6 @@
       </div>
     </div>
     <div class="col-sm-12 col-md-12 col-lg-12"></div>
-  </div>
+  </div>  -->
 </div>
 
-<!--<header class="hero-unit" id="banner">
-  <div class="container">
-    <h1>'Allo, 'Allo!</h1>
-    <p class="lead">Kick-start your next web app with Angular Fullstack</p>
-    <img src="assets/images/yeoman.png" alt="I'm Yeoman">
-  </div>
-</header>
-
-<div class="container">
-  <div class="row">
-    <div class="col-lg-12">
-      <h1 class="page-header">Features:</h1>
-      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="thing in awesomeThings">
-        <li><a href="#" tooltip="{{thing.info}}">{{thing.name}}<button type="button" class="close" ng-click="deleteThing(thing)">&times;</button></a></li>
-      </ul>
-    </div>
-  </div>
-
-  <form class="thing-form">
-    <label>Syncs in realtime across clients</label>
-    <p class="input-group">
-      <input type="text" class="form-control" placeholder="Add a new thing here." ng-model="newThing">
-      <span class="input-group-btn">
-        <button type="submit" class="btn btn-primary" ng-click="addThing()">Add New</button>
-      </span>
-    </p>
-  </form>
-</div>
-
-<footer class="footer">
-  <div class="container">
-      <p>Angular Fullstack v2.1.0 |
-        <a href="https://twitter.com/tyhenkel">@tyhenkel</a> |
-         <a href="https://github.com/DaftMonk/generator-angular-fullstack/issues?state=open">Issues</a></p>
-  </div>
-</footer>-->

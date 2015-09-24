@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('keepballin')
-  .controller('LoginCtrl', ['$scope', 'Auth', '$location', '$window', '$modalInstance', function ($scope, Auth, $location, $window, $modalInstance) {
+  .controller('LoginCtrl', ['$scope', '$state', 'Auth', '$location', '$window', '$modalInstance', function ($scope, $state, Auth, $location, $window, $modalInstance) {
     $scope.user = {};
     $scope.errors = {};
 
@@ -15,8 +15,9 @@ angular.module('keepballin')
         })
         .then( function() {
           // Logged in, redirect to home
-          // $location.path('/');
           $modalInstance.close();
+          //Reload the whole page in order for google map to show the correct icon
+          $window.location.reload();
         })
         .catch( function(err) {
           $scope.errors.other = err.message;

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('keepballin')
-  .controller('NavbarCtrl', ['$scope', '$location', 'Auth', 'Scroll',　'Modal', function ($scope, $location, Auth, Scroll, Modal) {
+  .controller('NavbarCtrl', ['$scope', '$window', '$location', 'Auth', 'Scroll',　'Modal', function ($scope, $window, $location, Auth, Scroll, Modal) {
     Scroll.scrollInit();
     $scope.menu = [{
       'title': '首頁',
@@ -37,7 +37,7 @@ angular.module('keepballin')
 
     $scope.logout = function() {
       Auth.logout();
-      $location.path('/login');
+      $location.path('/');
     };
 
     $scope.isActive = function(route) {

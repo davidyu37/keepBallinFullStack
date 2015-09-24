@@ -10,7 +10,8 @@ angular.module('keepballin', [
   'ui.bootstrap',
   'ngFileUpload',
   'bootstrapLightbox',
-  'infinite-scroll'
+  'infinite-scroll',
+  'angular-parallax'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider

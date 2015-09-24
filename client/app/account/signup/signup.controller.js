@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('keepballin')
-  .controller('SignupCtrl', ['$scope', 'Auth', '$location', '$window', '$modalInstance', function ($scope, Auth, $location, $window, $modalInstance) {
+  .controller('SignupCtrl', ['$scope', '$state', 'Auth', '$location', '$window', '$modalInstance', function ($scope, $state, Auth, $location, $window, $modalInstance) {
     $scope.user = {};
     $scope.errors = {};
 
@@ -18,6 +18,7 @@ angular.module('keepballin')
           // Account created, redirect to home
           // $location.path('/');
           $modalInstance.close();
+          $state.go($state.current, {}, {reload: true});
         })
         .catch( function(err) {
           err = err.data;
