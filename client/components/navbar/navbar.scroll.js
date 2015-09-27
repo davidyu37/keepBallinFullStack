@@ -8,8 +8,8 @@ angular.module('keepballin')
 				var didScroll;
 				var lastScrollTop = 0;
 				var delta = 5;
-				var navbarHeight = $('.header').outerHeight();
-				$(window).scroll(function(event) {
+				
+				$(window).scroll(function() {
 					didScroll = true;
 				});
 
@@ -26,7 +26,7 @@ angular.module('keepballin')
 					var st = $(window).scrollTop();
 					
 					if(Math.abs(lastScrollTop - st) <= delta)
-				        return;
+				        {return;}
 				  	// If current position > last position AND scrolled past navbar...
 					
 					if (st > lastScrollTop && st > 50){
@@ -41,5 +41,5 @@ angular.module('keepballin')
 				}
 
 			}
-		}
+		};
 	});//scroll factory ends here

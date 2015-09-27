@@ -21,9 +21,10 @@ angular.module('keepballin')
       console.log(user);
       user.open = !(user.open);
     };
+    
     $scope.send = function(user) {
       user.open = !(user.open);
       User.changeRole({id: user._id}, {role: user.role});
-    }
+    };
 
   });

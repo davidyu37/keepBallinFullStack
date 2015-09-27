@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('keepballin')
-  .controller('TeamCtrl', ['$scope','$timeout' ,'Auth', 'User', 'Team', 'Upload', function ($scope, $timeout, Auth, User, Team, Upload) {
+  .controller('TeamCtrl', ['$scope','$timeout' ,'Auth', 'User', 'Team', function ($scope, $timeout, Auth, User, Team) {
   	$scope.hasTeam = false;
   	$scope.team = [];
   	if(Auth.hasTeam()) {

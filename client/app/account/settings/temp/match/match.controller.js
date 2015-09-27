@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('keepballin')
-  .controller('DateCtrl', ['$scope', 'Auth', function ($scope, Auth) {
+  .controller('DateCtrl', ['$scope', function ($scope) {
 	$scope.today = function() {
     	$scope.dt = new Date();
 	};
@@ -22,7 +22,7 @@ angular.module('keepballin')
 	$scope.toggleMin();
 	$scope.maxDate = new Date(2020, 5, 22);
 
-	$scope.open = function($event) {
+	$scope.open = function() {
 	$scope.status.opened = true;
 	};
 

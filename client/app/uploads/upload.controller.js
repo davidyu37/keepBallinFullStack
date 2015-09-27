@@ -15,11 +15,13 @@ angular.module('keepballin')
     });
     //Using court id to collect an array of pictures
     $scope.getPicture = function(id) {
-        var pics = Download.query({court_id: id},function(data) {
+        $scope.slides = [];
+        var pics = Download.query({court: id},function(data) {
             if(!data) {
-                angular.noop;
+                return;
             } else {
-                $scope.slides = pics;  
+                console.log(data);
+                $scope.slides = pics; 
             }
         });
     };
@@ -29,15 +31,15 @@ angular.module('keepballin')
     };
     //Log is the progress percentage for upload, empty the courtinfos for other previews
     $scope.log = 0;
-    $scope.courtinfos = [];
     //Clear the preview pictures
     $scope.clearPreview = function() {
-        $scope.courtinfos = [];
-    }
+        console.log('cleared');
+        $scope.files = null;
+    };
     //Submit pictures
     $scope.submit = function(form) {
       if (form.courtpic.$valid && $scope.files && !$scope.files.$error) {
-        $scope.upload($scope.files, form.court_id);
+        $scope.upload($scope.files, form.courtId);
       } else {
         $window.alert('請加檔案');
       }
@@ -45,55 +47,46 @@ angular.module('keepballin')
     $scope.deletePic = function(pic) {
         var check = $window.confirm('確定要刪掉這張照片嗎？');
         if (check) {   
-            Download.delete({ id: pic._id, filename: pic.filename });
+            Download.delete({ id: pic._id });
             $scope.getPicture($scope.currentcourt._id);
         } else {
-            angular.noop;
+           return;
         }
     };
     //Go through the files' array and upload
-    $scope.upload = function (files, court_id) {        
+    $scope.upload = function (files, courtId) {        
 
         if (files && files.length) {
             for (var i = 0; i < files.length; i++) {
               var file = files[i];
               if (!file.$error) {
-                
-                Upload.upload({
-                    url: 'api/uploads/pictures',
-                    fields: {
-                        'court_id': court_id
-                    },
-                    file: file
-                }).progress(function (evt) {
-                    var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                    $scope.log = progressPercentage;
-                    // $scope.log = 'progress: ' + progressPercentage + '% ' +
-                    //             evt.config.file.name + '\n' + $scope.log;
-                }).success(function (data, status, headers, config) {
-                    $timeout(function() {
-                        var courtinfo = {
-                            url: data.url,
-                            name: data.filename,
-                            court_id: data.court_id,
-                            pic_id: data._id
-                        };
-                        //Preview pics
-                        $scope.courtinfos.push(courtinfo);
-                        //Get the new pictures to the slides
-                        
-                        //Clear the files for more uploads
-                        $scope.files = [];
-                        //Reset the progress bar
-                        $scope.log = 0;
-                        // $scope.log = 'file: ' + config.file.name + ', Response: ' + JSON.stringify(data) + '\n' + $scope.log;
-                        $scope.getPicture($scope.currentcourt._id)
-                    });
-                });
-              }
+                upload(file, courtId);     
+                }
             }
         }
     };
+
+    $scope.uploadCount = 0;
+
+    function upload(file, courtId) {
+        Upload.upload({
+            url: 'api/uploads/pictures',
+            fields: {
+                'courtId': courtId
+            },
+            file: file
+        }).progress(function (evt) {
+            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+            $scope.log = progressPercentage;
+        }).success(function (data) {
+            //Clear the files for more uploads
+            $scope.uploadCount += $scope.files.length;
+            $scope.files = [];
+            //Reset the progress bar
+            $scope.log = 0;
+        });
+    }
+
     /* For profile picture stuff */
     //Profile pic
     $scope.newpic = '';
@@ -113,15 +106,14 @@ angular.module('keepballin')
             //     'username': $scope.username
             // },
             file: file
-        }).progress(function (evt) {
-            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+        }).progress(function () {
             $scope.loading = true;
-        }).success(function (data, status, headers, config) {
+        }).success(function (data) {
             $timeout(function() {
                 console.log(data);
                 $scope.profilenow = data.url;
 
-                var user = Auth.changeAvatar(data.url)
+                Auth.changeAvatar(data.url)
                 .then( function() {
                   $scope.loading = false;
                 });

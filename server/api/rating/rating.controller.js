@@ -56,7 +56,7 @@ exports.create = function(req, res) {
     } else {
       return res.status(201).json(update);
     }
-  };
+  }
 };
 
 // Updates an existing rating in the DB.

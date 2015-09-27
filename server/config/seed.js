@@ -13,7 +13,7 @@ var Rating = require('../api/rating/rating.model');
 
 function randomDate(start, end) {
     return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
-};
+}
 
 var random = randomDate(new Date(1950, 0, 1), new Date());
 

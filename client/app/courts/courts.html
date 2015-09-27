@@ -51,7 +51,7 @@
                         </div>
                         <div ng-show="hovered" ng-repeat="slide in slides" class="carousel">
                             <div>
-                                <a ng-click="openLightboxModal($index)">
+                                <a style="cursor: pointer;" ng-click="openLightboxModal($index)">
                                     <img ng-src="{{slide.url}}">
                                 </a>
                                 <button class="picDeleteBtn" 

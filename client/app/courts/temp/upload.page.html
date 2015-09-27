@@ -1,10 +1,3 @@
-<!-- <div class="whitebackground" ng-click="stopPropagate($event)">
-  <form action="/upload/pictures" method="POST" enctype="multipart/form-data">
-    Select an image to upload:
-    <input type="file" name="courtpic"> 
-    <input type="submit" value="Upload Image">
-  </form>
-</div> -->
 <div class="whitebackground" ng-click="stopPropagate($event)">
     <form class="uploadForm" ng-controller="uploadCtrl" name="uploadForm">
       <h2>選檔案，或拖曳檔案丟進來紅框</h2>
@@ -16,12 +9,19 @@
         不好意思，你的瀏覽器不支援此功能
       </div>
       <p class="lead" ng-show="files">上傳{{files.length}}張 
-        <span>已上傳{{courtinfos.length}}張</span> 
+        <span>已上傳{{uploadCount}}張</span> 
       </p>
       <ul ng-repeat="file in files" class="list-group">
         <li class="list-group-item">
-            <p>{{file.name}}</p>
-            <p>{{file.size | bytes}}bytes</p>
+            <div class="media">
+              <div class="pull-left" style="height: 64px; width: 64px;">
+                  <img ngf-src="file" class="img-responsive media-object">
+              </div>
+              <div class="pull-left">
+                <h4>{{file.name}}</h4>
+                <p>{{file.size | bytes}}bytes</p>
+              </div>
+            </div>
             <div class="progress">
               <div class="progress-bar" role="progressbar"
               aria-valuenow="{{log}}" aria-valuemin="0" aria-valuemax="100" style="width:{{log}}%">
@@ -30,33 +30,15 @@
             </div>
         </li>
       </ul>
-      <button ng-show="courtinfos[0]" ng-click="clearPreview()">淨空</button>
-      <div ng-repeat="courtinfo in courtinfos" class="thumbnail col-md-3">
-        <img src="{{courtinfo.url}}">
-        <div class="caption">
-          <h3>{{courtinfo.name}}</h3>
-        </div>
-      </div>
-      <!-- <img src="files[0].data.url" ngf-background="{{url}}" ngf-no-object-url="true"> -->
+      <!-- <button ng-show="files" class="btn btn-warning pull-right" 
+      ng-click="clearPreview()">淨空</button> -->
       <div class="col-md-12">
         <input class="uploadbtn"
-        ng-click="uploadForm.court_id = $parent.currentcourt._id; submit(uploadForm)" 
+        ng-click="uploadForm.courtId = $parent.currentcourt._id; submit(uploadForm)" 
         ng-disabled="!files"
         value="送出"/>
       </div>
       
     </form>
 </div>
-<!-- <div class="whitebackground" ng-click="stopPropagate($event)">
-    <div ng-controller="uploadCtrl">
-        <div class="button" ngf-select ng-model="file" ngf-multiple="false">Select File</div>
-        <input type="text" ng-model="id"/>
-        <input type="submit" ng-click="getPicture(id)"/>
-        Upload Log:
-        <pre>{{log}}</pre>
-        <img src="{{url}}"/>
-        
-        <input type="submit" ng-click="courtId(currentcourt._id)"/>
-    </div>
-</div>
- -->
+

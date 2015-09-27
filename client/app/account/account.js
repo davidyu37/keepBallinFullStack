@@ -39,7 +39,7 @@ app.config(function ($stateProvider) {
       url: '/teamrepresent',
       templateUrl: 'app/team/temp/team.represent.html',
       authenticate: true
-    })
+    });
 });
 
 /**
@@ -59,20 +59,20 @@ app.run(function ($rootScope, $modal) {
     if(!condition) {return;}
     if(login) {
       $modal.open({
-        templateUrl: "app/account/login/login.html",
+        templateUrl: 'app/account/login/login.html',
         controller: 'LoginCtrl'
       });   
-    };
+    }
     if(signup) {
       $modal.open({
-        templateUrl: "app/account/signup/signup.html",
+        templateUrl: 'app/account/signup/signup.html',
         controller: 'SignupCtrl'
       });   
-    };
+    }
     
     /**
      * Prevent the transition to the dummy state, stay where you are
      */
     event.preventDefault();
-  })
+  });
 }); //app.run ends

@@ -32,7 +32,7 @@ angular.module('keepballin')
 		$scope.expanded = false;
 
 		//Broadcast the currentcourt
-		$scope.$watch('currentcourt._id', function(newVal, oldVal) {
+		$scope.$watch('currentcourt._id', function(newVal) {
 	        if(newVal) {
 	        	$scope.$broadcast('courtIdChanged', {newId: newVal});
 	        }
@@ -130,7 +130,9 @@ angular.module('keepballin')
 	    $scope.userLocation = {};
 	    var userLocation = $scope.userLocation;
 	    // Geolocating function
-	    $scope.geolocate = function() {Geolocate(userLocation, map)};
+	    $scope.geolocate = function() {
+	    	Geolocate(userLocation, map);
+	    };
 	    //Geolocate ends here
 	    //Add the addMarker button to map
 	    var addMarkerBtn = document.getElementById('addMarker');

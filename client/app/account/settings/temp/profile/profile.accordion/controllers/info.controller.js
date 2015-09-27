@@ -8,7 +8,7 @@ angular.module('keepballin')
         opened: false
     };
     
-    $scope.open = function($event) {
+    $scope.open = function() {
         $scope.status.opened = true;
     };
    	// Datepicker directive expects a Date object, give it

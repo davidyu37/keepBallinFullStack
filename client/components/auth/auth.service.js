@@ -131,9 +131,7 @@ angular.module('keepballin')
       changeDetail: function(newData, callback) {
         var cb = callback || angular.noop;
         
-        return User.changeDetail({ id: currentUser._id }, 
-          newData
-          ,function(user) {
+        return User.changeDetail({ id: currentUser._id }, newData ,function(user) {
           return cb(user);
         }, function(err) {
           return cb(err);

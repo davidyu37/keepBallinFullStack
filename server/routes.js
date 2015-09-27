@@ -7,13 +7,13 @@
 var errors = require('./components/errors');
 var path = require('path');
 // var multipart = require('connect-multiparty');
-var busboyBodyParser = require('busboy-body-parser');
+// var busboyBodyParser = require('busboy-body-parser');
 
 
 module.exports = function(app) {
 
-  //Use busboy
-  app.use(busboyBodyParser());
+  // //Use busboy
+  // app.use(busboyBodyParser());
 
   // Insert routes below
   app.use('/api/ratings', require('./api/rating'));

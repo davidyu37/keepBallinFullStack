@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('keepballin')
-  .controller('NavbarCtrl', ['$scope', '$window', '$location', 'Auth', 'Scroll',　'Modal', function ($scope, $window, $location, Auth, Scroll, Modal) {
+  .controller('NavbarCtrl', ['$scope', '$window', '$location', 'Auth', 'Scroll', function ($scope, $window, $location, Auth, Scroll) {
     Scroll.scrollInit();
     $scope.menu = [{
       'title': '首頁',
@@ -46,6 +46,6 @@ angular.module('keepballin')
 
     $scope.openLogin = function() {
      
-    }
+    };
 
   }]);

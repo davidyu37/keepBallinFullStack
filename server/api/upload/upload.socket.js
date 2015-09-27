@@ -18,7 +18,7 @@ exports.register = function(socket) {
 function onSave(socket, doc, cb) {
 	var binaryData = {
 		image: true,
-		court_id: doc.court_id,
+		courtId: doc.courtId,
 		filename: doc.filename,
 		url: doc.url,
 		// buffer: doc.buffer,

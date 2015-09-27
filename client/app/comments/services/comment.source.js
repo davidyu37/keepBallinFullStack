@@ -12,9 +12,9 @@ angular.module('keepballin')
   };
 
   CommentSource.prototype.nextPage = function() {
-    if (this.busy) return;
+    if (this.busy) {return;}
     //If the comments are complete loaded, don't make request
-    if (this.commentsLoaded >= this.totalComments) return;
+    if (this.commentsLoaded >= this.totalComments) {return;}
     this.busy = true;
     Comment.query({index: this.after, courtId: this.courtID}, function(comments) {
         for (var i = 0; i < comments.length; i++) {

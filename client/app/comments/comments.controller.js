@@ -18,7 +18,7 @@ angular.module('keepballin')
           }
       });
       return deferred.promise;
-    };
+    }
 
     $scope.$on('courtIdChanged', function(e, args) {
       $scope.comments = {};
@@ -38,7 +38,7 @@ angular.module('keepballin')
     $scope.addComment = function(event) {
 
       if(!$scope.currentcourt) {
-        angular.noop;
+        return;
       } else {
         var courtID = $scope.currentcourt._id;
         var data = {
@@ -63,6 +63,6 @@ angular.module('keepballin')
     //Clear text area
     $scope.clear = function() {
       $scope.newComment = '';
-    }
+    };
 
   }]); //CommentCtrl ends
