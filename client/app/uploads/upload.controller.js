@@ -6,6 +6,7 @@ angular.module('keepballin')
     $scope.slides = [];
     //Get picture when court id change
     $scope.$on('courtIdChanged', function(e, args) {
+        $scope.slides = [];
         $scope.getPicture(args.newId);
     });
     //socket.io instant updates
@@ -16,12 +17,11 @@ angular.module('keepballin')
     //Using court id to collect an array of pictures
     $scope.getPicture = function(id) {
         $scope.slides = [];
-        var pics = Download.query({court: id},function(data) {
+        var pics = Download.query({court : id},function(data) {
             if(!data) {
                 return;
             } else {
-                console.log(data);
-                $scope.slides = pics; 
+                $scope.slides = data;
             }
         });
     };
@@ -47,15 +47,16 @@ angular.module('keepballin')
     $scope.deletePic = function(pic) {
         var check = $window.confirm('確定要刪掉這張照片嗎？');
         if (check) {   
-            Download.delete({ id: pic._id });
-            $scope.getPicture($scope.currentcourt._id);
+            Download.delete({ id: pic._id }, function(){
+                $scope.getPicture($scope.currentcourt._id);
+            });
         } else {
            return;
         }
     };
     //Go through the files' array and upload
     $scope.upload = function (files, courtId) {        
-
+        $scope.uploading = true;
         if (files && files.length) {
             for (var i = 0; i < files.length; i++) {
               var file = files[i];
@@ -76,6 +77,7 @@ angular.module('keepballin')
             },
             file: file
         }).progress(function (evt) {
+            console.log(evt);
             var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
             $scope.log = progressPercentage;
         }).success(function (data) {
@@ -84,6 +86,10 @@ angular.module('keepballin')
             $scope.files = [];
             //Reset the progress bar
             $scope.log = 0;
+            $scope.uploading = false;
+            $timeout(function() {
+                $scope.getPicture($scope.currentcourt._id);
+            }, 1000);
         });
     }
 
@@ -110,7 +116,6 @@ angular.module('keepballin')
             $scope.loading = true;
         }).success(function (data) {
             $timeout(function() {
-                console.log(data);
                 $scope.profilenow = data.url;
 
                 Auth.changeAvatar(data.url)
