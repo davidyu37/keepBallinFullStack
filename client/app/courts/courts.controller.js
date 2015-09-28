@@ -127,11 +127,12 @@ angular.module('keepballin')
 	    // Place geolocate button on map
 	    var geoBtn = document.getElementById('geolocate');
 	    map.controls[google.maps.ControlPosition.RIGHT_CENTER].push(geoBtn);
-	    $scope.userLocation = {};
-	    var userLocation = $scope.userLocation;
+	    // $scope.userLocation = {};
+	    // var userLocation = $scope.userLocation;
 	    // Geolocating function
+	    $scope.userLocation = new google.maps.Marker();
 	    $scope.geolocate = function() {
-	    	Geolocate(userLocation, map);
+	    	var here = Geolocate($scope, map);
 	    };
 	    //Geolocate ends here
 	    //Add the addMarker button to map

@@ -5,27 +5,22 @@
   <div class="lightbox-nav">
     <!-- close button -->
     <button class="close" aria-hidden="true" ng-click="$dismiss()">×</button>
-
-    <div class="btn-group">
-      <a class="btn btn-xs btn-default" ng-click="Lightbox.prevImage()">
-        ‹ 上一張
+  </div>
+  <div class="picNav">
+    <!-- <div class="btn-group"> -->
+      <a class="left" ng-click="Lightbox.prevImage()">
+        <i class="fa fa-angle-left fa-5x"></i>
       </a>
-
-      <!-- <a ng-href="{{Lightbox.imageUrl}}" target="_blank"
-          class="btn btn-xs btn-default" title="Open in new tab">
-        Open image in new tab
-      </a> -->
-
-      <a class="btn btn-xs btn-default" ng-click="Lightbox.nextImage()">
-        下一張 ›
+      <a class="right" ng-click="Lightbox.nextImage()">
+       <i class="fa fa-angle-right fa-5x"></i>
       </a>
-    </div>
+   <!--  </div> -->
   </div>
 
   <div class="lightbox-image-container">
     <!-- caption -->
     <div class="lightbox-image-caption">
-      <span>{{Lightbox.imageCaption}}</span>
+      <span>由{{Lightbox.images[Lightbox.index].user.name}}提供</span>
     </div>
 
     <!-- image -->
