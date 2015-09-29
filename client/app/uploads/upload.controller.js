@@ -99,32 +99,32 @@ angular.module('keepballin')
     //Loading
     $scope.loading = false;
 
-    $scope.profilenow = Auth.getCurrentUser().avatar;
-    
+    if(!Auth.getCurrentUser().avatar) {
+        $scope.profilenow = 'assets/images/profile/profile.jpg';
+    } else {
+        if(Auth.getCurrentUser().avatar !== undefined) {
+            $scope.profilenow = Auth.getCurrentUser().avatar.url;
+        }
+    }
+
     //Upload for profile picture
-    $scope.uploadprofile = function(file) {
-        
+    $scope.uploadprofile = function(file) {  
       if (file && !file.$error) {
         
         Upload.upload({
             url: 'api/uploads/pictures/profile',
-            // fields: {
-            //     'username': $scope.username
-            // },
             file: file
         }).progress(function () {
             $scope.loading = true;
         }).success(function (data) {
             $timeout(function() {
                 $scope.profilenow = data.url;
-
-                Auth.changeAvatar(data.url)
-                .then( function() {
-                  $scope.loading = false;
-                });
+                $scope.loading = false;
             });
         });
       }      
     };
+
+
 
 }]);

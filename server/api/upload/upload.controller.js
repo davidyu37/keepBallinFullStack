@@ -2,10 +2,13 @@
 
 var _ = require('lodash'),
 Upload = require('./upload.model'),
+s3Config = require('./upload.config.js'),
 mongoose = require('mongoose'),
 Schema = mongoose.Schema,
 ObjectId = Schema.ObjectId,
 path = require('path');
+
+console.log(s3Config);
 
 var uuid = require('uuid'); // https://github.com/defunctzombie/node-uuid
 var multiparty = require('multiparty'); // https://github.com/andrewrk/node-multiparty
@@ -18,12 +21,18 @@ var s3Client = s3.createClient({
   multipartUploadThreshold: 20971520, // this is the default (20 MB)
   multipartUploadSize: 15728640, // this is the default (15 MB)
   s3Options: {
-    // accessKeyId: ,
-    // secretAccessKey:
+    accessKeyId: s3Config.Key,
+    secretAccessKey: s3Config.Secret
     // any other options are passed to new AWS.S3()
     // See: http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Config.html#constructor-property
   }
 });
+
+//Upload user's profile picture
+exports.profilepic = function(req, res) {
+  var category = 'profile';
+  uploadTos3AndRecordOnDB (req, res, category);
+};
 
 // Upload court pictures
 exports.createCourtPic = function(req, res) {
@@ -81,6 +90,10 @@ function uploadTos3AndRecordOnDB (req, res, category) {
         var courtId = fields.courtId;
         var destPath = 'pictures/' + category + '/' + courtId + '/' + uuid.v4() + extension;
       }
+      if(category === 'profile') {
+        var userId = req.user._id;
+        var destPath = 'pictures/' + category + '/' + userId + '/' + uuid.v4() + extension;
+      }
       //Params to upload to s3
       var params = {
         localFile: file.path,
@@ -99,6 +112,10 @@ function uploadTos3AndRecordOnDB (req, res, category) {
       if(category === 'courts') {
         var courtId = {court: fields.courtId[0]};
         record = _.merge(record, courtId);
+      }
+      if(category === 'profile') {
+        var avatar = {avatarOf: req.user._id};
+        record = _.merge(record, avatar);
       }
 
       var uploader = s3Client.uploadFile(params);
@@ -175,22 +192,6 @@ exports.index = function(req, res) {
 //   });
 // };
 
-//Upload user's profile picture
-// exports.profilepic = function(req, res) {
-  
-//   var file = req.files.file;
-//   var user_id = req.user._id;
-//   var filename = path.join('./client/assets/uploads/images/profile', file.name);
-
-//   // Information saving along with file
-//   var profilePic = {
-//     filename: file.name,
-//     url: path.join('assets/uploads/images/profile', file.name),
-//     mimetype: file.mimetype,
-//     user: user_id
-//   };
-//   writeFile(filename, file.data, profilePic, res);
-// };
 
 //Upload team photo
 // exports.teampic = function(req, res) {

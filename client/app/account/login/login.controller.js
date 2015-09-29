@@ -20,7 +20,10 @@ angular.module('keepballin')
           $window.location.reload();
         })
         .catch( function(err) {
+          console.log(err);
           $scope.errors.other = err.message;
+          $modalInstance.close();
+          $window.alert(err.message);
         });
       }
     };

@@ -2,7 +2,8 @@
 
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
-    ObjectId = Schema.ObjectId;
+    ObjectId = Schema.ObjectId,
+    relationship = require('mongoose-relationship');
 
 var UploadSchema = new Schema({
 	url: String,
@@ -19,14 +20,22 @@ var UploadSchema = new Schema({
 	court: {
 		type: Schema.Types.ObjectId,
 		ref: 'Court'
+	},
+	avatarOf: {
+		type: Schema.Types.ObjectId,
+		ref: 'User',
+		childPath: 'avatar'
 	}
 
 }, {strict: false});
+
+UploadSchema.plugin(relationship, { relationshipPathName: 'avatarOf'});
 
 UploadSchema.statics = {
   loadByCourtId: function(courtId, cb) {
     this.find({'court': courtId})
       .populate({path:'user', select: 'name avatar'})
+      .sort('-date')
       .select('user url date')
       .exec(cb);
   }

@@ -8,7 +8,7 @@
     <div class="row container">
       <div class="col-xs-1">
         <div class="avatarBox">
-          <i ng-hide="userNow.avatar" class="fa fa-3x fa-user"></i>
+          <i ng-hide="userNow" class="fa fa-3x fa-user"></i>
           <img class="avatar img-rounded" ng-src="{{userNow.avatar}}" alt="{{userNow.name}}">
         </div>
       </div>
@@ -58,15 +58,15 @@
       <div class="row">
         <div class="col-xs-1">
           <div class="avatarBox">
-            <img class="avatar img-rounded" ng-src="{{comment.author.avatar}}" alt="avatar">
+            <img ng-show="!comment.author.avatar.url" ng-src="assets/images/profile/profile.jpg" alt="" class="avatar img-rounded">
+            <img ng-show="comment.author.avatar.url" class="avatar img-rounded" ng-src="{{comment.author.avatar.url}}" alt="avatar">
           </div>
         </div>
         <div class="col-xs-11">
           <div class="bubble">
           <p class="pull-right">{{comment.date | date:'short'}}</p>
             <h5>
-              {{ comment.author.name }}
-              &nbsp說:
+              {{comment.author.name}}&nbsp說:
             </h5>
             <p>{{ comment.content }}</p>
           </div>

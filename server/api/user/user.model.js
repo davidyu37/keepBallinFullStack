@@ -23,7 +23,10 @@ var UserSchema = new Schema({
   height: Number,
   weight: Number,
   birthday: Date,
-  avatar: {type: String, default: 'assets/images/profile/profile.jpg'},
+  avatar: {
+    type: Schema.ObjectId,
+    ref: 'Upload'
+  },
   hashedPassword: String,
   provider: String,
   salt: String,
@@ -103,7 +106,7 @@ UserSchema
       }
       respond(true);
     });
-}, 'The specified email address is already in use.');
+}, '此信箱已註冊\nThe specified email address is already in use.');
 
 var validatePresenceOf = function(value) {
   return value && value.length;
@@ -160,5 +163,15 @@ UserSchema.methods = {
     return crypto.pbkdf2Sync(password, salt, 10000, 64).toString('base64');
   }
 };
+
+UserSchema.statics = {
+  findByIdAndPopulate: function(userId, cb) {
+    this.findOne({_id: userId})
+      .populate({path:'avatar', select: 'url date'})
+      .select('-salt -hashedPassword')
+      .exec(cb);
+  }
+};
+
 
 module.exports = mongoose.model('User', UserSchema);

@@ -1,7 +1,8 @@
 'use strict';
 
-var _ = require('lodash');
-var Comment = require('./comment.model');
+var _ = require('lodash'),
+    Comment = require('./comment.model');
+ 
 
 // exports.index = function(req, res) {
 //   Comment.find(function (err, comments) {
@@ -14,6 +15,7 @@ var Comment = require('./comment.model');
 exports.async = function(req, res) {
   Comment.loadNow(req.params.index, req.params.courtId, function (err, comments) {
     if(err) { return handleError(res, err); }
+    console.log('async data:', comments);
     return res.status(200).json(comments);
   });
 };
