@@ -34,6 +34,7 @@ var UserSchema = new Schema({
     type: Schema.ObjectId, 
     ref: 'Rating'
   }],
+  fbprofilepic: String,
   facebook: {},
   google: {},
   github: {}
