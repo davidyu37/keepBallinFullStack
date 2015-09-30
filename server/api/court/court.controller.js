@@ -38,6 +38,13 @@ exports.getRating = function(req, res) {
   });
 };
 
+exports.searchResult = function(req, res) {
+  court.search(req.query, function (err, courts) {
+    if(err) { return handleError(res, err); }
+    return res.status(200).json(courts);
+  });
+}
+
 
 // Creates a new court in the DB.
 exports.create = function(req, res) {

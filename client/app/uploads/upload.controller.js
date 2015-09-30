@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('keepballin')
-	.controller('uploadCtrl', ['$scope', '$window', 'Upload', 'Download', '$timeout', 'Court', 'socket', 'Lightbox', 'Auth', function ($scope, $window, Upload, Download, $timeout, Court, socket, Lightbox, Auth) {
+	.controller('uploadCtrl', ['$scope', '$window', 'Upload', 'Download', '$timeout', 'socket', 'Lightbox', 'Auth', function ($scope, $window, Upload, Download, $timeout, socket, Lightbox, Auth) {
     //Slides of pictures
     $scope.slides = [];
     //Get picture when court id change
@@ -70,6 +70,7 @@ angular.module('keepballin')
     $scope.uploadCount = 0;
 
     function upload(file, courtId) {
+        console.log(courtId);
         Upload.upload({
             url: 'api/uploads/pictures',
             fields: {
@@ -77,7 +78,6 @@ angular.module('keepballin')
             },
             file: file
         }).progress(function (evt) {
-            console.log(evt);
             var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
             $scope.log = progressPercentage;
         }).success(function (data) {
@@ -99,13 +99,21 @@ angular.module('keepballin')
     //Loading
     $scope.loading = false;
 
-    if(!Auth.getCurrentUser().avatar) {
-        $scope.profilenow = 'assets/images/profile/profile.jpg';
-    } else {
-        if(Auth.getCurrentUser().avatar !== undefined) {
-            $scope.profilenow = Auth.getCurrentUser().avatar.url;
+    $scope.userNow = Auth.getCurrentUser();
+
+    $timeout(function(){
+        if(!Auth.getCurrentUser().avatar) {
+            if(Auth.getCurrentUser().fbprofilepic) {
+                $scope.profilenow = Auth.getCurrentUser().fbprofilepic;
+            } else {
+                $scope.profilenow = 'assets/images/profile/profile.jpg';
+            }
+        } else {
+            if(Auth.getCurrentUser().avatar !== undefined) {
+                $scope.profilenow = Auth.getCurrentUser().avatar.url;
+            }
         }
-    }
+    },1000);
 
     //Upload for profile picture
     $scope.uploadprofile = function(file) {  

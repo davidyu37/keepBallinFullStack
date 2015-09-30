@@ -6,7 +6,11 @@ angular.module('keepballin')
     $scope.userNow = Auth.getCurrentUser();
     
     if(!Auth.getCurrentUser().avatar) {
-      $scope.userNow.avatar = 'assets/images/profile/profile.jpg';
+      if(Auth.getCurrentUser().fbprofilepic) {
+            $scope.userNow.avatar = Auth.getCurrentUser().fbprofilepic;
+        } else {
+            $scope.userNow.avatar = 'assets/images/profile/profile.jpg';
+        }
     } else {
         if(Auth.getCurrentUser().avatar !== undefined) {
             $scope.userNow.avatar = Auth.getCurrentUser().avatar.url;

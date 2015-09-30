@@ -40,7 +40,24 @@ CourtSchema.statics = {
       .select('ratings')
       .populate({path:'ratings', select: 'rate'})
       .exec(cb);
+  },
+  // || params.court || params.city || params.district || params.address
+  search: function(params, cb) {
+    var query = { $and: [] };
+    for (var key in params){
+      if(key === 'query') {
+        query.$and.push({ $text: { $search : params.query }});
+      } else {
+        var thisParam = {};
+        thisParam[key] = params[key];     
+        query.$and.push(thisParam);
+      }
+    }
+    this.find(query)
+      .exec(cb);
   }
 };
+// $** wildcard text search
+CourtSchema.index({ "$**": "text" });
 
 module.exports = mongoose.model('Court', CourtSchema);

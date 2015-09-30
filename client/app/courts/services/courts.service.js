@@ -13,6 +13,17 @@ angular.module('keepballin')
           controller: 'ratings'
         },
         isArray: true
+      },
+      search: {
+        method: 'GET',
+        params: {
+          controller: 'search'
+          // query: '@query',
+          // court: '@court',
+          // city: '@city',
+          // district: '@district'
+        },
+        isArray: true
       }
 	  });
   }]);

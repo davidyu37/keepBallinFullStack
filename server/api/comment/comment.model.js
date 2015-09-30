@@ -20,7 +20,7 @@ CommentSchema.plugin(deepPopulate, {
       select: 'url'
     },
     'author': {
-      select: 'name avatar'
+      select: 'fbprofilepic name avatar'
     }
   }
 });

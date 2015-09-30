@@ -11,7 +11,8 @@ angular.module('keepballin', [
   'ngFileUpload',
   'bootstrapLightbox',
   'infinite-scroll',
-  'angular-parallax'
+  'angular-parallax',
+  'angular-advanced-searchbox'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider

@@ -8,6 +8,7 @@ exports.setup = function (User, config) {
       callbackURL: config.google.callbackURL
     },
     function(accessToken, refreshToken, profile, done) {
+      console.log(profile);
       User.findOne({
         'google.id': profile.id
       }, function(err, user) {

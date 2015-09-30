@@ -15,7 +15,6 @@ var _ = require('lodash'),
 exports.async = function(req, res) {
   Comment.loadNow(req.params.index, req.params.courtId, function (err, comments) {
     if(err) { return handleError(res, err); }
-    console.log('async data:', comments);
     return res.status(200).json(comments);
   });
 };

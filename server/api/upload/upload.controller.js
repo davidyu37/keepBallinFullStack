@@ -87,6 +87,7 @@ function uploadTos3AndRecordOnDB (req, res, category) {
       var contentType = file.headers['content-type'];
       var extension = file.path.substring(file.path.lastIndexOf('.'));
       if(category === 'courts') {
+        console.log(fields.courtId);
         var courtId = fields.courtId;
         var destPath = 'pictures/' + category + '/' + courtId + '/' + uuid.v4() + extension;
       }

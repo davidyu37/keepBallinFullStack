@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('keepballin')
-	.controller('CourtsCtrl', ['$scope', '$window', '$animate', '$timeout', '$compile', 'socket', 'Panorama', 'mapOptions', 'Geolocate', 'AddMarker', 'Court', 'Auth',  
-		function ($scope, $window, $animate, $timeout, $compile, socket, Panorama, mapOptions, Geolocate, AddMarker, Court, Auth) {
+	.controller('CourtsCtrl', ['$scope', '$http', '$window', '$animate', '$timeout', '$compile', 'socket', 'Panorama', 'mapOptions', 'Geolocate', 'AddMarker', 'Court', 'Auth',  
+		function ($scope, $http, $window, $animate, $timeout, $compile, socket, Panorama, mapOptions, Geolocate, AddMarker, Court, Auth) {
 	    
 		//Initialize map
 	    $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
@@ -36,7 +36,28 @@ angular.module('keepballin')
 	        if(newVal) {
 	        	$scope.$broadcast('courtIdChanged', {newId: newVal});
 	        }
-	    });	   
+	    });
+
+	    //Searchbox
+	    $scope.availableSearchParams = [
+		  { key: "court", name: "球場名", placeholder: "球場名..." },
+		  { key: "city", name: "城市", placeholder: "城市..." },
+		  { key: "district", name: "區域", placeholder: "區域..." },
+		  { key: "address", name: "住址", placeholder: "住址..." }
+		];
+
+		$scope.searchCourt = function(params) {
+			console.log('clicked', params);
+			var hasParams = (params.query || params.court || params.city || params.district || params.address);
+			if(hasParams == undefined) {
+				return;
+			} else {
+				Court.search(params, function(data) {
+					console.log(data);
+					$scope.courts = data;
+				});
+			}
+		};
 
 	    //Empty markers
 	    $scope.markers = [];
@@ -121,8 +142,11 @@ angular.module('keepballin')
 			}
 			return hours;
 		};
-
 	    //Add Marker ends here
+
+	    //Add searchBox to map
+	    var searchBox = document.getElementById('searchbox');
+	    map.controls[google.maps.ControlPosition.TOP].push(searchBox);
 	    //Geolocate begins here
 	    // Place geolocate button on map
 	    var geoBtn = document.getElementById('geolocate');

@@ -1,4 +1,12 @@
 <div>
+    <div id="searchbox"> 
+        <nit-advanced-searchbox
+            ng-model="searchParams"
+            parameters="availableSearchParams"
+            placeholder="找球場">
+        </nit-advanced-searchbox>
+        <button ng-click="searchCourt(searchParams)" class="btn btn-primary pull-right">送出</button>
+    </div>
     <div id="map" marker 
     courts="courts"
     currentcourt="currentcourt" 
