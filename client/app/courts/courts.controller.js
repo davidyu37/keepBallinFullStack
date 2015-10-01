@@ -46,17 +46,42 @@ angular.module('keepballin')
 		  { key: "address", name: "住址", placeholder: "住址..." }
 		];
 
+		$scope.noResult = false;
+		$scope.gotResult = false;
+		$scope.emptyField = false;
+
 		$scope.searchCourt = function(params) {
-			console.log('clicked', params);
+			console.log('submit');
+			console.log(params);
 			var hasParams = (params.query || params.court || params.city || params.district || params.address);
 			if(hasParams == undefined) {
+				$scope.emptyField = true;
+				$timeout(function() {
+					$scope.emptyField = false;
+				}, 1000);
 				return;
 			} else {
 				Court.search(params, function(data) {
-					console.log(data);
-					$scope.courts = data;
+					console.log(data.length === 0);
+					if(data.length === 0) {
+						$scope.noResult = true;
+						$timeout(function() {
+							$scope.noResult = false;
+						}, 1000);
+					} else {
+						$scope.courts = data;
+						$scope.gotResult = true;
+						$timeout(function() {
+							$scope.gotResult = false;
+						}, 1000);
+					}
 				});
 			}
+		};
+
+		$scope.test = function(parent) {
+			console.log('inside');
+			console.log(parent);
 		};
 
 	    //Empty markers

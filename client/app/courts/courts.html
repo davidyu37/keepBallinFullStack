@@ -1,11 +1,29 @@
 <div>
-    <div id="searchbox"> 
-        <nit-advanced-searchbox
-            ng-model="searchParams"
-            parameters="availableSearchParams"
-            placeholder="找球場">
-        </nit-advanced-searchbox>
-        <button ng-click="searchCourt(searchParams)" class="btn btn-primary pull-right">送出</button>
+    <div id="searchbox">
+        <form ng-submit="searchCourt(searchParams)"
+            popover-placement="bottom" 
+            popover="再試一次" 
+            popover-is-open="emptyField"
+            popover-trigger="none">
+            <nit-advanced-searchbox
+                ng-model="searchParams"
+                parameters="availableSearchParams"
+                submit="searchCourt(searchParams)"
+                placeholder="任意輸入或用以下的選項"
+                focus="searchFocus"
+                popover-placement="bottom" 
+                popover="目前還沒有此球場" 
+                popover-is-open="noResult"
+                popover-trigger="none">
+            </nit-advanced-searchbox>
+            <button ng-hide="searchFocus" type="submit" class="btn pull-right" ng-class="{'btn-primary': !gotResult, 'btn-success btn-sm': gotResult}">
+            <span ng-show="!gotResult">
+            送出  
+            </span>
+            <span ng-show="gotResult && !searchFocus"><i class="fa fa-2x fa-check-circle"></i></span>
+            </button>
+        </form>
+        <span ng-show="gotResult && searchFocus" class="pull-right text-success"><i class="fa fa-lg fa-check-circle"></i></span> 
     </div>
     <div id="map" marker 
     courts="courts"
